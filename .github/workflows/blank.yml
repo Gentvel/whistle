@@ -22,13 +22,13 @@ jobs:
 
     # Runs a single command using the runners shell
     - name: Run a one-line script
-      run: deploy.sh
+      run: echo test, and deploy your project.
 
     # Runs a set of commands using the runners shell
     - name: Run a multi-line script
       run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+        chmod a+x deploy.sh
+        ./deploy.sh
     - name: Setup Node.js environment
       uses: actions/setup-node@v2.1.1
       with:
