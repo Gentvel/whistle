@@ -4,7 +4,7 @@
 set -e
 
 #初始化项目
-npm init
+npm install
 # 生成静态文件
 npm run build
 
