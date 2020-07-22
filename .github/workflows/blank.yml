@@ -22,7 +22,7 @@ jobs:
 
     # Runs a single command using the runners shell
     - name: Run a one-line script
-      run: echo test, and deploy your project.
+      run: pwd
     # Setup Node.js enviroment
     - name: Setup Node.js environment
       uses: actions/setup-node@v2.1.1
