@@ -3,6 +3,9 @@
 # 确保脚本抛出遇到的错误
 set -e
 
+git config --global user.email "2u2mi.pro@gmail.com"
+git config --global user.name "Gentvel"
+
 #初始化项目
 npm install
 # 生成静态文件
