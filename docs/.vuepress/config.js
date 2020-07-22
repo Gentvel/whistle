@@ -1,6 +1,7 @@
 module.exports = {
     title: 'Whistle',
     description: 'Just play for Fun',
+    base: '/whistle/',
     logo: './logo.svg',
     lastUpdated: 'Last Updated',
     themeConfig: {
