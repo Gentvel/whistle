@@ -8,11 +8,12 @@
     "devDependencies": {
         "vuepress": "^1.5.2"
     },
-
     "scripts": {
         "dev": "vuepress dev docs",
         "build": "vuepress build docs",
         "deploy": "bash deploy.sh"
+    },
+    "dependencies": {
+        "vuepress-theme-reco": "^1.5.4"
     }
-
 }
