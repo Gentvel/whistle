@@ -11,11 +11,9 @@ module.exports = {
         logo: '/logo.svg', //导航栏logo
         author: '林秃秃', //全局作者名
         authorAvatar: '/avatar.png', //设置首页右侧信息栏头像
-        noFoundPageByTencent: false, //404腾讯公益
+        //noFoundPageByTencent: false, //404腾讯公益
         nav: [
             { text: '主页', link: '/' },
-            { text: '导航', link: '/guide/' },
-            { text: 'External', link: 'https://google.com' },
             { text: '时间线', link: '/timeline/', icon: 'reco-date' }
         ],
         // 博客配置
@@ -25,7 +23,7 @@ module.exports = {
             //     text: 'Category' // 默认文案 “分类”
             // },
             tag: {
-                location: 3, // 在导航栏菜单中所占的位置，默认3
+                location: 2, // 在导航栏菜单中所占的位置，默认3
                 text: '标签' // 默认文案 “标签”
             }
         },
