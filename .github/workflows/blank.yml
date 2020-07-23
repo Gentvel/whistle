@@ -31,14 +31,4 @@ jobs:
 
     # Runs a set of commands using the runners shell
     - name: Git init & commit
-      run: |
-        git config --global user.email "2u2mi.pro@gmail.com"
-        git config --global user.name "Gentvel"
-        cd docs/.vuepress/dist
-        git init
-        git add -A
-        git commit -m 'deploy'
-    - name: Push changes to gh-page
-      uses: Gentvel/whistle@gh-pages
-      with:
-        github_token: ${{ secrets.WHISTLE }}
+      run: npm run deploy
