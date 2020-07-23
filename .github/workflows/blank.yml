@@ -39,6 +39,6 @@ jobs:
         git add -A
         git commit -m 'deploy'
     - name: Push changes to gh-page
-      uses: ad-m/github-push-action@master
+      uses: Gentvel/whistle@gh-pages
       with:
         github_token: ${{ secrets.WHISTLE }}
