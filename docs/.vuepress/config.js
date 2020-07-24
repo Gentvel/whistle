@@ -3,8 +3,8 @@ module.exports = {
     description: '有术无道，止于术；有道无术，术尚可求。',
     base: '/whistle/',
     theme: 'reco',
-    lastUpdated: 'Last Updated',
     themeConfig: {
+        lastUpdated: '最近更新', //上次更新
         smoothScroll: true, //页面滚动
         type: 'blog',
         sidebar: 'auto',
@@ -18,12 +18,12 @@ module.exports = {
         ],
         // 博客配置
         blogConfig: {
-            // category: {
-            //     location: 2, // 在导航栏菜单中所占的位置，默认2
-            //     text: 'Category' // 默认文案 “分类”
-            // },
+            category: {
+                location: 2, // 在导航栏菜单中所占的位置，默认2
+                text: '分类' // 默认文案 “分类”
+            },
             tag: {
-                location: 2, // 在导航栏菜单中所占的位置，默认3
+                location: 3, // 在导航栏菜单中所占的位置，默认3
                 text: '标签' // 默认文案 “标签”
             }
         },
