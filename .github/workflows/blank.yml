@@ -30,5 +30,18 @@ jobs:
       run: npm run build
 
     # Runs a set of commands using the runners shell
-    - name: Git init & commit
-      run: npm run deploy
+    - name: GitHub Push
+      uses: ad-m/github-push-action@v0.6.0
+      with:
+        # Token for the repo. Can be passed in using $\{{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.WHISTLE }}
+        # Repository name to push. Default or empty value represents current github repository (${GITHUB_REPOSITORY})
+        repository: ${GITHUB_REPOSITORY}
+        # Destination branch to push changes
+        branch: gh-pages
+        # Determines if force push is used
+        force: true
+        # Determines if --tags is used
+        #tags: # optional
+        # Directory to change to before pushing.
+        directory: docs/.vuepress/dist
