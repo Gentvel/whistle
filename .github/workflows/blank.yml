@@ -27,10 +27,16 @@ jobs:
       run: npm install  
     # Runs a single command using the runners shell
     - name: Build projects
+      run: npm run build
+        
+    - name: Commit files
       run: |
-        npm run build
         cd docs/.vuepress/dist
-
+        git init
+        git add -A
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -m "Add changes" -a
     # Runs a set of commands using the runners shell
     - name: GitHub Push
       uses: ad-m/github-push-action@v0.6.0
@@ -46,4 +52,4 @@ jobs:
         # Determines if --tags is used
         #tags: # optional
         # Directory to change to before pushing.
-        directory: 
+        directory: /docs/.vuepress/dist/
