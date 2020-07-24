@@ -8,7 +8,7 @@ tags:
 - git
 ---
 ## 一、分支操作
-```
+```shell
 git branch                  #创建分支
 git branch -b               #创建并切换到新建的分支上
 git checkout                #切换分支
@@ -24,7 +24,7 @@ git branch origin :分支名    #删除远处仓库分支
 git merge 分支名             #合并分支到当前分支上
 ```
 ## 二、暂存操作
-```
+```shell
 git stash                    #暂存当前修改
 git stash apply              #恢复最近的一次暂存
 git stash pop                #恢复暂存并删除暂存记录
@@ -33,14 +33,14 @@ git stash drop               #暂存名(例：stash@{0}) 移除某次暂存
 git stash clear              #清除暂存
 ```
 ## 三、 回退操作
-```
+```shell
 git reset --hard HEAD^                     #回退到上一个版本
 git reset --hard ahdhs1(commit_id)         #回退到某个版本
 git checkout -- file                       #撤销修改的文件(如果文件加入到了暂存区，则回退到暂存区的，如果文件加入到了版本库，则还原至加入版本库之后的态)        
 git reset HEAD file                        #撤回暂存区的文件修改到工作区
 ```
 ## 四、 标签操作
-```
+```shell
 git tag 标签名                             #添加标签(默认对当前版本)
 git tag 标签名 commit_id                   #对某一提交记录打标签
 git tag -a 标签名 -m '描述'                #创建新标签并增加备注
@@ -52,7 +52,7 @@ git push origin --tags                     #推送所有标签到远程仓库
 git push origin :refs/tags/标签名          #从远程仓库中删除标签
 ```
 ## 五、常规操作
-```
+```shell
 git init 
 git add -A                                 #添加所有当前目录文件
 git commit ''                              #commit
@@ -67,22 +67,22 @@ git check-ignore -v 文件名                 #查看忽略规则
 git add -f 文件名                          #强制将文件提交
 ```
 ### 5.1 git创建项目仓库
-```
+```shell
 git init                                    #初始化
 git remote add origin url                   #关联远程仓库
 git pull                                    #
 git fetch                                   #获取远程仓库中所有的分支到本地
 ```
 ### 5.2 忽略已加入到版本库中的文件
-```
+```shell
 git update-index --assume-unchanged file  #忽略单个文件
 git rm -r --cached                        #文件/文件夹名字 (. 忽略全部文件)
 ```
 ### 5.3 取消忽略文件
-```
+```shell
 git update-index --no-assume-unchanged file
 ```
 ### 5.4 拉取、上传免密码
-```
+```shell
 git config --global credential.helper store
 ```
