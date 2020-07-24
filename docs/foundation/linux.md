@@ -1,13 +1,15 @@
 ---
-title: 【Linux】常用基本命令
+title: 【Linux】常用命令
 date: 2020-07-22
+sidebar: auto
 categories:
  - 基础
 tags:
 - linux
-prev: ./markdown
+prev: ./
 next: ./git
 ---
+
 ## 一、基本命令
 *基于centos系统版本命令*
 ### 1.1 防火墙相关

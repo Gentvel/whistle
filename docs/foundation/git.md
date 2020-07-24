@@ -1,11 +1,13 @@
 ---
 title: 【Git】语法
 date: 2020-07-24
-sidebar: 'auto'
+sidebar: auto
 categories:
  - 基础
 tags:
 - git
+prev: ./git
+next: false
 ---
 ## 一、分支操作
 ```shell

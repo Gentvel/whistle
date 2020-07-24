@@ -1,7 +1,7 @@
 ---
 title: 【nginx】Nginx
 date: 2020-07-24
-sidebar: 'auto'
+sidebar: auto
 categories:
  - 基础
 tags:

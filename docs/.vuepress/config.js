@@ -33,6 +33,26 @@ module.exports = {
             { text: '主页', link: '/' },
             { text: '时间线', link: '/timeline/', icon: 'reco-date' }
         ],
+        //侧边栏
+        // sidebar: [{
+        //         title: '基础', // 必要的
+        //         path: '/foundation/', // 可选的, 标题的跳转链接，应为绝对路径且必须存在
+        //         collapsable: false, // 可选的, 默认值是 true,
+        //         sidebarDepth: 2, // 可选的, 默认值是 1
+        //         children: [
+        //             '/foundation/linux', '/foundation/git', '/foundation/markdown'
+        //         ]
+        //     },
+        //     {
+        //         title: 'java', // 必要的
+        //         path: '/java/javaee/', // 可选的, 标题的跳转链接，应为绝对路径且必须存在
+        //         collapsable: false, // 可选的, 默认值是 true,
+        //         sidebarDepth: 2, // 可选的, 默认值是 1
+        //         children: [
+        //             '/java/javaee/classloader'
+        //         ]
+        //     }
+        // ],
         // 博客配置
         blogConfig: {
             category: {
