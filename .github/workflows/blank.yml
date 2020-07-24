@@ -52,4 +52,4 @@ jobs:
         # Determines if --tags is used
         #tags: # optional
         # Directory to change to before pushing.
-        directory: /docs/.vuepress/dist/
+        directory: ./docs/.vuepress/dist/
