@@ -1,0 +1,14 @@
+---
+title: Java
+date: 2020-07-24
+sidebar: auto
+categories:
+- java
+prev: false
+next: ./classloader
+---
+
+- [JVM系列一 类的加载](./classloader) 
+- [JVM系列二 运行时数据区](./runtime)
+- [JVM系列三 垃圾回收](./garbage)
+- [JVM系列四 运行参数](./parameter)

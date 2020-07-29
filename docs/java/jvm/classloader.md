@@ -1,6 +1,6 @@
 ---
 title: 【JAVA】JVM 篇一 类的加载
-date: 2020-07-24
+date: 2020-07-29
 sidebar: auto
 categories:
 - java
