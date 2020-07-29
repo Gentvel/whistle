@@ -1,5 +1,5 @@
 ---
-title: 【JAVA】JVM 篇四 垃圾回收
+title: 【JAVA】JVM 篇三 垃圾回收
 date: 2020-07-29
 sidebar: auto
 categories:
