@@ -7,7 +7,7 @@ categories:
 tags:
 - jvm
 prev: ./runtime
-next: ./parameter
+next: ./collector
 ---
 
 ## 一、垃圾回收算法
@@ -23,6 +23,15 @@ next: ./parameter
 在标记阶段，首先通过根节点，标记所有从根节点开始的可达对象。因此，未标记的对象就是未被引用的垃圾对象。
 然后执行清除阶段将垃圾对象回收。
 标记清除法可能产生的最大问题就是空间碎片，空间不连续的问题。
+
+GC Root 对象有哪些
+（1）虚拟机（JVM）栈中引用对象  
+
+（2）方法区中的类静态属性引用对象  
+ 
+（3）方法区中常量引用的对象（final 的常量值）  
+
+（4）本地方法栈JNI的引用对象  
 
 ### 1.3 复制算法(Copying)
 将原有的内存空间分为两块，每次只是使用其中一块，在垃圾回收时，将正在使用的内存中的存活对象复制到未使用的内存块中，之后，清除正在使用的内存块中的所有对象，交换两个内存的角色，完成垃圾回收。这种算法应用于新生代中的ServivorFrom和ServivorTo这两个区中
@@ -114,3 +123,87 @@ new的对象就是强引用，强引用具备以下特点：
 
 ### 3.2 软引用-可被回收的引用
 一个对象只持有软引用，那么当堆空间不足时，就会被回收。软引用使用`java.lang.ref.SoftReference`类实现。
+```
+User u = new User(3,"张三");
+SoftReference<User> userSoftReference = new SoftReference<>(u);
+u = null;
+System.out.println(userSoftReference.get());
+System.gc();
+System.out.println("After GC:");
+System.out.println(userSoftReference.get());
+byte[] bytes = new byte[1024 * 1023 * 8];
+Thread.sleep(10000);
+System.gc();
+System.out.println(userSoftReference.get());
+```
+
+每一个软引用都可以附带一个引用队列，当对象的可达性状态发生改变时（由可达变为不可达），软引用对象就会进入引用队列。通过这个引用队列，可以跟踪对象的回收情况。
+
+```
+private static ReferenceQueue<User> userReferenceQueue;
+
+public static class UserSoftReference extends SoftReference<User> {
+    int uid;
+    public UserSoftReference(User referent, ReferenceQueue<? super User> queue){
+        super(referent,queue);
+        uid = referent.id;
+    }
+}
+
+public static void main(String[] args) throws InterruptedException {
+    Thread t =new Thread(()->{
+        while (true){
+            if(userReferenceQueue != null){
+                UserSoftReference obj = null;
+                try{
+                    obj = (UserSoftReference) userReferenceQueue.remove();
+                }catch (InterruptedException e){
+                    e.printStackTrace();
+                }
+                if(obj!=null){
+                    System.out.println("User id "+obj.uid + " is delete");
+                }
+            }
+        }
+    });
+    t.setDaemon(true);
+    t.start();
+    User user = new User(12,"张三");
+    userReferenceQueue = new ReferenceQueue<>();
+    UserSoftReference userSoftReference = new UserSoftReference(user,userReferenceQueue);
+    user = null;
+    System.out.println(userSoftReference.get());
+    System.gc();
+    //内存足够，不会被回收
+    System.out.println("After GC:");
+    System.out.println(userSoftReference.get());
+    System.out.println("try to create byte array and GC");
+    byte[] bytes= new byte[1024*925*7];
+    System.gc();
+    System.out.println(userSoftReference.get());
+    Thread.sleep(1000);
+}
+```
+
+在创建软引用时，指定一个软引用队列，当给定的软引用对象实例被回收时，就会被加入这个引用队列，通过访问该队列可以跟踪对象的回收情况。
+
+### 3.3 弱引用-发现即回收
+
+在系统GC时，只要发现弱引用，不管系统堆空间使用情况如何，都会将对象进行回收。但是，由于垃圾回收器的线程通常优先级很低，因此，并不一定能很快发现持有弱引用的对象。在这种情况下，弱引用对象可以存在较长的时间。一旦一个弱引用对象被垃圾回收器回收，便会加入到一个注册的引用队列中。使用`java.lang.ref.WeakReference`类实现
+```
+  User u = new User(3,"张三");
+  WeakReference<User> weakReference = new WeakReference<>(u);
+  u = null;
+  System.out.println(weakReference.get());
+  System.gc();
+  System.out.println("After GC");
+  System.out.println(weakReference.get());
+```
+
+:::tip
+软引用、弱引用都非常适合来保存那些可有可无的缓存数据。如果这么做，当系统内存不足时，这些缓存的数据会被回收，不会导致内存溢出。而当内存资源充足时，这些缓存数据又可以存在相当长的时间，从而起到加速系统的作用。
+:::
+
+### 3.4 虚引用-对象回收跟踪
+一个持有虚引用的对象，和没有引用几乎是一样的，随时都可能被垃圾回收器回收。当试图通过虚引用的get()方法取得强引用时，总是会失败。并且，虚引用必须和引用队列一起使用，它的作用在于跟踪垃圾回收过程。
+当垃圾回收器准备回收一个对象时，如果发现它还有虚引用，就会在回收对象后，将这个虚引用加入引用队列，以通知应用程序对象的回收情况。`java.lang.ref.PhantomReference`

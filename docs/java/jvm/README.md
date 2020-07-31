@@ -11,4 +11,5 @@ next: ./classloader
 - [JVM系列一 类的加载](./classloader) 
 - [JVM系列二 运行时数据区](./runtime)
 - [JVM系列三 垃圾回收](./garbage)
-- [JVM系列四 运行参数](./parameter)
+- [JVM系列四 垃圾回收器](./collector)
+- [JVM系列五 运行参数](./parameter)
