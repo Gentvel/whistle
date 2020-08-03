@@ -6,7 +6,7 @@ categories:
 - java
 tags:
 - thread
-prev: ./
+prev: false
 next: false
 ---
 ## 一、内存模型
