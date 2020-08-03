@@ -1,12 +1,12 @@
 ---
-title: 【JAVA】JVM 篇五 常用虚拟机参数
+title: 【JAVA】JVM 篇六 常用虚拟机参数
 date: 2020-07-29
 sidebar: auto
 categories:
 - java
 tags:
 - jvm
-prev: ./garbage
+prev: ./addition
 next: false
 ---
 

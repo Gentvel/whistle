@@ -12,4 +12,5 @@ next: ./classloader
 - [JVM系列二 运行时数据区](./runtime)
 - [JVM系列三 垃圾回收](./garbage)
 - [JVM系列四 垃圾回收器](./collector)
-- [JVM系列五 运行参数](./parameter)
+- [JVM系列五 内存分配和垃圾回收](./addition)
+- [JVM系列六 运行参数](./parameter)

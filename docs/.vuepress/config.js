@@ -52,6 +52,7 @@ module.exports = {
                 //sidebarDepth: 2, // 可选的, 默认值是 1
                 children: [
                     { title: 'JVM', path: '/java/jvm/' },
+                    { title: '多线程', path: '/java/thread/' },
                 ]
             },
             {

@@ -7,7 +7,7 @@ categories:
 tags:
 - jvm
 prev: ./garbage
-next: ./parameter
+next: ./addition
 ---
 
 ## 一、串行回收器
@@ -106,3 +106,6 @@ G1收集器解决上面问题的办法是G1在每个region都有一个与之对�
 为了修正在并发标记过程中由于用户线程运行导致标记产生变动的那一部分标记记录，虚拟机将这段时间对象记录在线程remembered Set logs里。同时需要把remembered Set logs的数据合并到Remembered set中，这阶段将停止线程，但是可并行执行。
 - 筛选回收
 首先对region的回收价值和成本进行排序，根据用户所期望的GC停顿时间来制定回收计划。这个步骤也需要停止用户线程。
+
+使用参数`-XX:+UseG1GC`打开G1收集器。最重要的参数是`-XX:MaxGCPauseMillis`，它用于指定目标最大停顿时间。如果任何一次停顿时间超过这个设置值时，G1就会尝试调整新生代和老年代的比例、堆的大小、晋升年龄等手段来达到预设的目标。此外，`-XX:InitiatingHeapOccupancyPercent`参数设定当前堆使用率达到多少时，出发并发标记周期的执行。默认为45，即当整个堆占用率达到45%时，执行并发标记周期。而且这个值一旦设置，始终都不会被G1收集器修改，这意味着G1收集器不会试图改变这个值来满足MaxGCPauseMillis的目标。
+
