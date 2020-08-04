@@ -38,7 +38,7 @@ module.exports = {
                 title: '基础', // 必要的
                 path: '/foundation/', // 可选的, 标题的跳转链接，应为绝对路径且必须存在
                 //collapsable: false, // 可选的, 默认值是 true,
-                //sidebarDepth: 2, // 可选的, 默认值是 1
+                sidebarDepth: 2, // 可选的, 默认值是 1
                 children: [
                     { title: 'Linux', path: '/foundation/linux' },
                     { title: 'Git', path: '/foundation/git' },
@@ -49,7 +49,7 @@ module.exports = {
                 title: 'JAVA', // 必要的
                 path: '/java/', // 可选的, 标题的跳转链接，应为绝对路径且必须存在
                 //collapsable: false, // 可选的, 默认值是 true,
-                //sidebarDepth: 2, // 可选的, 默认值是 1
+                sidebarDepth: 2, // 可选的, 默认值是 1
                 children: [
                     { title: 'JVM', path: '/java/jvm/' },
                     { title: '多线程', path: '/java/thread/' },
@@ -59,7 +59,7 @@ module.exports = {
                 title: '中间件', // 必要的
                 path: '/middle/', // 可选的, 标题的跳转链接，应为绝对路径且必须存在
                 //collapsable: false, // 可选的, 默认值是 true,
-                //sidebarDepth: 2, // 可选的, 默认值是 1
+                sidebarDepth: 2, // 可选的, 默认值是 1
                 children: [
                     { title: 'Nginx', path: '/middle/nginx' },
                     { title: 'Redis', path: '/middle/redis' }
