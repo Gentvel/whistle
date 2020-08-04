@@ -106,12 +106,12 @@ module.exports = {
             }
         }
     },
-    //修改默认语言代码
-    locales: {
-        '/': {
-            lang: 'zh-CN'
-        }
-    },
+    // //修改默认语言代码
+    // locales: {
+    //     '/': {
+    //         lang: 'zh-CN'
+    //     }
+    // },
     configureWebpack: {
         resolve: {
             alias: {
