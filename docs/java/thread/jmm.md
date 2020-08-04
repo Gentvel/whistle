@@ -5,7 +5,7 @@ sidebar: auto
 categories:
 - java
 tags:
-- thread
+- 多线程
 prev: false
 next: false
 ---
