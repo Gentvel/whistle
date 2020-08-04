@@ -4,6 +4,8 @@ date: 2020-07-31
 sidebar: auto
 categories:
 - java
+tags:
+- jvm
 prev: ./garbage
 next: ./addition
 ---

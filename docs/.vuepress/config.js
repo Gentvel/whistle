@@ -69,7 +69,7 @@ module.exports = {
                 title: '算法', // 必要的
                 path: '/algorithm/', // 可选的, 标题的跳转链接，应为绝对路径且必须存在
                 //collapsable: false, // 可选的, 默认值是 true,
-                //sidebarDepth: 2, // 可选的, 默认值是 1
+                sidebarDepth: 2, // 可选的, 默认值是 1
                 children: [
                     // { title: 'JVM', path: '/java/jvm' },
                 ]
@@ -81,10 +81,10 @@ module.exports = {
                 location: 2, // 在导航栏菜单中所占的位置，默认2
                 text: '分类' // 默认文案 “分类”
             },
-            // tag: {
-            //     location: 3, // 在导航栏菜单中所占的位置，默认3
-            //     text: '标签' // 默认文案 “标签”
-            // }
+            tag: {
+                location: 3, // 在导航栏菜单中所占的位置，默认3
+                text: '标签' // 默认文案 “标签”
+            }
         },
         //中英文
         locales: {

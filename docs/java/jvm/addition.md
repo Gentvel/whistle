@@ -4,6 +4,8 @@ date: 2020-08-03
 sidebar: auto
 categories:
 - java
+tags:
+- jvm
 prev: ./garbage
 next: ./parameter
 ---

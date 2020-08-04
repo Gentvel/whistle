@@ -4,6 +4,8 @@ date: 2020-07-24
 sidebar: auto
 categories:
  - 基础
+tags:
+- nginx
 ---
 *更多详情请参考[Nginx官方文档](http://nginx.org/en/docs/ "NGINX")*
 ## 一. 常用命令

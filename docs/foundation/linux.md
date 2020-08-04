@@ -4,6 +4,8 @@ date: 2020-07-22
 sidebar: auto
 categories:
  - 基础
+tags:
+- linux
 prev: ./
 next: ./git
 ---

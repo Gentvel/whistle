@@ -4,6 +4,8 @@ date: 2020-07-24
 sidebar: auto
 categories:
 - java
+tags:
+- jvm
 prev: ./classloader
 next: ./garbage
 ---
