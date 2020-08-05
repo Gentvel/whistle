@@ -50,3 +50,4 @@ next: false
 1. 分发处理发送给JVM信号的线程
 2. 调用对象[finalize()](../jvm/garbage.html#二、判断可触及性)方法的线程
 3. 清除[Reference](../jvm/garbage.html#三、引用)的线程
+4. main线程，用户线程的入口。

@@ -60,7 +60,7 @@ GC Root 对象有哪些
 - **可触及的**:从根节点开始，可以到达这个对象。
 - **可复活的**：对象的所有应用都被释放，但是对象有可能在`finalize()`函数中复活
 - **不可触及的**：对象的`finalize()`函数被调用，并且没有复活，那么就进入不可触及状态，不可触及的对象不可能被复活，因为`finalize()`函数只会被调用一次。
-```
+```java
     public static CanReliveObj obj;
 
     @Override
@@ -123,7 +123,7 @@ new的对象就是强引用，强引用具备以下特点：
 
 ### 3.2 软引用-可被回收的引用
 一个对象只持有软引用，那么当堆空间不足时，就会被回收。软引用使用`java.lang.ref.SoftReference`类实现。
-```
+```java
 User u = new User(3,"张三");
 SoftReference<User> userSoftReference = new SoftReference<>(u);
 u = null;
@@ -139,7 +139,7 @@ System.out.println(userSoftReference.get());
 
 每一个软引用都可以附带一个引用队列，当对象的可达性状态发生改变时（由可达变为不可达），软引用对象就会进入引用队列。通过这个引用队列，可以跟踪对象的回收情况。
 
-```
+```java
 private static ReferenceQueue<User> userReferenceQueue;
 
 public static class UserSoftReference extends SoftReference<User> {
@@ -190,7 +190,7 @@ public static void main(String[] args) throws InterruptedException {
 ### 3.3 弱引用-发现即回收
 
 在系统GC时，只要发现弱引用，不管系统堆空间使用情况如何，都会将对象进行回收。但是，由于垃圾回收器的线程通常优先级很低，因此，并不一定能很快发现持有弱引用的对象。在这种情况下，弱引用对象可以存在较长的时间。一旦一个弱引用对象被垃圾回收器回收，便会加入到一个注册的引用队列中。使用`java.lang.ref.WeakReference`类实现
-```
+```java
   User u = new User(3,"张三");
   WeakReference<User> weakReference = new WeakReference<>(u);
   u = null;
