@@ -2,8 +2,6 @@
 title: JVM系列
 date: 2020-07-24
 sidebar: auto
-categories:
-- java
 prev: false
 next: ./classloader
 ---

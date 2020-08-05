@@ -30,7 +30,7 @@ module.exports = {
         authorAvatar: '/avatar.png', //设置首页右侧信息栏头像
         //noFoundPageByTencent: false, //404腾讯公益
         nav: [
-            { text: '主页', link: '/' },
+            { text: '主页', link: '/', icon: 'reco-eye' },
             { text: '时间线', link: '/timeline/', icon: 'reco-date' }
         ],
         //侧边栏
@@ -51,6 +51,7 @@ module.exports = {
                 //collapsable: false, // 可选的, 默认值是 true,
                 sidebarDepth: 2, // 可选的, 默认值是 1
                 children: [
+                    { title: 'Java基础', path: '/java/javase/' },
                     { title: 'JVM', path: '/java/jvm/' },
                     { title: '多线程', path: '/java/thread/' },
                 ]
@@ -62,7 +63,7 @@ module.exports = {
                 sidebarDepth: 2, // 可选的, 默认值是 1
                 children: [
                     { title: 'Nginx', path: '/middle/nginx' },
-                    { title: 'Redis', path: '/middle/redis' }
+                    { title: '缓存', path: '/middle/cache/' }
                 ]
             },
             {
@@ -71,7 +72,8 @@ module.exports = {
                 //collapsable: false, // 可选的, 默认值是 true,
                 sidebarDepth: 2, // 可选的, 默认值是 1
                 children: [
-                    // { title: 'JVM', path: '/java/jvm' },
+                    { title: '排序', path: '/algorithm/sort' },
+                    { title: '递归', path: '/algorithm/recursion' },
                 ]
             }
         ],

@@ -26,3 +26,8 @@ TLAB(Thread Local Allocation Buffer)，线程本地分配缓存。为了加速�
 ![Allocation Buffer](./img/alloc.png)
 
 </center>
+
+## 四 JIT即时编译器
+
+[深入浅出JIT编译器](https://developer.ibm.com/zh/articles/j-lo-just-in-time/)
+

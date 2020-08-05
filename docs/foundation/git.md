@@ -9,6 +9,8 @@ tags:
 prev: ./git
 next: false
 ---
+
+原理请参考[Github](https://github.com/CyC2018/CS-Notes/blob/master/notes/Git.md)
 ## 一、分支操作
 ```shell
 git branch                  #创建分支
@@ -88,3 +90,4 @@ git update-index --no-assume-unchanged file
 ```shell
 git config --global credential.helper store
 ```
+

@@ -3,11 +3,10 @@ title: 【nginx】Nginx
 date: 2020-07-24
 sidebar: auto
 categories:
- - 基础
+ - 中间件
 tags:
 - nginx
 ---
-*更多详情请参考[Nginx官方文档](http://nginx.org/en/docs/ "NGINX")*
 ## 一. 常用命令
 ```shell
 nginx -s quit          #优雅停止nginx，有连接时会等连接请求完成再杀死worker进程  
@@ -399,3 +398,4 @@ location /images/ {
 
 *其他配置或调优请参考[nginx手册](https://www.kancloud.cn/louis1986/nginx-web "看云")*
  
+*更多详情请参考[Nginx官方文档](http://nginx.org/en/docs/ "NGINX")*

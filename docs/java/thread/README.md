@@ -2,8 +2,6 @@
 title: 多线程系列
 date: 2020-08-03
 sidebar: auto
-categories:
-- java
 prev: false
 next: false
 ---

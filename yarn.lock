@@ -1104,10 +1104,10 @@
   optionalDependencies:
     prettier "^1.18.2"
 
-"@vuepress-reco/vuepress-plugin-back-to-top@^1.5.4":
-  version "1.5.4"
-  resolved "https://registry.npm.taobao.org/@vuepress-reco/vuepress-plugin-back-to-top/download/@vuepress-reco/vuepress-plugin-back-to-top-1.5.4.tgz#da74fb8805a037551646e72511d065c2934a1ac3"
-  integrity sha1-2nT7iAWgN1UWRuclEdBlwpNKGsM=
+"@vuepress-reco/vuepress-plugin-back-to-top@^1.5.5":
+  version "1.5.5"
+  resolved "https://registry.npm.taobao.org/@vuepress-reco/vuepress-plugin-back-to-top/download/@vuepress-reco/vuepress-plugin-back-to-top-1.5.5.tgz#779e1f3ca22babe3568123760f53b0dc93869602"
+  integrity sha1-d54fPKIrq+NWgSN2D1Ow3JOGlgI=
 
 "@vuepress-reco/vuepress-plugin-comments@^1.4.6":
   version "1.4.6"
@@ -8176,12 +8176,12 @@ vuepress-plugin-smooth-scroll@^0.0.9:
   dependencies:
     smoothscroll-polyfill "^0.4.4"
 
-vuepress-theme-reco@^1.5.4:
-  version "1.5.4"
-  resolved "https://registry.npm.taobao.org/vuepress-theme-reco/download/vuepress-theme-reco-1.5.4.tgz#eea83bbb26320e053b0f33d04d4274fbb1155d97"
-  integrity sha1-7qg7uyYyDgU7DzPQTUJ0+7EVXZc=
+vuepress-theme-reco@^1.5.5:
+  version "1.5.5"
+  resolved "https://registry.npm.taobao.org/vuepress-theme-reco/download/vuepress-theme-reco-1.5.5.tgz#8ea5293991d0321e5f1e5e4dbbb6d94f4c8a7cc0"
+  integrity sha1-jqUpOZHQMh5fHl5Nu7bZT0yKfMA=
   dependencies:
-    "@vuepress-reco/vuepress-plugin-back-to-top" "^1.5.4"
+    "@vuepress-reco/vuepress-plugin-back-to-top" "^1.5.5"
     "@vuepress-reco/vuepress-plugin-comments" "^1.4.6"
     "@vuepress-reco/vuepress-plugin-loading-page" "^1.4.0"
     "@vuepress-reco/vuepress-plugin-pagation" "^1.4.7"
