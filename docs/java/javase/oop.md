@@ -1,5 +1,5 @@
 ---
-title: 【Java基础】系列 面向对象
+title: 【Java基础】系列二 面向对象
 date: 2020-08-05
 sidebar: auto
 categories:

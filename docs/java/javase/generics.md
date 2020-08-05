@@ -1,5 +1,5 @@
 ---
-title: 【Java基础】系列 泛型
+title: 【Java基础】系列三 泛型
 date: 2020-08-04
 sidebar: auto
 categories:
