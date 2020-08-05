@@ -6,8 +6,8 @@ categories:
  - java
 tags:
 - javase
-prev: false
-next: false
+prev: ./base
+next: ./generics
 ---
 
 ## 一、类和对象

@@ -6,8 +6,8 @@ categories:
  - java
 tags:
 - javase
-prev: false
-next: false
+prev: ./exception
+next: ./thread
 ---
 
 ## 一、概述

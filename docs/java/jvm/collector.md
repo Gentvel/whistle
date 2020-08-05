@@ -55,6 +55,7 @@ ParallelGC提供了两个重要参数用于控制系统的吞吐量：
 
 ## 三、CMS回收器
 CMS（Concurrent Mark Sweep）回收器主要关注于系统停顿时间。使用的是标记清除算法，也是一个多线程并行回收的垃圾回收器。
+
 <center>
 
 ![CMS](./img/cms.png)

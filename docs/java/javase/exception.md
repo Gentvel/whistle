@@ -6,8 +6,8 @@ categories:
  - java
 tags:
 - javase
-prev: false
-next: false
+prev: ./reflection
+next: ./io
 ---
 
 <center>

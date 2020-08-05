@@ -7,7 +7,7 @@ categories:
 tags:
 - javase
 prev: ./
-next: false
+next: ./oop
 ---
 
 ## 一、基本数据类型

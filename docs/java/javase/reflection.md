@@ -6,8 +6,8 @@ categories:
  - java
 tags:
 - javase
-prev: false
-next: false
+prev: ./generics
+next: ./exception
 ---
 
 ## 一、反射机制介绍
