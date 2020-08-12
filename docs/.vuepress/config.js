@@ -40,6 +40,14 @@ module.exports = {
                 //collapsable: false, // 可选的, 默认值是 true,
                 sidebarDepth: 2, // 可选的, 默认值是 1
                 children: [
+                    { title: '位运算', path: '/foundation/bitewise' },
+                    {
+                        title: '操作系统',
+                        path: '/foundation/system',
+                        children: [
+                            { title: '运行机制', path: '/foundation/system/runtime' },
+                        ]
+                    },
                     { title: 'Linux', path: '/foundation/linux' },
                     { title: 'Git', path: '/foundation/git' },
                     { title: 'Markdown', path: '/foundation/markdown' }
@@ -50,9 +58,31 @@ module.exports = {
                 path: '/java/', // 可选的, 标题的跳转链接，应为绝对路径且必须存在
                 //collapsable: false, // 可选的, 默认值是 true,
                 sidebarDepth: 2, // 可选的, 默认值是 1
-                children: [
-                    { title: 'Java基础', path: '/java/javase/' },
-                    { title: 'JVM', path: '/java/jvm/' },
+                children: [{
+                        title: 'Java基础',
+                        path: '/java/javase/',
+                        children: [
+                            { title: '基本类型与关键字', path: '/java/javase/base' },
+                            { title: '面向对象', path: '/java/javase/oop' },
+                            { title: '泛型', path: '/java/javase/generics' },
+                            { title: '反射', path: '/java/javase/reflection' },
+                            { title: '异常', path: '/java/javase/exception' },
+                            { title: 'IO', path: '/java/javase/io' },
+                            { title: '多线程基础', path: '/java/javase/thread' },
+                        ]
+                    },
+                    {
+                        title: 'JVM',
+                        path: '/java/jvm/',
+                        children: [
+                            { title: '类的加载', path: '/java/jvm/classloader' },
+                            { title: '运行时数据区', path: '/java/jvm/runtime' },
+                            { title: '垃圾回收', path: '/java/jvm/garbage' },
+                            { title: '垃圾回收器', path: '/java/jvm/collector' },
+                            { title: '内存分配和垃圾回收', path: '/java/jvm/addition' },
+                            { title: '运行参数', path: '/java/jvm/parameter' },
+                        ]
+                    },
                     { title: '多线程', path: '/java/thread/' },
                 ]
             },
@@ -74,6 +104,31 @@ module.exports = {
                 children: [
                     { title: '排序', path: '/algorithm/sort' },
                     { title: '递归', path: '/algorithm/recursion' },
+                ]
+            },
+            {
+                title: '数据结构', // 必要的
+                path: '/datastructure/', // 可选的, 标题的跳转链接，应为绝对路径且必须存在
+                //collapsable: false, // 可选的, 默认值是 true,
+                sidebarDepth: 2, // 可选的, 默认值是 1
+                children: [
+                    { title: '基础', path: '/datastructure/base' },
+                    {
+                        title: '线性结构',
+                        path: '/datastructure/line',
+                        children: [
+                            { title: '顺序表', path: '/datastructure/line/sequence' },
+                            { title: '单向链表', path: '/datastructure/line/link' },
+                        ]
+                    },
+                    {
+                        title: '树形结构',
+                        path: '/datastructure/tree',
+                        children: [
+                            { title: '二叉树', path: '/datastructure/tree/binaryTree' },
+                            //{ title: '单向链表', path: '/datastructure/line/link' },
+                        ]
+                    },
                 ]
             }
         ],
