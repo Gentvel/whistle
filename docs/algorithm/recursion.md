@@ -4,8 +4,6 @@ date: 2020-08-04
 sidebar: auto
 categories:
  - algorithm
-tags:
-- recursion
 prev: ./
 next: false
 ---

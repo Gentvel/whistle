@@ -96,6 +96,7 @@ module.exports = {
                     { title: '缓存', path: '/middle/cache/' }
                 ]
             },
+
             {
                 title: '算法', // 必要的
                 path: '/algorithm/', // 可选的, 标题的跳转链接，应为绝对路径且必须存在
@@ -129,6 +130,22 @@ module.exports = {
                             //{ title: '单向链表', path: '/datastructure/line/link' },
                         ]
                     },
+                ]
+            },
+            {
+                title: 'Leetcode', // 必要的
+                path: '/leetcode/', // 可选的, 标题的跳转链接，应为绝对路径且必须存在
+                //collapsable: false, // 可选的, 默认值是 true,
+                sidebarDepth: 2, // 可选的, 默认值是 1
+                children: [{
+                        title: 'Tree',
+                        path: '/leetcode/tree/',
+                        children: [
+                            { title: '[95]不同的二叉搜索树 II', path: '/leetcode/tree/95' },
+                            //{ title: '单向链表', path: '/datastructure/line/link' },
+                        ]
+                    },
+                    //{ title: '缓存', path: '/middle/cache/' }
                 ]
             }
         ],
