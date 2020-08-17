@@ -4,8 +4,6 @@ date: 2020-08-11
 sidebar: auto
 categories:
  - 操作系统
-tags:
-- 操作系统
 prev: false
 next: false
 ---
