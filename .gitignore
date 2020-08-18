@@ -1,4 +1,2 @@
-.history
-node_modules
-yarn-error.log
-docs/.vuepress/dist
+/out
+/.idea
