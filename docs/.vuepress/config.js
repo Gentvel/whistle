@@ -96,7 +96,20 @@ module.exports = {
                     { title: '缓存', path: '/middle/cache/' }
                 ]
             },
-
+            {
+                title: '服务网格', // 必要的
+                path: '/servicemesh/', // 可选的, 标题的跳转链接，应为绝对路径且必须存在
+                //collapsable: false, // 可选的, 默认值是 true,
+                sidebarDepth: 2, // 可选的, 默认值是 1
+                children: [
+                    
+                    { title: 'Docker', path: '/servicemesh/docker/' ,children:[
+                        { title: '安装', path: '/servicemesh/docker/install' },
+                            // { title: '运行时数据区', path: '/java/jvm/runtime' },
+                    ]},
+                    { title: 'Minishift', path: '/servicemesh/minishift/' },
+                ]
+            },
             {
                 title: '算法', // 必要的
                 path: '/algorithm/', // 可选的, 标题的跳转链接，应为绝对路径且必须存在

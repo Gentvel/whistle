@@ -100,6 +100,22 @@ sync; echo 2 > /proc/sys/vm/drop_caches
 sync; echo 3 > /proc/sys/vm/drop_caches
 ```
 
+### 1.5 关闭selinux
+```shell
+#临时关闭selinux
+setenforce 0
+#永久关闭selinux
+vi /etc/selinux/config
+#修改enforcing为disabled
+```
+
+### 1.6 设置环境变量
+
+[Centos7设置环境变量](https://blog.csdn.net/f110300641/article/details/82663132?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-4.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-4.nonecase)
+
+设置完注意source
+
+
 ## 二、插件命令
 ### 2.1 YUM 清理缓存
 清理yum缓存使用yum clean 命令，yum clean 的参数有headers, packages, metadata, dbcache, plugins, expire-cache, rpmdb, all
@@ -109,3 +125,4 @@ yum clean headers  #清理/var/cache/yum的headers
 yum clean packages #清理/var/cache/yum下的软件包
 yum clean metadata
 ```
+
