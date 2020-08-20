@@ -46,6 +46,7 @@ module.exports = {
                         path: '/foundation/system',
                         children: [
                             { title: '运行机制', path: '/foundation/system/runtime' },
+                            { title: '系统调用', path: '/foundation/system/systemcall' },
                         ]
                     },
                     { title: 'Linux', path: '/foundation/linux' },
@@ -145,22 +146,6 @@ module.exports = {
                     },
                 ]
             },
-            {
-                title: 'Leetcode', // 必要的
-                path: '/leetcode/', // 可选的, 标题的跳转链接，应为绝对路径且必须存在
-                //collapsable: false, // 可选的, 默认值是 true,
-                sidebarDepth: 2, // 可选的, 默认值是 1
-                children: [{
-                        title: 'Tree',
-                        path: '/leetcode/tree/',
-                        children: [
-                            { title: '[95]不同的二叉搜索树 II', path: '/leetcode/tree/95' },
-                            //{ title: '单向链表', path: '/datastructure/line/link' },
-                        ]
-                    },
-                    //{ title: '缓存', path: '/middle/cache/' }
-                ]
-            }
         ],
         // 博客配置
         blogConfig: {
