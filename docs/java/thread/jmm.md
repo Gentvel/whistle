@@ -1,5 +1,5 @@
 ---
-title: 【JAVA】多线程 篇一 理解java内存模型
+title: 【多线程】 篇二 理解java内存模型
 date: 2020-08-03
 sidebar: auto
 categories:
