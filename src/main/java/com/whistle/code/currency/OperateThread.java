@@ -38,7 +38,9 @@ public class OperateThread {
                 System.out.println("Engine Running! Current Speed: " + (speed.getAndIncrement()));
 
                 try {
-                    breakerThread.join();
+                    breakerThread.join(200);
+//                    Thread.sleep(100);
+//                    breakerThread.join();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
