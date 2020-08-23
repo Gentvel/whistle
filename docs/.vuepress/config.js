@@ -68,7 +68,7 @@ module.exports = {
                             { title: '反射', path: '/java/javase/reflection' },
                             { title: '异常', path: '/java/javase/exception' },
                             { title: 'IO', path: '/java/javase/io' },
-                            { title: '多线程基础', path: '/java/javase/thread' },
+                            
                         ]
                     },
                     {
@@ -83,7 +83,12 @@ module.exports = {
                             { title: '运行参数', path: '/java/jvm/parameter' },
                         ]
                     },
-                    { title: '多线程', path: '/java/thread/' },
+                    { title: '多线程', path: '/java/thread/' ,
+                    children: [
+                        { title: '多线程基础', path: '/java/thread/thread' },
+                        { title: '内存模型', path: '/java/thread/jmm' },
+                        
+                    ]},
                 ]
             },
             {

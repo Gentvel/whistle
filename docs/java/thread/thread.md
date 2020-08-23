@@ -6,8 +6,8 @@ categories:
  - java
 tags:
 - javase
-prev: ./io
-next: ./serializable
+prev: false
+next: false
 ---
 
 ## 一、概念
