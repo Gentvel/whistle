@@ -4,7 +4,6 @@ module.exports = {
     base: '/whistle/',
     theme: 'reco',
     themeConfig: {
-
         // // 假定是 GitHub. 同时也可以是一个完整的 GitLab URL
         // repo: 'https://github.com/Gentvel/whistle.git',
         // // 自定义仓库链接文字。默认从 `themeConfig.repo` 中自动推断为
@@ -106,6 +105,10 @@ module.exports = {
                     
                     { title: 'Docker', path: '/servicemesh/docker/' ,children:[
                         { title: '安装', path: '/servicemesh/docker/install' },
+                            // { title: '运行时数据区', path: '/java/jvm/runtime' },
+                    ]},
+                    { title: 'Kubernetes', path: '/servicemesh/kubernetes/' ,children:[
+                        { title: '安装', path: '/servicemesh/kubernetes/install' },
                             // { title: '运行时数据区', path: '/java/jvm/runtime' },
                     ]},
                     { title: 'Minishift', path: '/servicemesh/minishift/' },

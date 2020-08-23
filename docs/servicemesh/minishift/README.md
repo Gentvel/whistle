@@ -6,7 +6,7 @@ prev: false
 next: false
 ---
 
-## 安装
+## 一、 Centos 安装
 1. 设置Minishift管理程序驱动程序
 KVM用户需要手动安装驱动程序插件。以下安装KVM驱动程序（适用于KVM用户）。
 ```shell
@@ -66,7 +66,7 @@ minishift --vm-driver=virtulbox # virtual box
 如果使用的是Vmware首先要开启CPUVT虚拟化技术
 :::
 
-## 可能出现的问题
+### 可能出现的问题
 1. Openshift 版本校验
 ```shell
 -- Checking if requested OpenShift version 'v3.11.0' is valid ... v3.11.0 is not a valid OpenShift versionFAIL
@@ -82,4 +82,10 @@ minishift config set skip-check-openshift-release true
 minishift ssh
 docker pull ....
 ```
+
+## 二、 win10 安装
+
+步骤同上，只是将oc和openshift二进制文件下载成windows系统
+
+
 
