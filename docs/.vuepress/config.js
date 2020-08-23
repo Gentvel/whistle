@@ -87,6 +87,7 @@ module.exports = {
                     children: [
                         { title: '多线程基础', path: '/java/thread/thread' },
                         { title: '内存模型', path: '/java/thread/jmm' },
+                        { title: 'CAS(Compare And Swap)', path: '/java/thread/cas' },
                         
                     ]},
                 ]

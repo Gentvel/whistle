@@ -16,7 +16,7 @@ next: false
 3. 清除[Reference](../jvm/garbage.html#三、引用)的线程
 4. main线程，用户线程的入口
 
-### 3.1 创建线程的三种方法
+### 1.1 创建线程的三种方法
 - 通过继承Thread类，重写run方法
 - 通过实现Runable接口
 - 通过实现Callable接口
@@ -127,6 +127,102 @@ private native void start0();
 ```
 :::
 由于Thread类也是实现了Runnable接口，所以其实启动线程的方法只有一个，那就是start()方法。
+
+## 二、线程的操作方法
+
+操作线程有很多方法，这些方法可以从一种状态过渡到另一种状态
+
+### 2.1 线程的休眠
+使当前线程sleep，线程不会释放锁，处于等待状态。
+```java
+static void threadSleep() throws InterruptedException {
+    System.out.println("Thread sleep 2 seconds");
+    Thread.sleep(2000);
+}
+```
+
+### 2.2 线程的加入
+
+如果当前程序为多线程，加入当前线程A需要插入线程B来完成工作，并要求取回线程B完成后的结果，然后再执行线程A。那么此时可以使用join()方法。
+当某个线程使用join()加入到另外一个线程时，另一个线程会等待该线程执行完成后再继续。
+```java
+public static void threadJoin() throws InterruptedException {
+    AtomicInteger speed = new AtomicInteger(10);
+    Thread breakerThread = new Thread(()->{
+        System.out.println("Breaker Start! ");
+        do {
+            System.out.println("Breaker Running! Current Speed: " + (speed.getAndDecrement()));
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } while (speed.get() > 0);
+
+        System.out.println("Breaker Stop ! ");
+    });
+    Thread engineThread  = new Thread(()->{
+        System.out.println("Engine Start!");
+        do {
+            System.out.println("Engine Running! Current Speed: " + (speed.getAndIncrement()));
+
+            try {
+                breakerThread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } while (speed.get() <= 20);
+        System.out.println("Engine Stop!");
+    });
+
+    engineThread.start();
+    breakerThread.start();
+}
+```
+engine线程和breaker线程同时启动，当engine线程启动时，开启breaker进程，只有当breaker进程执行完才会执行engine线程。
+
+```java
+public final synchronized void join(final long millis)
+    throws InterruptedException {
+        if (millis > 0) {
+            if (isAlive()) {
+                final long startTime = System.nanoTime();
+                long delay = millis;
+                do {
+                    wait(delay);
+                } while (isAlive() && (delay = millis -
+                        TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startTime)) > 0);
+            }
+        } else if (millis == 0) {
+            while (isAlive()) {
+                wait(0);
+            }
+        } else {
+            throw new IllegalArgumentException("timeout value is negative");
+        }
+    }
+
+        /**
+     * Tests if this thread is alive. A thread is alive if it has
+     * been started and has not yet died.
+     *
+     * @return  {@code true} if this thread is alive;
+     *          {@code false} otherwise.
+     */
+    public final native boolean isAlive();
+
+```
+
+<!-- 从源码可以看出，底层是调用wait()方法，锁的是当前当前对象。 -->
+
+
+
 
 ## 二、线程状态的基本操作
 ![线程状态改变](./img/ThreadStatusChange.png)
