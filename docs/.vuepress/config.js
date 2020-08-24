@@ -42,11 +42,19 @@ module.exports = {
                     { title: '位运算', path: '/foundation/bitewise' },
                     {
                         title: '操作系统',
-                        path: '/foundation/system',
+                        path: '/foundation/system/',
                         children: [
                             { title: '运行机制', path: '/foundation/system/runtime' },
                             { title: '系统调用', path: '/foundation/system/systemcall' },
                         ]
+                    },
+                    {
+                        title: '设计模式',
+                        path: '/foundation/designpattern/',
+                        // children: [
+                        //     { title: '运行机制', path: '/foundation/designpattern/runtime' },
+                        //     { title: '系统调用', path: '/foundation/system/systemcall' },
+                        // ]
                     },
                     { title: 'Linux', path: '/foundation/linux' },
                     { title: 'Git', path: '/foundation/git' },
