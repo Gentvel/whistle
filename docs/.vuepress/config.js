@@ -46,6 +46,7 @@ module.exports = {
                         children: [
                             { title: '运行机制', path: '/foundation/system/runtime' },
                             { title: '系统调用', path: '/foundation/system/systemcall' },
+                            { title: '进程', path: '/foundation/system/process' },
                         ]
                     },
                     {
