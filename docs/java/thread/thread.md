@@ -132,14 +132,116 @@ private native void start0();
 
 操作线程有很多方法，这些方法可以从一种状态过渡到另一种状态
 
-### 2.1 线程的休眠
-使当前线程sleep，线程不会释放锁，处于等待状态。
+### 2.1 线程的优先级
+每个线程执行时都有一个优先级的属性，优先级高的线程可以获得较多的执行机会，而优先级较低的线程则获得较少的执行机会。
+
+操作系统采用时分的形式调用运行的线程，操作系统会分出一个个时间片，线程会分配到若干时间片，当线程的时间片用完了就会发生线程调度，并等待着下次分配。线程分配到的时间片多少也就决定了线程使用处理器资源的多少，而线程优先级就是决定线程需要多或者少分配一些处理器资源的线程属性。
+
+```java
+
+/**
+* The minimum priority that a thread can have.
+*/
+public static final int MIN_PRIORITY = 1;
+
+/**
+* The default priority that is assigned to a thread.
+*/
+public static final int NORM_PRIORITY = 5;
+
+/**
+* The maximum priority that a thread can have.
+*/
+public static final int MAX_PRIORITY = 10;
+
+```
+可以看出线程最大的优先级为10，而最小优先级为1，在使用中最好使用Thread中已经定义的常量。设置线程优先级的方法为`setPriority()`
+
+### 2.2 线程的守护
+
+Daemon 线程是一种支持型线程，在后台守护一些系统服务，比如 JVM 的垃圾回收、内存管理等线程都是守护线程。
+
+与之对应的就是用户线程，用户线程就是系统的工作线程，它会完成整个系统的业务操作。
+
+用户线程结束后就意味着整个系统的任务全部结束了，因此系统就没有对象需要守护的了，守护线程自然而然就会退出。所以当一个 Java 应用只有守护线程的时候，虚拟机就会自然退出。设置线程为守护线程的方法是`setDaemon()`
+
+
+```java
+
+
+public void testDaemon() {
+    Thread thread = new Thread(()->{
+        for (int i = 0; i < 10000000; i++) {
+            System.out.println(" I am Daemon");
+            try {
+                Thread.sleep(5);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    });
+    thread.setDaemon(true);
+    thread.start();
+    new Thread(() -> {
+        for (int i = 0; i < 5; i++) {
+            System.out.println(" I m not daemon running");
+        }
+    }).start();
+}
+```
+输出结果如下：
+```shell
+I m not daemon running
+ I am Daemon
+ I m not daemon running
+ I m not daemon running
+ I m not daemon running
+ I m not daemon running
+Running time: 3 ms.
+ I am Daemon
+```
+当测试线程执行完后就只剩下守护线程，所以系统就退出了。
+:::warning 注意
+如果在not daemon线程加上`Thread.sleep(millis)`有可能在该线程没执行完就结束了，因为等待的线程不在就绪状态，操作系统认为当前线程队列已经不存在需要执行的非守护线程，于是终止了进程。
+:::
+
+### 2.3 线程的休眠
+使当前线程sleep，线程不会释放锁，处于阻塞状态。
 ```java
 static void threadSleep() throws InterruptedException {
     System.out.println("Thread sleep 2 seconds");
     Thread.sleep(2000);
 }
 ```
+### 2.4 线程的礼让
+
+yield 方法是 Thread 的静态方法，yield 方法让当前正在执行的线程进入到就绪状态，让出 CPU 资源给其他的线程。
+```java
+Thread thread = new Thread(() -> {
+    int i = 30;
+    while (i > 0) {
+        System.out.println("I am yield !");
+        i--;
+        Thread.yield();
+    }
+});
+thread.setPriority(Thread.MAX_PRIORITY);
+
+Thread run = new Thread(()->{
+    int i = 30;
+    while (i>0){
+        System.out.println(" I am run ");
+        i--;
+    }
+});
+run.setPriority(Thread.MIN_PRIORITY);
+thread.start();
+run.start();
+```
+:::tip 注意
+yield 方法只是让当前线程暂停一下，重新进入就绪线程池中，让系统的线程调度器重新调度器重新调度一次，完全可能出现这样的情况：当某个线程调用 yield()方法之后，线程调度器又将其调度出来重新进入到运行状态执行。
+:::
+### 2.5 线程的中断
 
 ### 2.2 线程的加入
 
