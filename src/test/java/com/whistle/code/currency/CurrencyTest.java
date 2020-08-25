@@ -24,4 +24,14 @@ public class CurrencyTest extends CommonTest {
             Thread.sleep(2000);
         }
     }
+    @Test
+    public void testThreadDaemon(){
+        new OperateThread().testDaemon();
+    }
+
+
+    @Test
+    public void testThreadYield(){
+        new OperateThread().testYield();
+    }
 }
