@@ -103,6 +103,18 @@ public class OperateThread {
         run.start();
     }
 
+    public Thread testInterrupt(){
+        return new Thread(()->{
+            for (int i = 0; i < 5; i++) {
+                System.out.println(Thread.currentThread().getName()+"     Running !  "+i);
+            }
+        });
+    }
 
+
+
+    public void testThreadWait(){
+
+    }
 
 }
