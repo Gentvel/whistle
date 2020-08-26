@@ -242,8 +242,62 @@ run.start();
 yield 方法只是让当前线程暂停一下，重新进入就绪线程池中，让系统的线程调度器重新调度器重新调度一次，完全可能出现这样的情况：当某个线程调用 yield()方法之后，线程调度器又将其调度出来重新进入到运行状态执行。
 :::
 ### 2.5 线程的中断
+中断代表线程状态，每个线程都关联了一个中断状态，用boolean值表示，初始值为false。中断一个线程，其实就是设置了这个线程的中断状态boolean值为true。
+:::warning 注意
+中断只是一种状态，处于中断状态的线程不一定要停止运行。
+:::
 
-### 2.2 线程的加入
+Thread类线程中断的方法：
+```java
+// 设置一个线程的中断状态为true
+public void interrupt() {}
+
+// 检测线程中断状态，处于中断状态返回true
+public boolean isInterrupted() {}
+
+// 静态方法，检测调用这个方法的线程是否已经中断，处于中断状态返回true
+// 注意：这个方法返回中断状态的同时，会将此线程的中断状态重置为false
+public static boolean interrupted() {}
+
+```
+自动感知中断
+以下方法会自动感知中断：
+Object类的wait(),wait(long),wait(long,int)  
+Thread类的join(),join(long),join(long,int),sleep(long),sleep(long,int)
+
+当一个线程处于sleep、wait、join这三种状态之一时，如果此时线程中断状态为true，
+那么就会抛出一个InterruptedException的异常，并将中断状态重新设置为false
+
+```java
+publicclass Test1 {
+    public static void main(String[] args) throws InterruptedException {
+        MyThread thread = new MyThread();
+        thread.start();
+        Thread.sleep(3000);
+        thread.interrupt();
+    }
+}
+
+class MyThread extends Thread {
+    int i = 0;
+
+    @Override
+    public void run() {
+        while (true) {
+            System.out.println(i);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                System.out.println("中断异常被捕获了");
+                return;
+            }
+            i++;
+        }
+    }
+}
+```
+MyThread 线程一直循环打印数字，3s 之后主线程将 MyThread 线程中断，MyThread 线程处于 sleep 状态会自动感应中断，抛出 InterruptedException 异常，线程结束执行。
+### 2.6 线程的加入
 
 如果当前程序为多线程，加入当前线程A需要插入线程B来完成工作，并要求取回线程B完成后的结果，然后再执行线程A。那么此时可以使用join()方法。
 当某个线程使用join()加入到另外一个线程时，另一个线程会等待该线程执行完成后再继续。
@@ -323,10 +377,10 @@ public final synchronized void join(final long millis)
 
 <!-- 从源码可以看出，底层是调用wait()方法，锁的是当前当前对象。 -->
 
+### 2.7 线程的阻塞与唤醒
 
 
-
-## 二、线程状态的基本操作
+## 三、线程状态的基本操作
 ![线程状态改变](./img/ThreadStatusChange.png)
 
 除了新建一个线程外，线程在生命周期内还有需要基本操作，而这些操作会成为线程间一种通信方式，比如使用中断（interrupted）方式通知实现线程间的交互等等
