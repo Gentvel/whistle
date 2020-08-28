@@ -2,8 +2,6 @@ package com.whistle.code.spring;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.PropertySource;
 
 /**
  * Description: <br>
@@ -13,8 +11,6 @@ import org.springframework.context.annotation.PropertySource;
  * @see: com.whistle.code.spring.Configuration
  */
 @Configuration
-@ComponentScan
-@Import(ConfigurationConfig.class)
-@PropertySource("classpath:org/application.yml")
+@ComponentScan("com.whistle.code.spring")
 public class ConfigurationConfig {
 }
