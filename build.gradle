@@ -1,7 +1,9 @@
 plugins {
     id 'java'
 }
-
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
 group 'org.whistle'
 version '1.0-SNAPSHOT'
 
@@ -10,5 +12,6 @@ repositories {
 }
 
 dependencies {
+    compile group: 'org.springframework', name: 'spring-context', version: '5.2.8.RELEASE'
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
