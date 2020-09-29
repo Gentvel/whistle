@@ -34,3 +34,27 @@ ImportBeanDifinitionRegister也是一个接口，使用时需要提供实现类�
 :::warning 注意
 实现了ImportSelector和ImportBeanDifinitionRegister的类不会被解析成一个bean注册到容器中
 :::
+
+
+## 五、PropertySource
+
+## 六、DepdendsOn
+用于指定某个类的创建依赖的bean对象必须被先创建出来，@DependsOn("类名")
+## 七、Lazy
+用于指定单例bean对象的创建实际。在没有使用这个注解时，单例bean的生命周期与容器相同，但使用此注解后，单例对象的创建时机变成了第一次使用时创建。
+<!-- :::warning 注意
+这不是延迟加载思想。
+::: -->
+## 八、Conditional
+根据条件选择注入bean的对象
+
+## 九、Profile
+环境不同时使用
+同@ActiveProfile使用
+
+## 十、Scope
+
+## 十一、Inject&Named | Autowired&Qualifier
+
+## 十二、Resource
+## 十三、Primary
