@@ -376,7 +376,7 @@ public final synchronized void join(final long millis)
 ```
 
 <!-- 从源码可以看出，底层是调用wait()方法，锁的是当前当前对象。 -->
-
+ 
 ### 2.7 线程的阻塞与唤醒
 
 
