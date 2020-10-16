@@ -3,13 +3,13 @@ package com.whistle.code.designpattern.creator.singleton;
 import com.whistle.code.designpattern.creator.Game;
 import com.whistle.code.designpattern.creator.LOL;
 import com.whistle.code.designpattern.creator.XYD;
+import com.whistle.code.spring.event.MyEvent;
 
 /**
  * Description: <br>
- *
  * @auther: Gentvel
  * @since: 1.0
- * @see: com.whistle.code.designpattern.creator.singleton.Singleton
+ * @see Singleton
  */
 public class Singleton {
     private static volatile Game instance;
@@ -24,6 +24,12 @@ public class Singleton {
         return xyd;
     }
     //缺点，资源耗费大
+
+    /**
+     *
+     * @see MyEvent
+     * @return Game {@link Game}
+     */
     public static Game getDoubleCheckInstance(){
         if(instance==null){
             synchronized (Singleton.class){

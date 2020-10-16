@@ -3,6 +3,7 @@ package com.whistle.code.spring.event;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.event.ApplicationContextEvent;
+import org.springframework.stereotype.Component;
 
 /**
  * Description: <br>
@@ -11,6 +12,7 @@ import org.springframework.context.event.ApplicationContextEvent;
  * @since: 1.0
  * @see: com.whistle.code.spring.event.MyEvent
  */
+@Component
 public class MyEvent extends ApplicationEvent {
     /**
      * Create a new ContextStartedEvent.
