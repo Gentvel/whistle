@@ -39,7 +39,7 @@ module.exports = {
                 //collapsable: false, // 可选的, 默认值是 true,
                 sidebarDepth: 2, // 可选的, 默认值是 1
                 children: [
-                    { title: '位运算', path: '/foundation/bitewise' },
+                    
                     {
                         title: '操作系统',
                         path: '/foundation/system/',
@@ -47,6 +47,35 @@ module.exports = {
                             { title: '运行机制', path: '/foundation/system/runtime' },
                             { title: '系统调用', path: '/foundation/system/systemcall' },
                             { title: '进程', path: '/foundation/system/process' },
+                            { title: 'Linux', path: '/foundation/system/linux' },
+                        ]
+                    },
+                    {
+                        title: 'MySQL',
+                        path: '/foundation/mysql/',
+                        children: [
+                            { title: 'MYSQL分层、存储引擎', path: '/foundation/mysql/engine' },
+                            { title: 'MYSQL索引与explain', path: '/foundation/mysql/sql' },
+                           
+                        ]
+                    },
+                    {
+                        title: 'Redis',
+                        path: '/foundation/redis/',
+                        children: [
+                            { title: '数据类型', path: '/foundation/redis/datatype' },
+                            { title: '通用指令', path: '/foundation/redis/command' },
+                            { title: 'Lettuce', path: '/foundation/redis/lettuce' },
+                            { title: '持久化', path: '/foundation/redis/rdbaof' },
+                            { title: '事务', path: '/foundation/redis/transaction' },
+                            { title: '过期策略', path: '/foundation/redis/expire' },
+                            { title: '高级数据类型', path: '/foundation/redis/seniordata' },
+                            { title: '主从复制', path: '/foundation/redis/replication' },
+                            { title: '哨兵', path: '/foundation/redis/sentinel' },
+                            { title: '集群', path: '/foundation/redis/cluster' },
+                            { title: '解决方案', path: '/foundation/redis/solution' },
+
+                           
                         ]
                     },
                     {
@@ -57,7 +86,7 @@ module.exports = {
                         //     { title: '系统调用', path: '/foundation/system/systemcall' },
                         // ]
                     },
-                    { title: 'Linux', path: '/foundation/linux' },
+                    { title: '位运算', path: '/foundation/bitewise' },
                     { title: 'Git', path: '/foundation/git' },
                     { title: 'Markdown', path: '/foundation/markdown' }
                 ]

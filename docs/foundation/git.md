@@ -6,7 +6,7 @@ categories:
  - 基础
 tags:
 - git
-prev: ./git
+prev: false
 next: false
 ---
 
