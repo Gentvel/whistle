@@ -1,6 +1,6 @@
 ---
-title: Redis系列一 数据类型
-date: 2020-11-01
+title: Redis系列一 通用指令
+date: 2020-10-12
 sidebar: auto
 prev: false
 next: false
