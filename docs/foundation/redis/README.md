@@ -1,9 +1,9 @@
 ---
-title: 缓存中间件
+title: 缓存
 date: 2020-08-04
 sidebar: auto
 prev: false
-next: false
+next: ./datatype
 ---
 ## 一、缓存特征
 ### 命中率

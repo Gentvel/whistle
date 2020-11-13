@@ -2,8 +2,8 @@
 title: Redis系列一 数据类型
 date: 2020-10-11
 sidebar: auto
-prev: false
-next: false
+prev: ./
+next: ./command
 ---
 
 ## 前言
@@ -512,6 +512,92 @@ Redis 有序集合和集合一样也是 string 类型元素的集合,且不允�
 
 集合是通过哈希表实现的，所以添加，删除，查找的复杂度都是 O(1)。 集合中最大的成员数为 232 - 1 (4294967295, 每个集合可存储40多亿个成员)。
 ### 基本操作
+
+```shell
+> zadd sset 1 redis #添加数据 数字为序列
+1
+> zadd sset 1 mongodb
+1
+> zadd sset 2 mysql
+1
+> zadd sset 3 oracle
+1
+> zrange sset 0 10 withscores #获取数据 包括序列
+mongodb
+1
+redis
+1
+mysql
+2
+oracle
+3
+> zrange sset 0 10 #获取数据 不包括序列
+mongodb
+redis
+mysql
+oracle
+> zadd sset 2 mysql8
+1
+> zrange sset 0 10
+mongodb
+redis
+mysql
+mysql8
+oracle
+> zadd sset 3 mysql8 #当添加存在的数据时，序列不同会更新序列
+0
+> zrange sset 0 10
+mongodb
+redis
+mysql
+mysql8
+oracle
+> zrange sset 0 10 withscores
+mongodb
+1
+redis
+1
+mysql
+2
+mysql8
+3
+oracle
+3
+> zrangebyscore sset 1 3 #按条件获取元素
+mongodb
+redis
+mysql
+mysql8
+oracle
+> zremrangebyrank sset 0 3  #按下表区间删除数据
+4
+> zrangebyscore sset 0 10 
+oracle
+> zadd sset 1 redis
+1
+> zremrangebyscore sset 1 2 #按score删除数据
+1
+> zrangebyscore sset 0 10
+oracle
+> zadd sset 2 mysql
+1
+> zadd sset 1 redis
+1
+> zcard sset #获取集合数据总个数
+3
+> zrange sset 0 10 withscores
+redis
+1
+mysql
+2
+oracle
+3
+> zcount sset 1 2 #获取集合指定score范围的个数
+2
+```
+:::danger
+当按score查找或者删除时用于限定查询条件，当按rank操作set时，作用于索引，表示开始、结束索引
+:::
 ### 拓展操作
 
 

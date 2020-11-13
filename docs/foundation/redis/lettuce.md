@@ -1,7 +1,9 @@
 ---
-title: Redis系列一 数据类型
-date: 2020-11-01
+title: Redis系列三 Lettuce（生菜）客户端
+date: 2020-10-15
 sidebar: auto
-prev: false
-next: false
+prev: ./command
+next: ./rdbaof
 ---
+
+## 生菜
