@@ -1,6 +1,6 @@
 ---
-title: Redis系列一 数据类型
-date: 2020-11-01
+title: Redis系列六 过期策略
+date: 2020-10-21
 sidebar: auto
 prev: false
 next: false
