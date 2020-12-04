@@ -2,8 +2,8 @@
 title: Redis系列四 持久化
 date: 2020-10-16
 sidebar: auto
-prev: false
-next: false
+prev: ./lettuce
+next: ./transaction
 ---
 ## 简介
 利用永久存储介质将数据保存，在特定时间将保存的数据进行恢复的工作机制称为持久化。

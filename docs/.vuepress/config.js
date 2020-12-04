@@ -121,6 +121,7 @@ module.exports = {
                             { title: '运行参数', path: '/java/jvm/parameter' },
                         ]
                     },
+
                     { title: '多线程', path: '/java/thread/' ,
                     children: [
                         { title: '多线程基础', path: '/java/thread/thread' },
@@ -129,6 +130,33 @@ module.exports = {
                         { title: 'CAS(Compare And Swap)', path: '/java/thread/cas' },
                         
                     ]},
+                    {
+                        title: 'Spring',
+                        path: '/java/spring/',
+                        children: [
+                             { title: '注解', path: '/java/spring/annotation' },
+                             { title: '源码', path: '/java/spring/code' },
+                             { title: 'IOC', path: '/java/spring/ioc' },
+                             { title: 'AOP', path: '/java/spring/aop' },
+                            // { title: '运行时数据区', path: '/java/jvm/runtime' },
+                            // { title: '垃圾回收', path: '/java/jvm/garbage' },
+                            // { title: '垃圾回收器', path: '/java/jvm/collector' },
+                            // { title: '内存分配和垃圾回收', path: '/java/jvm/addition' },
+                            // { title: '运行参数', path: '/java/jvm/parameter' },
+                        ]
+                    },
+                    {
+                        title: 'SpringMVC',
+                        path: '/java/springmvc/',
+                        children: [
+                             { title: '基础', path: '/java/springmvc/foundation' },
+                            // { title: '运行时数据区', path: '/java/jvm/runtime' },
+                            // { title: '垃圾回收', path: '/java/jvm/garbage' },
+                            // { title: '垃圾回收器', path: '/java/jvm/collector' },
+                            // { title: '内存分配和垃圾回收', path: '/java/jvm/addition' },
+                            // { title: '运行参数', path: '/java/jvm/parameter' },
+                        ]
+                    },
                 ]
             },
             {

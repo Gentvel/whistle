@@ -77,6 +77,8 @@ SYNC|用于复制功能(replication)的内部命令
 命令|描述
 -|-
 AUTH password|验证密码是否正确
+CONFIG SET requirepass < password>| 配置密码
+CONFIG GET requirepass | 查看密码
 ECHO message|打印字符串
 PING|查看服务是否运行
 QUIT|关闭当前连接
@@ -91,3 +93,48 @@ SCRIPT EXISTS script [script ...] |查看指定的脚本是否已经被保存在
 SCRIPT FLUSH|从脚本缓存中移除所有脚本。
 SCRIPT KILL|杀死当前正在运行的 Lua 脚本。
 SCRIPT LOAD script|将脚本 script 添加到脚本缓存中，但并不立即执行这个脚本。
+
+## 五、配置
+
+### 基础配置
+
+- 设置服务器以守护进程的方式运行  
+`daemonize yes|no`  
+daemonize:yes ：在该模式下，redis会在后台运行，并将进程pid号写入至redis.conf选项pidfile设置的文件中，此时redis将一直运行，除非手动kill该进程。  
+daemonize:no ：当daemonize选项设置成no时，当前界面将进入redis的命令行界面，exit强制退出或者关闭连接工具(putty,xshell等)都会导致redis进程退出。
+
+- 绑定主机地址  
+`bind 127.0.0.1`   
+绑定了主机地址后，客户端只能通过该ip访问，如果不绑定可以通过比如localhost访问，
+
+- 设置服务器端口  
+`port 6379`  
+
+- 设置数据库数量  
+`databases 16 `
+
+- 设置数据库密码  
+`requirepass <password>`
+
+
+
+### 日志配置
+
+- 设置服务器以指定的日志记录级别  
+`loglevel debug|verbose|notice|warning`  
+日志级别开发期设置为verbose即可（默认），生产环境中配置为notice，简化日志输出量，降低写日志的IO频度
+
+- 记录日志文件名  
+`logfile 端口号.log` 
+
+### 客户端配置
+
+- 设置统一时间最大客户端连接数，默认无限制。当客户端达到上限，redis会关闭新的连接  
+`maxclients 0`
+
+- 客户端限制等待最大时长，达到最大值后关闭连接。 关闭该功能设置为0即可  
+`timeout 300`
+
+### 多服务器快捷配置
+- 导入并加载指定配置文件信息，用于快速创建redis公共配置较多的redis实例配置文件，便于维护  
+`include /path/server-端口号.conf`
