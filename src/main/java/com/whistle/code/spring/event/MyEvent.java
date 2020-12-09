@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 /**
  * Description: <br>
  *
- * @auther: Gentvel
+ * @author Gentvel
  * @since: 1.0
  * @see: com.whistle.code.spring.event.MyEvent
  */
