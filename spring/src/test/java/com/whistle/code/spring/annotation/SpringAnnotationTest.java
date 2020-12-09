@@ -10,11 +10,11 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
  * @author Gentvel
  * @version 1.0.0
  */
-public class SpringConfigurationTest {
+public class SpringAnnotationTest {
     private ApplicationContext applicationContext;
     @Before
     public void initialize(){
-         applicationContext = new AnnotationConfigApplicationContext();
+         applicationContext = new AnnotationConfigApplicationContext("com.whistle.code.spring.annotation");
     }
 
     @Test
