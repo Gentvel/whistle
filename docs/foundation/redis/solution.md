@@ -1,7 +1,7 @@
 ---
-title: Redis系列一 数据类型
-date: 2020-11-01
+title: Redis系列十一 解决方案
+date: 2020-11-10
 sidebar: auto
-prev: false
+prev: ./cluster
 next: false
 ---
