@@ -116,7 +116,8 @@ daemonize:no ：当daemonize选项设置成no时，当前界面将进入redis的
 - 设置数据库密码  
 `requirepass <password>`
 
-
+protected-mode yes时，不设置密码只能进行本地连接，设置密码以后可以外网连接。
+protected-mode no时，不设置密码也可以外网连接。
 
 ### 日志配置
 

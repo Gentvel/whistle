@@ -54,7 +54,7 @@ next: ./sentinel
 如果master配置密码的话则需要使用命令 
 `config set masterauth password`
 2. 服务器启动参数  
-`redis-server --slaveof <masterport>`
+`redis-server --slaveof <masterip> <masterport>`
 
 3. 服务器配置  
 `slaveof <masterip> <masterport>`  

@@ -41,3 +41,6 @@ next: ./solution
 `cluster-config-file <path>` 集群配置文件
 `cluster-node-time millis` 集群超时时间，超时就下线 
 
+
+`./redis-trib.rb create --replicas 1 <ip>:<port>`
+
