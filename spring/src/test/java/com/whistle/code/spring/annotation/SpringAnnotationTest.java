@@ -1,5 +1,6 @@
 package com.whistle.code.spring.annotation;
 
+import com.whistle.code.spring.annotation.another.School;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -14,7 +15,7 @@ public class SpringAnnotationTest {
     private ApplicationContext applicationContext;
     @Before
     public void initialize(){
-         applicationContext = new AnnotationConfigApplicationContext("com.whistle.code.spring.annotation");
+         applicationContext = new AnnotationConfigApplicationContext(SpringConfiguration.class);
     }
 
     @Test
@@ -23,5 +24,7 @@ public class SpringAnnotationTest {
         for (String name:beanDefinitionNames){
             System.out.println(name);
         }
+        final School school = applicationContext.getBean("school", School.class);
+        System.out.println(school.getUser().getName());
     }
 }
