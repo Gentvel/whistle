@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class BioClient {
     public static void main(String[] args) throws IOException {
         final Socket socket = new Socket();
-        socket.connect(new InetSocketAddress(6666));
+        socket.connect(new InetSocketAddress(6888));
         final OutputStream outputStream = socket.getOutputStream();
 
         try (Scanner scanner = new Scanner(System.in)) {

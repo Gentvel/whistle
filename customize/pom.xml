@@ -3,36 +3,17 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>com.whistle.code</groupId>
+    <parent>
+        <groupId>com.whistle.code</groupId>
+        <artifactId>parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath/>
+    </parent>
     <artifactId>customize</artifactId>
-    <version>1.0-SNAPSHOT</version>
     <modules>
         <module>ioc</module>
     </modules>
     <packaging>pom</packaging>
 
-    <properties>
-        <spring.version>5.2.8.RELEASE</spring.version>
-        <junit.version>4.12</junit.version>
-    </properties>
-
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-context</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${junit.version}</version>
-                <scope>test</scope>
-            </dependency>
-
-        </dependencies>
-    </dependencyManagement>
 
 </project>
