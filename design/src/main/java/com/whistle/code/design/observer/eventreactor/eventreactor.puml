@@ -1,0 +1,23 @@
+@startuml
+
+interface Event
+
+interface Subscriber{
+    void subscribeEvent(Event event)
+}
+
+interface Publisher{
+    List<Subscriber> subscribers
+
+    void add(Subscriber subscriber)
+    void remove(Subscriber subscriber)
+    void publish(Event event)
+}
+
+
+
+
+Publisher<|-Subscriber
+Event<|-Subscriber
+
+@enduml

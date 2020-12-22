@@ -1,0 +1,30 @@
+@startuml
+abstract class Subject{
+    List<Observer>
+    add()
+    remove()
+    notify()
+}
+
+interface Observer{
+    update()
+}
+Observer<|-Subject:List
+class MilkStation
+
+Subject<|--MilkStation
+
+class People1
+class People2
+class People3
+
+Observer<|--People1
+Observer<|--People2
+Observer<|--People3
+
+class Client
+
+Subject<|-Client
+Observer<|-Client
+
+@enduml
