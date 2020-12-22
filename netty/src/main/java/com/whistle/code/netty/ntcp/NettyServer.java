@@ -41,7 +41,17 @@ public class NettyServer {
             //绑定一个端口并且同步，生成了一个ChannelFuture 对象
             //启动服务器（并绑定端口）
             ChannelFuture future = serverBootstrap.bind(6888).sync();
-
+            future.addListener(cf->{
+                if (cf.isSuccess()) {
+                    System.out.println("监听端口：6888成功");
+                }
+                if(cf.isDone()){
+                    System.out.println("监听端口：已完成");
+                }
+                if (cf.isCancelled()) {
+                    System.out.println("监听端口已取消");
+                }
+            });
             //对关闭通道进行监听
             future.channel().closeFuture().sync();
         } catch (InterruptedException e) {

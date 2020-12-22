@@ -2,6 +2,7 @@ package com.whistle.code.netty.nhttp;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
+import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.*;
@@ -40,7 +41,12 @@ public class CustomizeHttpHandler extends SimpleChannelInboundHandler<HttpObject
             defaultFullHttpResponse.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/plain");
             defaultFullHttpResponse.headers().set(HttpHeaderNames.CONTENT_LENGTH, content.readableBytes());
             //将构建号的response返回
-            ctx.writeAndFlush(defaultFullHttpResponse);
+            ChannelFuture channelFuture = ctx.writeAndFlush(defaultFullHttpResponse);
+            channelFuture.addListener(cf->{
+                if (cf.isSuccess()) {
+                    System.out.println("服务端消息返回成功");
+                }
+            });
 
         }
     }
