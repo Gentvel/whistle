@@ -7,6 +7,9 @@ name: CI/CD
 on:
   push:
     branches: [ master ]
+    paths-ignore:
+      - "README.md"
+      - ".gitignore"
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
