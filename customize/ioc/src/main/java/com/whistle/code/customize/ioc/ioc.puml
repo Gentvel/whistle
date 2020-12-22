@@ -1,0 +1,34 @@
+@startuml
+
+interface BeanFactory{
+    Object getBean(String)
+}
+
+interface BeanDefinitionRegistry{
+    boolean registerBeanDefinition(beanName,beanDefinition)
+    BeanDefinition getBeanDefinition(String beanName)
+    boolean containBeanDefinition(String beanName)
+}
+
+interface BeanDefinition{
+    SCOPE_SINGLETON
+    SCOPE_PROTOTYPE
+    Class getBeanClass()
+    String getBeanFactoryMethodName()
+    String getFactoryBeanName()
+    String getScope()
+    boolean isSingleton()
+    boolean isPrototype()
+    String getInitMethodName()
+    String getDestroyMethodName()
+    boolean validate()
+}
+
+BeanDefinitionRegistry <|-BeanDefinition
+BeanFactory <|-BeanDefinitionRegistry
+
+Class DefaultBeanFactory
+
+BeanDefinitionRegistry<|--DefaultBeanFactory
+BeanFactory<|--DefaultBeanFactory
+@enduml
