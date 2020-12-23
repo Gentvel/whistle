@@ -157,6 +157,10 @@ module.exports = {
                             // { title: '运行参数', path: '/java/jvm/parameter' },
                         ]
                     },
+                    {
+                        title: '单元测试',
+                        path: '/java/junit/'
+                    },
                 ]
             },
             {
