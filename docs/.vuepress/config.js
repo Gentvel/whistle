@@ -169,8 +169,10 @@ module.exports = {
                 //collapsable: false, // 可选的, 默认值是 true,
                 sidebarDepth: 2, // 可选的, 默认值是 1
                 children: [
+                    { title: 'Netty', path: '/middle/netty/', children: [
+                        { title: 'NIO', path: '/middle/netty/nio' },
+                    ]},
                     { title: 'Nginx', path: '/middle/nginx' },
-                    { title: '缓存', path: '/middle/cache/' }
                 ]
             },
             {
@@ -199,6 +201,18 @@ module.exports = {
                 children: [
                     { title: '排序', path: '/algorithm/sort' },
                     { title: '递归', path: '/algorithm/recursion' },
+                ]
+            },
+            {
+                title: 'Leetcode', // 必要的
+                path: '/leetcode/', // 可选的, 标题的跳转链接，应为绝对路径且必须存在
+                //collapsable: false, // 可选的, 默认值是 true,
+                sidebarDepth: 2, // 可选的, 默认值是 1
+                children: [
+                    { title: '树', path: '/leetcode/tree/',children:[
+                        { title: '中序遍历', path: '/leetcode/tree/94' },
+                        { title: '动态规划树', path: '/leetcode/tree/95' },
+                    ] },
                 ]
             },
             {

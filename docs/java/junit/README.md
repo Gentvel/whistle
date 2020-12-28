@@ -229,6 +229,6 @@ JUnit 还提供了读取外部 CSV 格式文件数据的方式作为数据源的
 
 除了上面提到的三种数据源方式外，JUnit 还提供了以下三种数据源：
 
-@EnumSource：允许我们通过参数值，给指定 Enum 枚举类型传入，构造出枚举类型中特定的值。
-@MethodSource：指定一个返回的 Stream / Array / 可迭代对象 的方法作为数据源。 需要注意的是该方法必须是静态的，并且不能接受任何参数。
-@ArgumentSource：通过实现 ArgumentsProvider 接口的参数类来作为数据源，重写它的 provideArguments 方法可以返回自定义类型的 Stream\<Arguments \> ，作为测试方法所需要的数据使用。
+- @EnumSource：允许我们通过参数值，给指定 Enum 枚举类型传入，构造出枚举类型中特定的值。
+- @MethodSource：指定一个返回的 Stream / Array / 可迭代对象 的方法作为数据源。 需要注意的是该方法必须是静态的，并且不能接受任何参数。
+- @ArgumentSource：通过实现 ArgumentsProvider 接口的参数类来作为数据源，重写它的 provideArguments 方法可以返回自定义类型的 Stream\<Arguments \> ，作为测试方法所需要的数据使用。

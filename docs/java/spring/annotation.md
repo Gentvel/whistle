@@ -399,7 +399,9 @@ public @interface Bean {
 作用： 该注解是卸载类上的，通常和注解驱动的配置类一起使用。它是引入其他配置类的。使用此注解后，可以使我们的注解驱动开发和早期的xml配置一样，分别配置不同的内容，使配置更加清晰。同时指定了此注解后，被引入的类不再使用@Configuration和@Component
 
 使用场景：
-当我们在使用注解开发的时候，由于配置项过多的情况下，都写在一个类里的话，配置结构和内容将杂乱不堪，此时使用此注解可以把配置进行分类配置
+在使用注解开发的时候，由于配置项过多的情况下，都写在一个类里的话，配置结构和内容将杂乱不堪，此时使用此注解可以把配置进行分类配置。
+但是，当需要import的类很多的时候，每个类上添加注解很麻烦也繁琐，使用bean或者Import注解也麻烦。
+可以使用Import的高级用法自定义ImportSelector或者ImportBeanDefinitionRegister来实现。
 
 ### 4.1 ImportSelector & ImportBeanDifinitionRegister
 
@@ -412,10 +414,59 @@ ImportSelector是一个接口，使用时需要提供实现类。实现类中返
 
 ImportBeanDifinitionRegister也是一个接口，使用时需要提供实现类，在实现类中手动注入到容器中。
 
+在springboot中，@EnableXXX这样的注解绝大多数都借助了ImportSelector或者ImportBeanDefinitionRegister。
+
 :::warning 注意
 实现了ImportSelector和ImportBeanDifinitionRegister的类不会被解析成一个bean注册到容器中
 :::
+自定义实现ImportSelector如下：
+:::details 点击查看代码
+```java
+/**
+ * 自定义导入器
+ * @author Gentvel
+ * @version 1.0.0
+ */
+public class CustomImportSelector implements ImportSelector {
+    /**
+     * 实现获取要导入类的字节码
+     * 导入的过滤规则使用TypeFilter的AspectJ表达式方式
+     * {@link org.springframework.core.type.filter.TypeFilter}
+     * @param importingClassMetadata metadata
+     * @return string[] 类名
+     */
+    @Override
+    public String[] selectImports(AnnotationMetadata importingClassMetadata) {
+        //定义扫描包名称
+        String[] basePackage = null;
+        //判断有@Import注解类上有没有ComponentScan注解
+        if(importingClassMetadata.hasAnnotation(ComponentScan.class.getName())){
+            Map<String, Object> annotationAttributes = importingClassMetadata.getAnnotationAttributes(ComponentScan.class.getName());
+            basePackage= (String[])annotationAttributes.get("basePackages");
+        }
+        //ComponentScan注解中不存在basePackages属性值，那么就使用当前package
+        if(basePackage==null || basePackage.length==0){
+            String packageName = null;
+            try {
+                packageName = Class.forName(importingClassMetadata.getClassName()).getPackageName();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            basePackage = new String[]{packageName};
+        }
 
+        //类路径扫描器
+        ClassPathScanningCandidateComponentProvider componentProvider = new ClassPathScanningCandidateComponentProvider(true);
+        Set<String> classes = new HashSet<>();
+        for (String p : basePackage) {
+            componentProvider.findCandidateComponents(p).forEach(beanDefinition -> classes.add(beanDefinition.getBeanClassName()));
+        }
+
+        return classes.toArray(new String[classes.size()]);
+    }
+}
+```
+:::
 
 ## 五、PropertySource
 
