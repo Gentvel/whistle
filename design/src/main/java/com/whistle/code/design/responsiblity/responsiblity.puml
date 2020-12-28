@@ -1,0 +1,20 @@
+@startuml
+
+interface Handler{
+    Handler successor
+    void processRequest()
+}
+
+interface Request
+
+class ConcreteHandler1
+
+class ConcreteHandler2
+
+Handler <|--ConcreteHandler1
+Handler <|--ConcreteHandler2
+Request <|-Handler
+
+
+
+@enduml
