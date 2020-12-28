@@ -1,4 +1,4 @@
-package com.whistle.code.spring.annotation.another;
+package com.whistle.code.spring.annotation.bean;
 
 import org.springframework.stereotype.Service;
 

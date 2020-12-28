@@ -1,9 +1,5 @@
 package com.whistle.code.customize.ioc.annotation;
 
-import jdk.jfr.StackTrace;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

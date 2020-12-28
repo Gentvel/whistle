@@ -1,4 +1,4 @@
-package com.whistle.code.spring.annotation.customize;
+package com.whistle.code.spring.annotation.componentscan;
 
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -61,7 +61,7 @@ public class CustomizeBeanNameGenerator implements BeanNameGenerator {
             }
 
         }
-        return beanName!=null?"my+"+beanName:"my+"+buildDefaultBeanName(definition);
+        return beanName!=null?"my"+beanName:"my"+buildDefaultBeanName(definition);
     }
 
     private String buildDefaultBeanName(BeanDefinition definition) {

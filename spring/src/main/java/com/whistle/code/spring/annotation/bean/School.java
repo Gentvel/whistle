@@ -1,4 +1,4 @@
-package com.whistle.code.spring.annotation.another;
+package com.whistle.code.spring.annotation.bean;
 
 /**
  *
@@ -14,5 +14,10 @@ public class School {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "I am School Bean，my user is："+user;
     }
 }

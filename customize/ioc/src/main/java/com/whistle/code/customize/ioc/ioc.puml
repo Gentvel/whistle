@@ -24,11 +24,10 @@ interface BeanDefinition{
     boolean validate()
 }
 
-BeanDefinitionRegistry <|-BeanDefinition
-BeanFactory <|-BeanDefinitionRegistry
+BeanDefinitionRegistry <|- BeanDefinition
+BeanFactory <|- BeanDefinitionRegistry
 
-Class DefaultBeanFactory
 
-BeanDefinitionRegistry<|--DefaultBeanFactory
-BeanFactory<|--DefaultBeanFactory
+BeanDefinitionRegistry<|-- DefaultBeanFactory
+BeanFactory<|-- DefaultBeanFactory
 @enduml

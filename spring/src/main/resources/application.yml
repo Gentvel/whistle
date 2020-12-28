@@ -1,0 +1,7 @@
+spring:
+  main:
+    banner-mode: off
+
+custom:
+  importselector:
+    expression: "com.whistle.code.spring.annotation.bean.*"

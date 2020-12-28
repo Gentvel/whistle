@@ -24,10 +24,8 @@ public interface BeanDefinition {
     String getDestroyMethodName();
     default boolean validate(){
         if(Objects.isNull(this.getBeanClass())){
-            if(Objects.isNull(this.getBeanFactoryMethodName())||Objects.isNull(this.getFactoryBeanName())){
-                return false;
-            }
+            return !this.getBeanFactoryMethodName().isBlank() || !this.getFactoryBeanName().isBlank();
         }
-        return !Objects.isNull(this.getBeanClass()) && !Objects.isNull(this.getFactoryBeanName());
+        return true;
     }
 }

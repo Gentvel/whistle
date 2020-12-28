@@ -24,6 +24,14 @@ public class DefaultBeanFactory implements BeanFactory, BeanDefinitionRegistry ,
 
     private ReentrantLock lock = new ReentrantLock();
 
+    protected Map<String, Object> getSingletonBeans(){
+        return singletonBeans;
+    }
+
+
+    public void registerBeanDefinition(BeanDefinition beanDefinition){
+        this.registerBeanDefinition(beanDefinition.getBeanName(),beanDefinition);
+    }
 
     @Override
     public void registerBeanDefinition(String beanName, BeanDefinition beanDefinition) throws BeanDefinitionRegistryException {
@@ -45,6 +53,8 @@ public class DefaultBeanFactory implements BeanFactory, BeanDefinitionRegistry ,
         }
         beanDefinitions.put(beanName, beanDefinition);
     }
+
+
 
     @Override
     public BeanDefinition getBeanDefinition(String beanName) {
@@ -104,7 +114,7 @@ public class DefaultBeanFactory implements BeanFactory, BeanDefinitionRegistry ,
 
     protected void doInit(BeanDefinition beanDefinition, Object instance) {
         String initMethodName = beanDefinition.getInitMethodName();
-        if (!initMethodName.isBlank()) {
+        if (!initMethodName.isEmpty()) {
             try {
                 Method method = instance.getClass().getMethod(initMethodName);
                 method.setAccessible(true);

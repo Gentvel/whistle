@@ -1,15 +1,18 @@
 package com.whistle.code.leetcode.tree;
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 /**
  *
  * @author Gentvel
  * @version 1.0.0
  */
-
+@DisplayName("树结构测试")
 public class TestTree {
     @Test
+    @DisplayName("测试第94题")
     public void test94(){
         TreeNode root = new TreeNode(1);
         TreeNode t1 = new TreeNode(2);

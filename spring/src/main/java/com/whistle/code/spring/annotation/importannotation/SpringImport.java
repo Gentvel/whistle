@@ -1,11 +1,10 @@
-package com.whistle.code.spring.annotation;
+package com.whistle.code.spring.annotation.importannotation;
 
-import com.whistle.code.spring.annotation.another.School;
-import com.whistle.code.spring.annotation.another.User;
+import com.whistle.code.spring.annotation.bean.School;
+import com.whistle.code.spring.annotation.bean.User;
 import com.whistle.code.spring.annotation.customize.CustomizeBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
 
 /**
  *

@@ -8,6 +8,7 @@ import com.whistle.code.customize.ioc.exception.BeanDefinitionRegistryException;
  * @version 1.0.0
  */
 public interface BeanDefinitionRegistry {
+    void registerBeanDefinition(BeanDefinition beanDefinition);
     void registerBeanDefinition(String beanName,BeanDefinition beanDefinition) throws BeanDefinitionRegistryException;
     BeanDefinition getBeanDefinition(String beanName);
     boolean containBeanDefinition(String beanName);
