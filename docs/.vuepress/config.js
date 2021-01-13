@@ -128,6 +128,13 @@ module.exports = {
                         { title: '内存模型', path: '/java/thread/jmm' },
                         { title: '关键字', path: '/java/thread/keyword' },
                         { title: 'CAS(Compare And Swap)', path: '/java/thread/cas' },
+                        { title: 'LockSupport', path: '/java/thread/locksupport' },
+                        { title: 'AQS同步队列', path: '/java/thread/aqs' },
+                        { title: 'ReentrantLock', path: '/java/thread/reentrantlock' },
+                        { title: '公平锁与非公平锁', path: '/java/thread/fair' },
+                        { title: '读写锁', path: '/java/thread/reentrantreadwritelock' },
+                        { title: '线程池基础', path: '/java/thread/pool' },
+                        { title: '线程池实战', path: '/java/thread/javapool' },
                         
                     ]},
                     {
@@ -234,7 +241,7 @@ module.exports = {
                         path: '/datastructure/tree',
                         children: [
                             { title: '二叉树', path: '/datastructure/tree/binaryTree' },
-                            //{ title: '单向链表', path: '/datastructure/line/link' },
+                            { title: '二叉查找树', path: '/datastructure/tree/binarySearchTree' },
                         ]
                     },
                 ]
