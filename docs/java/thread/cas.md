@@ -128,3 +128,141 @@ CAS 需要检查操作值有没有发生改变，如果没有发生改变则更�
 - 利用对象整合多个共享变量，即一个类中的成员变量就是这几个共享变量，然后将这个对象做 CAS 操作就可以保证其原子性。atomic 中提供了 AtomicReference 来保证引用对象之间的原子性。
 
 - 利用变量的高低位，如 JDK 读写锁 ReentrantReadWriteLock 的 state，高 16 位用于共享模式 ReadLock，低 16 位用于独占模式 WriteLock。
+
+
+## 四、常用操作
+### 4.1 基本数据类型的原子操作类
+AtomicInteger、AtomicLong、AtomicBoolean
+
+以 AtomicInteger 为例总结一下常用的方法：
+
+- `addAndGet(int delta)`：以原子方式将输入的数值delta与实例中原本的值相加，并返回最后的结果；
+- `incrementAndGet()` ：以原子的方式将实例中的原值进行加1操作，并返回最终相加后的结果；
+- `getAndSet(int newValue)`：将实例中的值更新为新值newValue，并返回旧值；
+- `getAndIncrement()`：以原子的方式将实例中的原值加1，返回的是自增前的旧值；
+
+### 4.2 数组类型的原子操作类
+AtomicIntegerArray、AtomicLongArray、AtomicReferenceArray（引用类型数组）。
+
+以 AtomicIntegerArray 来总结下常用的方法：
+- addAndGet(int i, int delta)：以原子更新的方式将数组中索引为i的元素与输入值delta相加；
+- getAndIncrement(int i)：以原子更新的方式将数组中索引为i的元素自增加1；
+- compareAndSet(int i, int expect, int update)：将数组中索引为i的位置的元素进行更新；
+
+:::tip
+AtomicIntegerArray 与 AtomicInteger 的方法基本一致，只不过在 AtomicIntegerArray 的方法中会多一个指定数组索引位 i。
+:::
+```java
+private static AtomicIntegerArray atomicIntegerArray = new AtomicIntegerArray(2);
+public static void main(String[] args) {
+    atomicIntegerArray.compareAndSet(0,0,3);
+    int i = atomicIntegerArray.get(0);
+    System.out.println(i);
+    atomicIntegerArray.incrementAndGet(1);
+    System.out.println(atomicIntegerArray);
+
+}
+```
+### 4.3 引用类型的原子操作类
+AtomicReference
+
+```java
+    private static AtomicReference<User> atomicReference = new AtomicReference<>();
+
+    public static void main(String[] args) {
+        User user = new User();
+        user.setAge(12);
+        user.setName("张三");
+        atomicReference.set(user);
+        user.setName("李四");
+        atomicReference.compareAndSet(user, user);
+        atomicReference.getAndSet(new User());
+        System.out.println(atomicReference.get());
+    }
+
+
+    private static class User{
+        private String name;
+        private int age;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        public void setAge(int age) {
+            this.age = age;
+        }
+
+        @Override
+        public String toString() {
+            return "User{" +
+                    "name='" + name + '\'' +
+                    ", age=" + age +
+                    '}';
+        }
+    }
+```
+
+### 4.4  字段类型的原子操作类
+如果需要更新对象的某个字段，并在多线程的情况下，能够保证线程安全，atomic 同样也提供了相应的原子操作类：
+
+AtomicIntegeFieldUpdater：原子更新整型字段类；
+AtomicLongFieldUpdater：原子更新长整型字段类；
+AtomicStampedReference：原子更新引用类型，这种更新方式会带有版本号。解决CAS的ABA问题。 
+
+1. 通过 AtomicIntegerFieldUpdater 的静态方法 newUpdater 来创建一个更新器，并且需要设置想要更新的类和属性；
+2. 更新类的属性必须使用 public volatile 进行修饰；
+
+```java
+    private static AtomicIntegerFieldUpdater<User> atomicIntegerFieldUpdater = AtomicIntegerFieldUpdater.newUpdater(User.class, "age");
+
+    public static void main(String[] args) {
+        User user = new User();
+        user.setAge(12);
+        user.setName("张三");
+        atomicIntegerFieldUpdater.compareAndSet(user, 12, 13);
+        System.out.println(user);
+        atomicIntegerFieldUpdater.set(user, 16);
+        System.out.println(user);
+    }
+
+    private static class User {
+        private String name;
+        private volatile int age;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        public void setAge(int age) {
+            this.age = age;
+        }
+
+        @Override
+        public String toString() {
+            return "User{" +
+                    "name='" + name + '\'' +
+                    ", age=" + age +
+                    '}';
+        }
+    }
+```
+
+
+其实CAS最主要的即是比较和交换，这种方式可以高效地解决原子性问题。
