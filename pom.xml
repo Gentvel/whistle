@@ -37,6 +37,8 @@
         <module>java</module>
         <module>design</module>
         <module>customize</module>
+        <module>EasyCode</module>
+        <module>day</module>
     </modules>
 
     <properties>

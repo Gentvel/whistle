@@ -1,6 +1,7 @@
 package com.whistle.code.thread.juc;
 
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
+import java.util.concurrent.locks.LockSupport;
 
 /**
  * @see java.util.concurrent.locks.AbstractQueuedSynchronizer
@@ -55,4 +56,5 @@ import java.util.concurrent.locks.AbstractQueuedSynchronizer;
  * @version 1.0.0
  */
 public class BasicAQS {
+    private BasicLockSupport lockSupport = new BasicLockSupport();
 }

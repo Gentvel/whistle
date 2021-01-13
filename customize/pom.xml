@@ -12,7 +12,6 @@
     <artifactId>customize</artifactId>
     <modules>
         <module>ioc</module>
-        <module>daycode</module>
     </modules>
     <packaging>pom</packaging>
 

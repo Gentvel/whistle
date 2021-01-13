@@ -14,10 +14,11 @@ public class BasicCountDownLatch {
             System.out.println(Thread.currentThread().getName() + " running");
             try {
                 COUNT_DOWN_LATCH.await();
+                System.out.println(Thread.currentThread().getName() + "meeting start");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println(Thread.currentThread().getName() + "meeting start");
+
         }, "boss");
         boss.start();
 

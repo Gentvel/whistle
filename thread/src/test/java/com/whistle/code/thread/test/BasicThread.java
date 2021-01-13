@@ -1,6 +1,7 @@
 package com.whistle.code.thread.test;
 
-import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -12,8 +13,10 @@ import java.util.concurrent.TimeUnit;
  * @author Gentvel
  * @version 1.0.0
  */
+@DisplayName("线程测试")
 public class BasicThread {
     @Test
+    @DisplayName("线程创建测试")
     public void createThread() throws ExecutionException, InterruptedException {
 
         new Thread(() -> {
@@ -30,6 +33,7 @@ public class BasicThread {
     }
 
     @Test
+    @DisplayName("测试Interrupt")
     public void testInterrupt() {
         Thread thread = new Thread(() -> {
             System.out.println("Iam Thread" + Thread.currentThread().getName());
@@ -62,6 +66,7 @@ public class BasicThread {
     因此，B线程也还没开始。等到A线程执行完毕之后，主线程继续执行，走到了t2.start()，B线程才会开始执行。
      */
     @Test
+    @DisplayName("测试join")
     public void testJoin() throws InterruptedException {
         Thread thread = new Thread(() -> {
             for (int i = 0; i < 10; i++) {
@@ -90,6 +95,7 @@ public class BasicThread {
     private List<String> list = new LinkedList<>();
 
     @Test
+    @DisplayName("测试wait and notify")
     public void testWaitAndNotify(){
         for (int i = 0; i < 5; i++) {
             new Thread(this::produce,"producer"+i).start();
@@ -164,6 +170,7 @@ public class BasicThread {
 
     private int testInt = 100;
     @Test
+    @DisplayName("测试synchronized")
     public void testSynchronize(){
         for (int i = 0; i<10;i++) {
             new Thread(()->{
@@ -180,7 +187,10 @@ public class BasicThread {
 
     private Object lock1 = new Object();
     private Object lock2 = new Object();
+
+
     @Test
+    @DisplayName("测试死锁")
     public void testDeadLock(){
         new Thread(()->{
             synchronized (lock1){

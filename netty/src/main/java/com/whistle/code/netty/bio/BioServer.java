@@ -12,7 +12,7 @@ import java.util.concurrent.Executors;
  * @author Gentvel
  * @version 1.0.0
  */
-public class BioServer {
+public class  BioServer {
     public static void main(String[] args) throws IOException {
         final ExecutorService executorService = Executors.newCachedThreadPool();
         //创建ServerSocket
