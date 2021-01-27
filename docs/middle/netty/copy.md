@@ -25,7 +25,7 @@ raf.read(arr);
 Socket socket = new ServerSocket(8080).accept();
 socket.getOutputStream().write(arr);
 ```
-调用 read 方法读取 index.html 的内容变成字节数组，然后调用 write 方法，将 index.html 字节流写到 socket 中，那么，我们调用这两个方法，在 OS 底层发生了什么呢？这里借鉴了一张其他文字的图片，尝试解释这个过程。
+调用 read 方法读取 index.html 的内容变成字节数组，然后调用 write 方法，将 index.html 字节流写到 socket 中，那么，调用这两个方法，在 OS 底层发生了什么呢？这里借尝试解释这个过程。
 
 <center>
 
@@ -91,3 +91,52 @@ mmap 通过内存映射，将文件映射到内核缓冲区，同时，用户空
 在这个选择上：rocketMQ 在消费消息时，使用了 mmap。kafka 使用了 sendFile。
 
 ## Java中的mmap和sendFile
+
+### mmap
+```java
+try (FileInputStream fileInputStream = new FileInputStream(file);
+FileOutputStream fileOutputStream = new FileOutputStream(copy)) {
+    FileChannel inputStreamChannel = fileInputStream.getChannel();
+    MappedByteBuffer map = inputStreamChannel.map(FileChannel.MapMode.READ_ONLY, 0, inputStreamChannel.size());
+    FileChannel outputStreamChannel = fileOutputStream.getChannel();
+    outputStreamChannel.write(map);
+    map.flip();
+    try {
+        map.put(new byte[12]);
+    } catch (Exception e) {
+        System.err.println("map 不能写入");
+    }
+} catch (IOException e) {
+    e.printStackTrace();
+}
+```
+java中的mmap就是由channel.map获取，但是它只能在Full GC的时候回收内存，或者调用一个方法来释放该部分内存（该方法忘了）
+
+### sendFile
+```java
+try (FileInputStream fileInputStream = new FileInputStream(file);
+FileOutputStream fileOutputStream = new FileOutputStream(copy)) {
+    FileChannel inputStreamChannel = fileInputStream.getChannel();
+    FileChannel outputStreamChannel = fileOutputStream.getChannel();
+    inputStreamChannel.transferTo(0,inputStreamChannel.size(),outputStreamChannel);
+} catch (IOException e) {
+    e.printStackTrace();
+}
+```
+sendFile其实就是channel的transferTo、transferForm这两个方法，在很多地方都有运用到.
+
+比如，kafka 在客户端和 broker 进行数据传输时，会使用 transferTo 和 transferFrom 方法，即对应 Linux 的 sendFile。
+
+<center>
+
+![kafka](./img/kafka.png)
+
+</center>
+
+ tomcat 内部在进行文件拷贝的时候，也会使用 transferto 方法。
+
+ <center>
+
+![tomcat](./img/tomcat.png)
+
+</center>
