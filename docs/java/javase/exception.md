@@ -12,7 +12,7 @@ next: ./io
 
 <center>
 
-![CACHE](./img/exception.png)
+![exception](./img/exception.png)
 
 </center>
 

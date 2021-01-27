@@ -7,4 +7,3 @@ next: ./nginx
 ---
 
 - [Nginx](./naginx) 
-- [Cache](./cache#常用缓存)
