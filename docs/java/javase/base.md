@@ -1,6 +1,6 @@
 ---
 title: 【Java基础】系列一 数据类型与关键字
-date: 2020-08-04
+date: 2020-08-05
 sidebar: auto
 categories:
  - java

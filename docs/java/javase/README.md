@@ -12,4 +12,5 @@ next: false
 - [java基础系列四 反射](./reflection)
 - [java基础系列五 异常](./exception)
 - [java基础系列六 IO](./io)
-- [java基础系列七 多线程基础](./thread)
+- [java基础系列七 序列化](./serializable)
+- [java基础系列八 注解](./annotation)

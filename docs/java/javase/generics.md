@@ -1,6 +1,6 @@
 ---
 title: 【Java基础】系列三 泛型
-date: 2020-08-04
+date: 2020-08-10
 sidebar: auto
 categories:
  - java

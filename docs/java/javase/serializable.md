@@ -1,13 +1,13 @@
 ---
-title: 【Java基础】系列八 序列化
-date: 2020-08-06
+title: 【Java基础】系列七 序列化
+date: 2020-08-23
 sidebar: auto
 categories:
  - java
 tags:
 - javase
-prev: ./thread
-next: false
+prev: ./io
+next: ./annotation
 ---
 
 ## 一、序列化的含义、意义及使用场景

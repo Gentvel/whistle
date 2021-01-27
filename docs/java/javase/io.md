@@ -1,13 +1,13 @@
 ---
 title: 【Java基础】系列六 IO流
-date: 2020-08-05
+date: 2020-08-19
 sidebar: auto
 categories:
  - java
 tags:
 - javase
 prev: ./exception
-next: ./thread
+next: ./serializable
 ---
 
 ## 一、概述

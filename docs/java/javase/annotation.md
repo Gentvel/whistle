@@ -1,12 +1,12 @@
 ---
-title: 【Java基础】系列九 注解
-date: 2020-08-06
+title: 【Java基础】系列八 注解
+date: 2020-08-26
 sidebar: auto
 categories:
  - java
 tags:
 - javase
-prev: false
+prev: ./serializable
 next: false
 ---
 
