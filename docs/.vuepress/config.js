@@ -178,10 +178,15 @@ module.exports = {
                 sidebarDepth: 2, // 可选的, 默认值是 1
                 children: [
                     { title: 'Netty', path: '/middle/netty/', children: [
+                        { title: 'BIO', path: '/middle/netty/bio' },
                         { title: 'NIO', path: '/middle/netty/nio' },
-                        { title: 'NIO', path: '/middle/netty/nio' },
-                        { title: 'NIO', path: '/middle/netty/nio' },
-                        { title: 'NIO', path: '/middle/netty/nio' },
+                        { title: '零拷贝', path: '/middle/netty/copy' },
+                        { title: 'Netty架构衍变', path: '/middle/netty/architecture' },
+                        { title: 'Netty组件详解', path: '/middle/netty/component' },
+                        { title: 'Google Protobuf', path: '/middle/netty/protobuf' },
+                        { title: 'Netty Handler详解', path: '/middle/netty/handler' },
+                        { title: 'Netty 粘包和拆包', path: '/middle/netty/package' },
+                        { title: 'Netty 实战', path: '/middle/netty/netty' },
                     ]},
                     { title: 'Nginx', path: '/middle/nginx' },
                 ]

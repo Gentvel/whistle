@@ -1,11 +1,11 @@
 ---
 title: 【Netty】 Google Protobuf
-date: 2020-12-23
+date: 2020-12-25
 sidebar: auto
 categories:
  - 中间件
 tags:
 - netty
 prev: ./component
-next: false
+next: ./handler
 ---
