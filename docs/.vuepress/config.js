@@ -133,6 +133,7 @@ module.exports = {
                         { title: 'ReentrantLock', path: '/java/thread/reentrantlock' },
                         { title: '公平锁与非公平锁', path: '/java/thread/fair' },
                         { title: '读写锁', path: '/java/thread/reentrantreadwritelock' },
+                        { title: '读写锁进阶', path: '/java/thread/stampedlock' },
                         { title: '线程池基础', path: '/java/thread/pool' },
                         { title: '线程池实战', path: '/java/thread/javapool' },
                         
@@ -177,6 +178,9 @@ module.exports = {
                 sidebarDepth: 2, // 可选的, 默认值是 1
                 children: [
                     { title: 'Netty', path: '/middle/netty/', children: [
+                        { title: 'NIO', path: '/middle/netty/nio' },
+                        { title: 'NIO', path: '/middle/netty/nio' },
+                        { title: 'NIO', path: '/middle/netty/nio' },
                         { title: 'NIO', path: '/middle/netty/nio' },
                     ]},
                     { title: 'Nginx', path: '/middle/nginx' },

@@ -1,13 +1,13 @@
 ---
-title: 【多线程】 篇  公平锁与非公平锁Fair and NoFair
-date: 2020-12-25
+title: 【多线程】 篇八  公平锁与非公平锁Fair and NoFair
+date: 2020-10-15
 sidebar: auto
 categories:
-- java
+ - 多线程
 tags:
-- thread
-prev: false
-next: false
+- 多线程
+prev: ./reentrantlock
+next: ./reentrantreadwritelock
 ---
 
 ## 简介

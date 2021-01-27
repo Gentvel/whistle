@@ -2,8 +2,12 @@
 title: 多线程系列
 date: 2020-09-03
 sidebar: auto
+categories:
+ - 多线程
+tags:
+- 多线程
 prev: false
-next: false
+next: ./thread
 ---
 ## 一、概念
 ### 1.1 并发编程的好处

@@ -1,13 +1,13 @@
 ---
-title: 【多线程】 篇 CAS(Compare And Swap)
-date: 2020-08-23
+title: 【多线程】 篇四 CAS(Compare And Swap)
+date: 2020-09-23
 sidebar: auto
 categories:
-- java
+ - 多线程
 tags:
-- thread
-prev: false
-next: false
+- 多线程
+prev: ./keyword
+next: ./locksupport
 ---
 
 ## 一、介绍

@@ -1,13 +1,13 @@
 ---
-title: 【多线程】 篇 线程池基础
-date: 2021-01-07
+title: 【多线程】 篇十 线程池基础
+date: 2020-10-27
 sidebar: auto
 categories:
-  - java
+ - 多线程
 tags:
-  - thread
-prev: false
-next: false
+- 多线程
+prev: ./reentrantreadwritelock
+next: ./javapool
 ---
 
 ## 概述

@@ -1,13 +1,13 @@
 ---
-title: 【多线程】 篇  StampedLock
-date: 2020-12-28
+title: 【多线程】 篇 十 StampedLock
+date: 2020-11-03
 sidebar: auto
 categories:
-- java
+ - 多线程
 tags:
-- thread
-prev: false
-next: false
+- 多线程
+prev: ./reentrantreadwritelock
+next: ./pool
 ---
 
 StampedLock是 JDK1.8 版本中在 J.U.C 并发包里新增的一个锁，StampedLock是对读写锁ReentrantReadWriteLock的增强，优化了读锁、写锁的访问，更细粒度控制并发。

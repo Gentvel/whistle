@@ -1,13 +1,13 @@
 ---
-title: 【多线程】 篇 AQS AbstractQueuedSynchronizer
-date: 2020-12-23
+title: 【多线程】 篇六 AQS AbstractQueuedSynchronizer
+date: 2020-10-03
 sidebar: auto
 categories:
-- java
+ - 多线程
 tags:
-- thread
-prev: false
-next: false
+- 多线程
+prev: ./locksupport
+next: ./reentrantlock
 ---
 
 ## 简介

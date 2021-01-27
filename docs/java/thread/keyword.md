@@ -1,9 +1,13 @@
 ---
-title: 【多线程】  关键字
-date: 2020-08-26
+title: 【多线程】 篇三  关键字
+date: 2020-09-16
 sidebar: auto
-prev: false
-next: false
+categories:
+ - 多线程
+tags:
+- 多线程
+prev: ./jmm
+next: ./cas
 ---
 
 ## 一、volatile

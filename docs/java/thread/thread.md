@@ -3,9 +3,11 @@ title: 【多线程】 篇一 多线程基础
 date: 2020-09-05
 sidebar: auto
 categories:
- - java
-prev: false
-next: false
+ - 多线程
+tags:
+- 多线程
+prev: ./
+next: ./jmm
 ---
 
 

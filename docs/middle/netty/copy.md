@@ -1,12 +1,11 @@
 ---
-title: 【Netty】 NIO 非阻塞式IO
-date: 2020-12-14
+title: 【Netty】 零拷贝技术
+date: 2020-12-16
 sidebar: auto
 categories:
  - 中间件
 tags:
 - netty
-prev: ./bio
+prev: ./nio
 next: ./architecture
 ---
-

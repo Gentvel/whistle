@@ -1,13 +1,13 @@
 ---
-title: 【多线程】 篇 LockSupport
-date: 2020-08-28
+title: 【多线程】 篇五 LockSupport
+date: 2020-09-28
 sidebar: auto
 categories:
-  - java
+ - 多线程
 tags:
-  - thread
-prev: false
-next: false
+- 多线程
+prev: ./cas
+next: ./aqs
 ---
 
 ## 一，介绍

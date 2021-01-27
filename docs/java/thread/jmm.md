@@ -1,13 +1,13 @@
 ---
 title: 【多线程】 篇二 理解java内存模型
-date: 2020-08-03
+date: 2020-09-09
 sidebar: auto
 categories:
-- java
+ - 多线程
 tags:
-- thread
-prev: false
-next: false
+- 多线程
+prev: ./thread
+next: ./keyword
 ---
 ## 一、内存模型
 '内存模型'，可以理解为在特定的操作协议下，对特定的内存或高速缓存进行读写访问的过程抽象。

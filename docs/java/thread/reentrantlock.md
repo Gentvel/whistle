@@ -1,13 +1,13 @@
 ---
-title: 【多线程】 篇 ReentrantLock
-date: 2020-12-24
+title: 【多线程】 篇七 ReentrantLock
+date: 2020-10-09
 sidebar: auto
 categories:
-- java
+ - 多线程
 tags:
-- thread
-prev: false
-next: false
+- 多线程
+prev: ./aqs
+next: ./fair
 ---
 
 ## 简介

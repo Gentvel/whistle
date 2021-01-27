@@ -1,13 +1,13 @@
 ---
-title: 【多线程】 篇  读写锁
-date: 2020-12-26
+title: 【多线程】 篇九  读写锁
+date: 2020-10-19
 sidebar: auto
 categories:
-- java
+ - 多线程
 tags:
-- thread
-prev: false
-next: false
+- 多线程
+prev: ./fair
+next: ./stampedlock
 ---
 
 ## 简介
