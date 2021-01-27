@@ -1,7 +1,11 @@
 ---
 title: 缓存
-date: 2020-08-04
+date: 2020-11-04
 sidebar: auto
+categories:
+ - redis
+tags:
+- redis
 prev: false
 next: ./datatype
 ---

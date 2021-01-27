@@ -1,7 +1,11 @@
 ---
 title: Redis系列八 主从复制
-date: 2020-11-01
+date: 2020-11-28
 sidebar: auto
+categories:
+ - redis
+tags:
+- redis
 prev: ./seniordata
 next: ./sentinel
 ---

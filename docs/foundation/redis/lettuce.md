@@ -1,7 +1,11 @@
 ---
 title: Redis系列三 Lettuce（生菜）客户端
-date: 2020-10-15
+date: 2020-11-15
 sidebar: auto
+categories:
+ - redis
+tags:
+- redis
 prev: ./command
 next: ./rdbaof
 ---

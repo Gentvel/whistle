@@ -1,7 +1,11 @@
 ---
 title: Redis系列四 持久化
-date: 2020-10-16
+date: 2020-11-16
 sidebar: auto
+categories:
+ - redis
+tags:
+- redis
 prev: ./lettuce
 next: ./transaction
 ---

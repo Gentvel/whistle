@@ -1,7 +1,11 @@
 ---
 title: Redis系列十 集群
-date: 2020-11-07
+date: 2020-12-02
 sidebar: auto
+categories:
+ - redis
+tags:
+- redis
 prev: ./cluster
 next: ./solution
 ---

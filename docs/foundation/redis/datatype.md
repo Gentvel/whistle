@@ -1,7 +1,11 @@
 ---
 title: Redis系列一 数据类型
-date: 2020-10-11
+date: 2020-11-08
 sidebar: auto
+categories:
+ - redis
+tags:
+- redis
 prev: ./
 next: ./command
 ---

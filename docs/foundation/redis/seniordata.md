@@ -1,7 +1,11 @@
 ---
 title: Redis系列七 高级数据类型
-date: 2020-10-25
+date: 2020-11-23
 sidebar: auto
+categories:
+ - redis
+tags:
+- redis
 prev: ./expire
 next: ./replication
 ---

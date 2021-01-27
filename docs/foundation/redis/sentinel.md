@@ -1,7 +1,11 @@
 ---
 title: Redis系列九 哨兵模式
-date: 2020-11-03
+date: 2020-11-30
 sidebar: auto
+categories:
+ - redis
+tags:
+- redis
 prev: ./replication
 next: ./cluster
 ---

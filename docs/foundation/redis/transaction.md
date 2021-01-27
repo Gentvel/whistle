@@ -1,7 +1,11 @@
 ---
 title: Redis系列五 事务
-date: 2020-10-18
+date: 2020-11-18
 sidebar: auto
+categories:
+ - redis
+tags:
+- redis
 prev: ./rdbaof
 next: ./expire
 ---

@@ -1,7 +1,11 @@
 ---
 title: Redis系列二 通用指令
-date: 2020-10-12
+date: 2020-11-12
 sidebar: auto
+categories:
+ - redis
+tags:
+- redis
 prev: ./datatype
 next: ./lettuce
 ---

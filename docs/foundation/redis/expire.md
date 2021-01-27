@@ -1,7 +1,11 @@
 ---
 title: Redis系列六 过期策略
-date: 2020-10-21
+date: 2020-11-20
 sidebar: auto
+categories:
+ - redis
+tags:
+- redis
 prev: ./transaction
 next: ./seniordata
 ---
