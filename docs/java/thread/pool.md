@@ -1,6 +1,6 @@
 ---
-title: 【多线程】 篇十 线程池基础
-date: 2020-10-27
+title: 【多线程】 篇十一 线程池基础
+date: 2020-11-03
 sidebar: auto
 categories:
  - 多线程
