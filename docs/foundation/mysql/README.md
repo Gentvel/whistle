@@ -1,7 +1,11 @@
 ---
 title: MySQL
-date: 2020-10-22
+date: 2021-01-22
 sidebar: auto
+categories:
+ - MySQL
+tags:
+- MySQL
 prev: false
 next: false
 ---

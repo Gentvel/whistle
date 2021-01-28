@@ -97,15 +97,17 @@ mmap 通过内存映射，将文件映射到内核缓冲区，同时，用户空
 try (FileInputStream fileInputStream = new FileInputStream(file);
 FileOutputStream fileOutputStream = new FileOutputStream(copy)) {
     FileChannel inputStreamChannel = fileInputStream.getChannel();
-    MappedByteBuffer map = inputStreamChannel.map(FileChannel.MapMode.READ_ONLY, 0, inputStreamChannel.size());
+    /**
+    * 参数1: FileChannel.MapMode.READ_WRITE，使用的读写模式
+    * 参数2: 0，可以直接修改的起始位置
+    * 参数3: 5，是映射到内存的大小(不是文件中字母的索引位置），即将 1.txt 的多少个字节映射到内存，也就是可以直接修改的范围就是 [0, 5)
+    * 实际的实例化类型：DirectByteBuffer
+    */
+    MappedByteBuffer map = inputStreamChannel.map(FileChannel.MapMode.READ_WRITE, 0, inputStreamChannel.size());
     FileChannel outputStreamChannel = fileOutputStream.getChannel();
     outputStreamChannel.write(map);
     map.flip();
-    try {
-        map.put(new byte[12]);
-    } catch (Exception e) {
-        System.err.println("map 不能写入");
-    }
+    
 } catch (IOException e) {
     e.printStackTrace();
 }
