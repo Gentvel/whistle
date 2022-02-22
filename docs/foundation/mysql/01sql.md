@@ -149,11 +149,19 @@ having和where的区别在于，having是对聚合后的结果进行条件的过
 
 还有比如[左右内全连接](https://www.cnblogs.com/xj-excellent/p/13292291.html)
 
+### JOIN
+
+<center>
+
+![sql-join](./img/sql-join.png)
+
+</center>
 
 某些情况下，当进行查询的时候，需要的条件是另外一个select语句的结果，这个时候，就要用到子查询。用于子查询的关键字主要包括 in、not in、=、!=、exists、not exists等。
 
 ## DCL语句
 将在 [权限与安全](./21security.md) 详细讲解
+
 
 ## 常用网络资源
 [MySQL的官方网站](http://dev.mysql.com/downloads)，可以下载到各个版本的MySQL以及相关客户端开发工具等。  
