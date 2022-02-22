@@ -6,8 +6,8 @@ categories:
  - 基础
 tags:
 - markdown
-prev: ./
-next: ./mardown
+prev: false
+next: false
 ---
 ## 一、概述
 ### 1.1 设计理念
