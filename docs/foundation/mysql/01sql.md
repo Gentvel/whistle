@@ -1,5 +1,5 @@
 ---
-title: MySQL SQL基础
+title: SQL基础
 date: 2021-01-22
 sidebar: auto
 categories:
@@ -10,20 +10,24 @@ prev: ./
 next: false
 ---
 ## SQL分类
+
 - DDL（Data Definition Languages）语句：数据定义语言，这些语句定义了不同的数据段、数据库、表、列、索引等数据库对象。常用的语句关键字主要包括create、drop、alter等。
 - DML（Data Manipulation Language）语句：数据操纵语句，用于添加、删除、更新和查询数据库记录，并检查数据完整性。常用的语句关键字主要包括 insert、delete、update和select等。
 - DCL（Data Control Language）语句：数据控制语句，用于控制不同数据段直接的许可和访问级别的语句。这些语句定义了数据库、表、字段、用户的访问权限和安全级别。主要的语句关键字包括grant、revoke等
 
 ## DDL语句
+
 DDL是数据定义语言的缩写，简单来说，就是对数据库内部的对象进行创建、删除、修改等操作的语言。它和DML语句的最大区别是DML只是对表内部数据操作，而不涉及表的定义、结构的修改，更不会涉及其他对象。DDL 语句更多地由数据库管理员（DBA）使用，开发人员一般很少使用。
 
 ```sql
 # 连接数据库
 mysql -uroot -p
 ```
+
 ### 建表语句
 
 1. 创建数据库
+
 ```sql
 # 查看数据库中有哪些表
 show databases;
