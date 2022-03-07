@@ -68,6 +68,6 @@ jobs:
         # SSH URL of the source repo.
         source-repo: https://github.com/Gentvel/whistle.git
         # SSH URL of the destination repo.
-        destination-repo: https://gitee.com/gentvel/whistle.git
+        destination-repo: git@gitee.com:gentvel/whistle.git
         # Execute a dry run.
         dry-run: false# optional, default is false
