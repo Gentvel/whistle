@@ -55,11 +55,13 @@ jobs:
         #tags: # optional
         # Directory to change to before pushing.
         directory: ./docs/.vuepress/dist/
-#   # This workflow contains a single job called "mirror"
-#   mirror_to_gitee:
-#     # The type of runner that the job will run on
-#     runs-on: ubuntu-latest
-#     steps:
+  # This workflow contains a single job called "mirror"
+  mirror_to_gitee:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    steps:
+    - name: check_git
+      run: ssh -T git@gitee.com
     - name: Mirror to Gitee
       # You may pin to the exact commit or the version.
       # uses: wearerequired/git-mirror-action@c44c68aebe42de49a80a8dfd557416b6a0cafdad
