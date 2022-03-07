@@ -55,8 +55,9 @@ jobs:
         #tags: # optional
         # Directory to change to before pushing.
         directory: ./docs/.vuepress/dist/
-  # This workflow contains a single job called "mirror"
+  # This workflow contains a single job called "mirror_to_gitee"
   mirror_to_gitee:
+    needs: build_deploy
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     steps:
