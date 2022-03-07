@@ -60,16 +60,16 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     steps:
-    - name: check_git
-      run: ssh -T git@gitee.com
-    - name: Mirror to Gitee
+    - name: sync-gitee-mirror
       # You may pin to the exact commit or the version.
-      # uses: wearerequired/git-mirror-action@c44c68aebe42de49a80a8dfd557416b6a0cafdad
-      uses: wearerequired/git-mirror-action@v1.2.0
+      # uses: abersheeran/sync-gitee-mirror@d5052905badcdc5f34f58afa947212de5ab34766
+      uses: abersheeran/sync-gitee-mirror@v1-beta
       with:
-        # SSH URL of the source repo.
-        source-repo: git@github.com:Gentvel/whistle.git
-        # SSH URL of the destination repo.
-        destination-repo: git@gitee.com:gentvel/whistle.git
-        # Execute a dry run.
-        dry-run: false# optional, default is false
+        # Gitee 仓库，例如 abersheeran/gitee-mirror
+        repository: gentvel/whistle
+        # Gitee 用户名，用于登录。
+        username: ${{ secrets.GITEE_USER }}
+        # Gitee 密码，用于登录。
+        password: ${{ secrets.GITEE_PWD }}
+        # GitHub 令牌，用于私有仓库的拉取。
+        token: ${{ secrets.GITHUB_TOKEN }} # optional, default is ${{ github.token }}
