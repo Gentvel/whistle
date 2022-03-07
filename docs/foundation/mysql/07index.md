@@ -54,4 +54,3 @@ MySQL可以分为以下几类索引：
 
 空间索引是对空间数据类型的字段建立的索引，MySQL中空间数据类型有4种。分别是GEOMETRY、POINT、LINESTRING和POLYGON。创建空间索引的列，必须声明为NOT NULL，空间索引只能在存储引擎为MyISAM的表中创建。
 
-

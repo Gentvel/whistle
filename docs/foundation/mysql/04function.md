@@ -56,7 +56,6 @@ select strcmp('b','c');#-1
 
 ## 数值函数
 
-
 <center>
 
 ![datatype](./img/3_3fun.jpg)
