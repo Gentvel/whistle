@@ -1,5 +1,5 @@
 ---
-title: MySQL 触发器
+title:  触发器
 date: 2021-01-22
 sidebar: auto
 categories:
