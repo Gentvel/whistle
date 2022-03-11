@@ -9,6 +9,7 @@
         <version>1.0-SNAPSHOT</version>
         <relativePath/>
     </parent>
+    <description>设计模式学习项目</description>
     <artifactId>design</artifactId>
 
 

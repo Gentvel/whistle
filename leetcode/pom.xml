@@ -10,6 +10,7 @@
         <version>1.0-SNAPSHOT</version>
         <relativePath/>
     </parent>
+    <description>LeetCode 算法学习项目，目标每天一道，坚持</description>
     <artifactId>leetcode</artifactId>
     <dependencies>
         <dependency>

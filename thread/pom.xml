@@ -9,6 +9,7 @@
         <version>1.0-SNAPSHOT</version>
         <relativePath/>
     </parent>
+    <description>Java线程实验及学习项目</description>
     <artifactId>thread</artifactId>
     <dependencies>
 

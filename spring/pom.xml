@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <artifactId>spring</artifactId>
-
+    <description>Spring学习项目，包括Spring核心和SpringBoot etc。</description>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

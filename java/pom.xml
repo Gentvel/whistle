@@ -9,6 +9,7 @@
         <version>1.0-SNAPSHOT</version>
         <relativePath/>
     </parent>
+    <description>Java特性及一些基础类学习项目</description>
     <artifactId>java</artifactId>
 
 
