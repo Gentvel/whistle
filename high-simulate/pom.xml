@@ -3,24 +3,36 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
         <groupId>com.whistle.code</groupId>
         <artifactId>parent</artifactId>
         <version>1.0-SNAPSHOT</version>
         <relativePath/>
     </parent>
-    <description>LeetCode 算法学习项目，目标每天一道，坚持</description>
-    <artifactId>leetcode</artifactId>
+    <description>高并发模拟</description>
+    <artifactId>high-simulate</artifactId>
     <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>compile</scope>
+        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.openjdk.nashorn</groupId>
+            <artifactId>nashorn-core</artifactId>
         </dependency>
         <dependency>
             <groupId>com.sun.jini</groupId>
@@ -28,6 +40,7 @@
             <version>2.1</version>
             <scope>compile</scope>
         </dependency>
+
     </dependencies>
 
 </project>

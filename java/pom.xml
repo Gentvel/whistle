@@ -11,6 +11,14 @@
     </parent>
     <description>Java特性及一些基础类学习项目</description>
     <artifactId>java</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>com.sun.jini</groupId>
+            <artifactId>sun-util</artifactId>
+            <version>2.1</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
 
 </project>

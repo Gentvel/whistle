@@ -37,6 +37,7 @@
         <module>java</module>
         <module>design</module>
         <module>customize</module>
+        <module>high-simulate</module>
     </modules>
 
     <properties>
@@ -44,7 +45,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <netty.version>4.1.55.Final</netty.version>
-        <lombok.version>1.18.16</lombok.version>
+        <hutool.version>5.7.22</hutool.version>
+        <nashorn.version>15.3</nashorn.version>
     </properties>
 
 
@@ -56,7 +58,26 @@
                 <artifactId>netty-all</artifactId>
                 <version>${netty.version}</version>
             </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openjdk.nashorn</groupId>
+                <artifactId>nashorn-core</artifactId>
+                <version>${nashorn.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>com.sun.jini</groupId>
+            <artifactId>sun-util</artifactId>
+            <version>2.1</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
 </project>

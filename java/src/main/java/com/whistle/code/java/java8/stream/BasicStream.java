@@ -42,7 +42,7 @@ public class BasicStream {
         //List<Person> people = testFilter(objects, person -> person.getAge() > 15);
         //List<String> people = testMap(objects);
         //List<String> people = testMap(objects,person -> "年龄："+person.getAge());
-        people.stream().forEach(System.out::println);
+        people.forEach(System.out::println);
         testReduce();
     }
 

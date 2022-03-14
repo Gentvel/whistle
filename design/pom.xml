@@ -11,6 +11,14 @@
     </parent>
     <description>设计模式学习项目</description>
     <artifactId>design</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>com.sun.jini</groupId>
+            <artifactId>sun-util</artifactId>
+            <version>2.1</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
 
 </project>
