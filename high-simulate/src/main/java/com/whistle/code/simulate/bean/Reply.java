@@ -22,6 +22,6 @@ public class Reply implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("##%d|%d|%s|%s|%d|%d",this.posterId,this.personId,this.message,this.datetime,this. agreed,this.disagreed);
+        return String.format("##%d|%d|%s|%s|%d|%d\r\n",this.posterId,this.personId,this.message,this.datetime,this. agreed,this.disagreed);
     }
 }

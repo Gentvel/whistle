@@ -38,7 +38,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 @Slf4j
 public class TestGenerateData {
-    private static final Integer PERSON_ORIGIN_NUMBER = 1000000;
+    private static final Integer PERSON_ORIGIN_NUMBER = 100;
     private static final Integer POSTER_ORIGIN_NUMBER = PERSON_ORIGIN_NUMBER * 3;
     private static final Integer REPLY_ORIGIN_NUMBER = PERSON_ORIGIN_NUMBER * 2;
     private static final AtomicInteger PERSON_NUMBER = new AtomicInteger(PERSON_ORIGIN_NUMBER);

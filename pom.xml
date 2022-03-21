@@ -38,6 +38,7 @@
         <module>design</module>
         <module>customize</module>
         <module>high-simulate</module>
+        <module>common-demo</module>
     </modules>
 
     <properties>
@@ -68,6 +69,18 @@
                 <artifactId>nashorn-core</artifactId>
                 <version>${nashorn.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>3.3.2</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <!--在引用时请在maven中央仓库搜索3.X最新版本号-->
+                <version>3.0.3</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>

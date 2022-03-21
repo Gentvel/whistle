@@ -23,7 +23,7 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("##%s|%d|%s|%s|%s|%s|%s",this.name,this.age,this.birthDate,this.email,this.address,this.phone,this.photoUrl);
+        return String.format("##%s|%d|%s|%s|%s|%s|%s\r\n",this.name,this.age,this.birthDate,this.email,this.address,this.phone,this.photoUrl);
     }
 
 }

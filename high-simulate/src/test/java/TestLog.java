@@ -14,10 +14,13 @@ import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author Lin
@@ -39,6 +42,7 @@ public class TestLog {
 //        log.info(""+Mock.natural(10000,1200));
         log.info("" + Mock.character());
         log.info("" + Mock.date());
+        log.info("" + Mock.datetime());
         log.info("" + Mock.cname());
         log.info("" + Mock.id());
         log.info("" + Mock.county(true));
@@ -68,46 +72,107 @@ public class TestLog {
         try {
             FileInputStream fileInputStream = new FileInputStream("D:\\Projects\\simulated_data\\person\\person.data");
             FileChannel channel = fileInputStream.getChannel();
-            ByteBuffer allocate = ByteBuffer.allocate(64);
-            ByteBuffer fixed = ByteBuffer.allocate(4);
-            ByteBuffer buffer = ByteBuffer.allocate(64 * 3);
-            while (channel.read(allocate) != -1) {
-                allocate.flip();
-                byte[] array = allocate.array();
-                byte lastByte = array[array.length - 1];
-                byte secondLastByte = array[array.length - 2];
-                if (allocate.limit() + buffer.position() > buffer.limit()) {
-                    buffer.flip();
-                    log.info(new String(buffer.array()).trim());
-                    buffer.clear();
-                }
-                /*
-                 *中文字符有三个字节
-                 * @see https://www.cnblogs.com/liushui-sky/p/10483248.html
-                 *
-                 * 当第一位为1110开头时，说明表示该字的第一个字节
-                 */
-                if (Integer.toBinaryString((lastByte & 0xFF) + 0x100).substring(1).startsWith("1110")) {
-                    fixed.put(lastByte);
-                    buffer.put(array, 0, array.length - 1);
-                } else if (Integer.toBinaryString((secondLastByte & 0xFF) + 0x100).substring(1).startsWith("1110")) {
-                    fixed.put(lastByte);
-                    fixed.put(secondLastByte);
-                    buffer.put(array, 0, array.length - 2);
+            ByteBuffer allocate = ByteBuffer.allocate(32);
+            ByteBuffer fixed = ByteBuffer.allocate(3);
+            ByteBuffer buffer = ByteBuffer.allocate(32 * 2);
+            channel.read(fixed);
+//            byte[] array = fixed.array();
+            String a="Abc#$%我…（￥我";
+            byte[] array = a.getBytes(StandardCharsets.UTF_8);
+            int i = 8;
+            log.info("{},{}",(char)array[i],isMessyCode((char) array[i]));
+
+
+            while (i < array.length) {
+                if ((char) array[i] > 127) {
+                    if (i + 3 < array.length) {
+                        i += 3;
+                    }
+                    break;
                 } else {
-                    buffer.put(array);
-                }
-                buffer.put(array);
-                allocate.clear();
-                if (fixed.position() > 0) {
-                    fixed.flip();
-                    allocate.put(fixed);
-                    fixed.clear();
+                    ++i;
                 }
             }
+//            log.info("i={}", i);
+//            String trim = new String(fixed.array());
+//            log.info("{}least{},last{}", trim, isMessyCode(trim.charAt(trim.length() - 2)),isMessyCode(trim.charAt(trim.length() - 1)));
+//            log.info(Arrays.toString(fixed.array()));
+//            while (channel.read(allocate) != -1) {
+//                allocate.flip();
+//                byte[] array = allocate.array();
+//                byte lastByte = array[array.length - 1];
+//                byte secondLastByte = array[array.length - 2];
+//                if (allocate.limit() + buffer.position() > buffer.limit()) {
+//                    buffer.flip();
+//                    log.info(new String(buffer.array()).trim());
+//                    buffer.clear();
+//                }
+//                /*
+//                 *中文字符有三个字节
+//                 * @see https://www.cnblogs.com/liushui-sky/p/10483248.html
+//                 *
+//                 * 当第一位为1110开头时，说明表示该字的第一个字节
+//                 */
+//                if (Integer.toBinaryString((lastByte & 0xFF) + 0x100).substring(1).startsWith("1110")) {
+//                    fixed.put(lastByte);
+//                    buffer.put(array, 0, array.length - 1);
+//                } else if (Integer.toBinaryString((secondLastByte & 0xFF) + 0x100).substring(1).startsWith("1110")) {
+//                    fixed.put(lastByte);
+//                    fixed.put(secondLastByte);
+//                    buffer.put(array, 0, array.length - 2);
+//                } else {
+//                    buffer.put(array);
+//                }
+            //buffer.put(array);
+//                allocate.clear();
+//                if (fixed.position() > 0) {
+//                    fixed.flip();
+//                    allocate.put(fixed);
+//                    fixed.clear();
+//                }
+//            }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 判断字符后两位是否是乱码
+     *
+     * @param str 字符
+     * @return 乱码数
+     */
+    public static boolean isMessyCode(char ch) {
+
+        if (!Character.isLetterOrDigit(ch)) {
+            if (Character.isSpaceChar(ch)) {
+                return false;
+            }
+            return !isChinese(ch);
+
+        }
+
+
+        return false;
+    }
+
+    /**
+     * 判断字符是否是中文
+     *
+     * @param c 字符
+     * @return 是否是中文
+     */
+    public static boolean isChinese(char c) {
+        Character.UnicodeBlock ub = Character.UnicodeBlock.of(c);
+        if (ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS
+                || ub == Character.UnicodeBlock.CJK_COMPATIBILITY_IDEOGRAPHS
+                || ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A
+                || ub == Character.UnicodeBlock.GENERAL_PUNCTUATION
+                || ub == Character.UnicodeBlock.CJK_SYMBOLS_AND_PUNCTUATION
+                || ub == Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS) {
+            return true;
+        }
+        return false;
     }
 
     @Test
@@ -133,11 +198,11 @@ public class TestLog {
         stopWatch.stop();
 
         stopWatch.start("random access");
-        RandomAccessFile randomAccessFile = new RandomAccessFile(Path.of(personBytePath).toFile(),"r");
+        RandomAccessFile randomAccessFile = new RandomAccessFile(Path.of(personBytePath).toFile(), "r");
         long length = randomAccessFile.length();
-        for (long p = 1024*1000; p < length; p+=1024*1000){
+        for (long p = 1024 * 1000; p < length; p += 1024 * 1000) {
             randomAccessFile.seek(p);
-            log.info("读去长度：{}",randomAccessFile.getFilePointer());
+            log.info("读去长度：{}", randomAccessFile.getFilePointer());
         }
 
         stopWatch.stop();

@@ -18,7 +18,7 @@ public class DataBuilders {
 
     public static Person getPerson(){
         return Person.builder().age((int) Mock.natural(10, 100))
-                .birthDate(Mock.date())
+                .birthDate(Mock.datetime())
                 .name(Mock.cname())
                 .address(Mock.county(true))
                 .email(Mock.email())
@@ -43,7 +43,7 @@ public class DataBuilders {
         }
         for (int i = 0; i < size; i++) {
             persons.add(Person.builder().age((int) Mock.natural(10, 100))
-                    .birthDate(Mock.date())
+                    .birthDate(Mock.datetime())
                     .name(Mock.cname())
                     .address(Mock.county(true))
                     .email(Mock.email())

@@ -19,6 +19,6 @@ public class Poster implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("##%d|%s|%c|%s|%s",this.personId,this.title,this.type,this.content,this.datetime);
+        return String.format("##%d|%s|%c|%s|%s\r\n",this.personId,this.title,this.type,this.content,this.datetime);
     }
 }
