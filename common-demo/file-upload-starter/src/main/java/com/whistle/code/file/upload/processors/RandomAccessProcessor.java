@@ -2,10 +2,12 @@ package com.whistle.code.file.upload.processors;
 
 import com.whistle.code.file.upload.AbstractUploadProcessor;
 import com.whistle.code.file.upload.UploadHandler;
+import com.whistle.code.file.upload.bean.FileUploadContext;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.Objects;
 
 /**
  * @author Lin
@@ -20,13 +22,12 @@ public class RandomAccessProcessor extends AbstractUploadProcessor {
     }
 
     @Override
-    protected boolean doProcess() {
+    protected boolean doProcess(FileUploadContext context) {
         try (RandomAccessFile accessTmpFile = new RandomAccessFile(context.getTempChunkFile(),"rw")){
-//            long chunkSize = file.getChunkSize()==0L ? (long) properties.getDefaultChunkSize() * 1024 * 1024 : file.getChunkSize();
-//            long offset = chunkSize*file.getChunkNumber();
             accessTmpFile.seek(0);
-            if(context.getFile()==null){
+            if(!Objects.equals(context.getChunkNumber(), context.getUploadResult().getChunkNumber())){
                 log.info("文件未生成成功.....{}",context.toString());
+                log.warn("多线程致命错误");
             }
             accessTmpFile.write(context.getFile().getBytes());
         } catch (IOException e) {

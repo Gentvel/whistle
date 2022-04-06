@@ -1,5 +1,10 @@
 server:
   port: 8000
+  tomcat:
+    threads:
+      max: 1
+      min-spare: 1
+    max-connections: 30
 spring:
   servlet:
     multipart:
@@ -7,7 +12,11 @@ spring:
       max-request-size: 20MB
 loader:
   temp-file-path: D:\temps
-  enable-auto-merge: true
-  enable-zero-merge: false
-#  process-type: RANDOM
+  enable-auto-merge: false
+  enable-zero-merge: true
+  process-type: RANDOM
+
+logging:
+  level:
+    com.whistle.code.file: debug
   

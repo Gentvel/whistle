@@ -1,62 +1,71 @@
 package com.whistle.code.file.upload;
 
-import cn.hutool.extra.spring.SpringUtil;
 import com.whistle.code.file.upload.bean.FileUploadContext;
 import com.whistle.code.file.upload.bean.UploadResult;
+import com.whistle.code.file.upload.boot.FileUploadProperties;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.DisposableBean;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.scheduling.annotation.Async;
 
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-import java.util.concurrent.ThreadPoolExecutor;
+import javax.annotation.Resource;
+import java.util.concurrent.*;
 
 /**
  * @author Lin
  * @version 1.0.0
  */
 @Slf4j
-public class Uploader implements DisposableBean {
+public class Uploader {
 
+    @Resource(name = FileUploadProperties.FILE_UPLOAD_POOL)
+    private Executor fileUploadExecutor;
     private final UploadProcessor uploadProcessor;
-    private final ThreadPoolTaskExecutor executor;
-    public Uploader(UploadProcessor uploadProcessor){
+    private final UploadResult errorResult;
+
+    public Uploader(UploadProcessor uploadProcessor) {
+        errorResult = new UploadResult();
+        errorResult.setStatus(9);
+        errorResult.setMessage("操作失败");
         this.uploadProcessor = uploadProcessor;
-        executor = new ThreadPoolTaskExecutor();
-        //核心线程池大小
-        executor.setCorePoolSize(4);
-        //最大线程数
-        executor.setMaxPoolSize(8);
-        //队列容量
-        executor.setQueueCapacity(32);
-        //活跃时间
-        executor.setKeepAliveSeconds(60);
-        //线程名字前缀
-        executor.setThreadNamePrefix("uploader-thread-");
-        /*
-            当poolSize已达到maxPoolSize，如何处理新任务（是拒绝还是交由其它线程处理）
-            CallerRunsPolicy：不在新线程中执行任务，而是由调用者所在的线程来执行
-         */
-        executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
-        executor.initialize();
+
     }
 
-    public UploadResult upload(FileUploadContext context){
-        Callable<UploadResult> callable = () -> uploadProcessor.process(context);
-        Future<UploadResult> submit = executor.submit(callable);
+    public UploadResult upload(FileUploadContext context) {
+        CompletableFuture<UploadResult> future = CompletableFuture.supplyAsync(() -> uploadProcessor.process(context), fileUploadExecutor);
         try {
-            UploadResult uploadResult = submit.get();
-            log.info(uploadResult.toString());
-            return uploadResult;
+            return future.get();
         } catch (InterruptedException | ExecutionException e) {
-            log.error("",e);
+            log.error("", e);
+            Thread.currentThread().interrupt();
+            return errorResult;
         }
-        return null;
     }
 
-    @Override
-    public void destroy() throws Exception {
-        executor.destroy();
+
+    public UploadResult preQuery(FileUploadContext context) {
+        CompletableFuture<UploadResult> future = CompletableFuture.supplyAsync(() -> uploadProcessor.preQuery(context), fileUploadExecutor);
+        try {
+            return future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            log.error("", e);
+            Thread.currentThread().interrupt();
+            return errorResult;
+        }
     }
+
+    /**
+     * 文件合并
+     *
+     * @param context
+     */
+    public UploadResult merge(FileUploadContext context) {
+        CompletableFuture<UploadResult> future = CompletableFuture.supplyAsync(() -> uploadProcessor.merge(context), fileUploadExecutor);
+        try {
+            return future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            log.error("", e);
+            Thread.currentThread().interrupt();
+            return errorResult;
+        }
+    }
+
 }

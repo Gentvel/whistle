@@ -25,7 +25,10 @@ public class UploadResult {
      */
     private long loadSize;
     /**
-     * 上传状态 0-未上传，1-分片已上传，2-文件已合并，3-文件已校验，4-文件已完成
+     * 上传状态：
+     * 0-未上传，1-分片已上传，2-分片上传失败，3-分片上传完成，4-分片已上传部分
+     * 5-文件合并失败，6-文件校验失败
+     * 7-文件已处理完成
      */
     private int status=0;
     /**
@@ -37,4 +40,17 @@ public class UploadResult {
      * 已上传文件
      */
     private List<ChunkUploaded> uploaded;
+    /**
+     * 当前文件分片
+     */
+    private Integer chunkNumber;
+    /**
+     * 文件是否需要合并
+     */
+    private boolean needMerge;
+
+    /**
+     *
+     */
+    private String message;
 }

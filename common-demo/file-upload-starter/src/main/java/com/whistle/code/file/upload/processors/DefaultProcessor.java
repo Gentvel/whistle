@@ -2,6 +2,7 @@ package com.whistle.code.file.upload.processors;
 
 import com.whistle.code.file.upload.AbstractUploadProcessor;
 import com.whistle.code.file.upload.UploadHandler;
+import com.whistle.code.file.upload.bean.FileUploadContext;
 import com.whistle.code.file.upload.exceptions.UploaderException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,7 +21,7 @@ public class DefaultProcessor extends AbstractUploadProcessor {
     }
 
     @Override
-    protected boolean doProcess() {
+    protected boolean doProcess(FileUploadContext context) {
         MultipartFile file = context.getFile();
         try {
             file.transferTo(context.getTempChunkFile());

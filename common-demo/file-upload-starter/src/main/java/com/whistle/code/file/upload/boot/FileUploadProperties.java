@@ -15,6 +15,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(FileUploadProperties.FILE_UPLOAD_PREFIX)
 public class FileUploadProperties {
     public static final String FILE_UPLOAD_PREFIX = "loader";
+    public static final String FILE_UPLOAD_POOL = "uploadExecutor";
     /**
      * 临时文件夹位置 (temp file location (dir))
      * 如果为空则使用 spring.servlet.multipart.location
@@ -34,19 +35,29 @@ public class FileUploadProperties {
      */
     private boolean deleteTempFile = true;
     /**
-     * 是否开启秒传
-     */
-    private boolean enableTestChunk = true;
-    /**
      * 是否开启自动合并
      */
     private boolean enableAutoMerge = true;
     /**
-     * 是否开启合并后自动校验
-     */
-    private boolean enableAutoCheck = false;
-    /**
      * 是否开启零拷贝合并
      */
     private boolean enableZeroMerge = true;
+    /**
+     * 核心线程池大小
+     */
+    private Integer coreSize=2;
+
+    /**
+     * 最大线程（默认核心线程数*2）
+     */
+    private Integer maxSize=coreSize*2;
+    /**
+     * 队列长度
+     */
+    private Integer queueCapacity = 200;
+    /**
+     * 活跃时间
+     */
+    private Integer keepAlive=60;
+
 }

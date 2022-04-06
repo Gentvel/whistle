@@ -32,10 +32,10 @@ public class FileUploadContext implements Serializable {
     private Integer totalChunks;
     @ApiModelProperty("文件")
     private MultipartFile file;
-    @ApiModelProperty("是否前置查询")
+    /**
+     * 是否前置查询
+     */
     private boolean pre;
-    @ApiModelProperty("是否合并")
-    private boolean merge;
     /**
      * 上传处理结果
      */
