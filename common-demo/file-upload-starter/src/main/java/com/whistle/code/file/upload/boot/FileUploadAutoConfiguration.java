@@ -43,7 +43,6 @@ public class FileUploadAutoConfiguration {
 
     @Bean
     @Lazy
-    //@Scope(value = "prototype",proxyMode = ScopedProxyMode.TARGET_CLASS)
     @ConditionalOnClass(UploadProcessor.class)
     @ConditionalOnProperty(prefix=FileUploadProperties.FILE_UPLOAD_PREFIX,name="process-type",havingValue = "DEFAULT",matchIfMissing = true)
     public UploadProcessor defaultProcessor(UploadHandler uploadHandler){
@@ -52,7 +51,6 @@ public class FileUploadAutoConfiguration {
 
     @Bean
     @Lazy
-    //@Scope(value = "prototype",proxyMode = ScopedProxyMode.TARGET_CLASS)
     @ConditionalOnClass(UploadProcessor.class)
     @ConditionalOnProperty(prefix=FileUploadProperties.FILE_UPLOAD_PREFIX,name="process-type",havingValue = "RANDOM")
     public UploadProcessor randomProcessor(UploadHandler uploadHandler){
@@ -61,7 +59,6 @@ public class FileUploadAutoConfiguration {
 
     @Bean
     @Lazy
-    //@Scope(value = "prototype",proxyMode = ScopedProxyMode.TARGET_CLASS)
     @ConditionalOnClass(UploadProcessor.class)
     @ConditionalOnProperty(prefix=FileUploadProperties.FILE_UPLOAD_PREFIX,name="process-type",havingValue = "BUFFERED")
     public UploadProcessor bufferedProcessor(UploadHandler uploadHandler){

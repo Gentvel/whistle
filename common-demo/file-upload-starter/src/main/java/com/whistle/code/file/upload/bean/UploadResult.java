@@ -13,22 +13,22 @@ import java.util.List;
 @Data
 public class UploadResult {
     /**
-     * 临时文件MD5
+     * 临时文件SM3
      */
     private String identifier;
-    /**
-     * 临时文件UID
-     */
-    private String loadedUID;
+
     /**
      * 临时文件大小
      */
+    @JsonIgnore
     private long loadSize;
     /**
+     *
+     *
      * 上传状态：
-     * 0-未上传，1-分片已上传，2-分片上传失败，3-分片上传完成，4-分片已上传部分
+     * 1-分片已上传，2-分片上传失败，3-分片上传完成
      * 5-文件合并失败，6-文件校验失败
-     * 7-文件已处理完成
+     * 7-文件已处理完成 8-分片已存在 9-整体文件已存在
      */
     private int status=0;
     /**

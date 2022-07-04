@@ -18,10 +18,6 @@ public class DefaultHandler implements UploadHandler {
         return new ArrayList<>();
     }
 
-    @Override
-    public String getUUID(FileUploadContext context) {
-        return null;
-    }
 
     @Override
     public void beforeProcess(FileUploadContext context) {

@@ -1,5 +1,6 @@
 package com.whistle.code.file.upload.bean;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 /**
@@ -15,11 +16,7 @@ public class ChunkUploaded {
     /**
      * 已上传分片size
      */
+    @JsonIgnore
     private long loadedSize;
-
-    /**
-     * 已上传分片uid
-     */
-    private String loadedUID;
 
 }

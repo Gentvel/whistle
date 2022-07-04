@@ -9,10 +9,14 @@ import com.whistle.code.file.upload.bean.FileUploadContext;
 import com.whistle.code.file.upload.bean.UploadResult;
 import com.whistle.code.file.upload.boot.FileUploadProperties;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.backoff.BackOff;
+import org.springframework.util.backoff.BackOffExecution;
+import org.springframework.util.backoff.FixedBackOff;
 
 import java.io.*;
 import java.nio.channels.FileChannel;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Lin
@@ -29,17 +33,17 @@ public abstract class AbstractUploadProcessor implements UploadProcessor {
 
     /**
      * 0-未上传，1-分片已上传，2-分片上传失败，3-分片上传完成，4-分片已上传部分
-     * 5-文件合并失败，6-文件校验失败
-     * 7-文件已处理完成
+     * 5-文件合并失败，6-文件校验失败，7-文件已处理完成，9-文件处理失败
      */
-    private static final Integer UNLOAD = 0;
-    private static final Integer CHUNK_UPLOADED = 1;
-    private static final Integer CHUNK_ERROR = 2;
-    private static final Integer CHUNK_SUCCESS = 3;
-    private static final Integer CHUNK_PART = 4;
-    private static final Integer FILE_MERGE_ERROR = 5;
-    private static final Integer FILE_CHECK_ERROR = 6;
-    private static final Integer FILE_SUCCESS = 7;
+    public static final Integer UNLOAD = 0;
+    public static final Integer CHUNK_UPLOADED = 1;
+    public static final Integer CHUNK_ERROR = 2;
+    public static final Integer CHUNK_SUCCESS = 3;
+    public static final Integer CHUNK_PART = 4;
+    public static final Integer FILE_MERGE_ERROR = 5;
+    public static final Integer FILE_CHECK_ERROR = 6;
+    public static final Integer FILE_SUCCESS = 7;
+    public static final Integer FILE_ERROR = 9;
 
 
     public AbstractUploadProcessor(UploadHandler uploadHandler) {
@@ -93,12 +97,13 @@ public abstract class AbstractUploadProcessor implements UploadProcessor {
             return uploadResult;
 
         }
-        //是否已存在分片文件
+        //分片文件夹不存在
         if (!FileUtil.exist(context.getTempChunkFileDir())) {
             uploadResult.setUploaded(uploadeds);
             uploadResult.setStatus(UNLOAD);
             return uploadResult;
         }
+        //是否已存在分片文件
         List<String> strings = FileUtil.listFileNames(context.getTempChunkFileDir());
         strings.sort(Comparator.comparingInt(o -> Integer.parseInt(FileUtil.getPrefix(o))));
         uploadeds = new ArrayList<>(strings.size());
@@ -124,11 +129,10 @@ public abstract class AbstractUploadProcessor implements UploadProcessor {
                 continue;
             }
             String index = FileUtil.getPrefix(string);
-            String fileUUID = uploadHandler.getUUID(context);
+            //String fileUUID = uploadHandler.getUUID(context);
             ChunkUploaded chunkUploaded = new ChunkUploaded();
             chunkUploaded.setChunkNumber(Integer.parseInt(index));
             chunkUploaded.setLoadedSize(length);
-            chunkUploaded.setLoadedUID(fileUUID);
             uploadeds.add(chunkUploaded);
             tempsSize += length;
         }
@@ -145,10 +149,15 @@ public abstract class AbstractUploadProcessor implements UploadProcessor {
 
     @Override
     public UploadResult process(FileUploadContext context) {
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        boolean mergedFlag = false;
         initContext(context);
         beforeUpload(context);
         UploadResult uploadResult = context.getUploadResult();
-        uploadResult.setLoadedUID(uploadHandler.getUUID(context));
         uploadHandler.beforeProcess(context);
         //文件处理完成
         if (doProcess(context)) {
@@ -158,7 +167,25 @@ public abstract class AbstractUploadProcessor implements UploadProcessor {
             if (Objects.equals(context.getTotalChunks(), context.getChunkNumber())) {
                 uploadResult.setNeedMerge(true);
                 uploadResult.setStatus(CHUNK_SUCCESS);
-                if( properties.isEnableAutoMerge() && merged(context)){
+                UploadResult result = preQuery(context);
+                if (result.getUploaded().size() == context.getTotalSize()) {
+                    mergedFlag = true;
+                } else {
+                    BackOff backOff = new FixedBackOff(2000L, 3);
+                    BackOffExecution execution = backOff.start();
+                    for (int i = 0; i < 3; i++) {
+                        if(execution.nextBackOff()==BackOffExecution.STOP){
+                            break;
+                        }else{
+                            List<ChunkUploaded> uploaded = preQuery(context).getUploaded();
+                            if(uploaded.size()== context.getTotalSize()){
+                                mergedFlag=true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (mergedFlag && properties.isEnableAutoMerge() && merged(context)) {
                     uploadResult.setStatus(FILE_SUCCESS);
                     return uploadResult;
                 }
@@ -167,7 +194,6 @@ public abstract class AbstractUploadProcessor implements UploadProcessor {
         }
         uploadResult.setStatus(CHUNK_ERROR);
         return uploadResult;
-
     }
 
     /**

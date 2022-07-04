@@ -25,10 +25,6 @@ public class RandomAccessProcessor extends AbstractUploadProcessor {
     protected boolean doProcess(FileUploadContext context) {
         try (RandomAccessFile accessTmpFile = new RandomAccessFile(context.getTempChunkFile(),"rw")){
             accessTmpFile.seek(0);
-            if(!Objects.equals(context.getChunkNumber(), context.getUploadResult().getChunkNumber())){
-                log.info("文件未生成成功.....{}",context.toString());
-                log.warn("多线程致命错误");
-            }
             accessTmpFile.write(context.getFile().getBytes());
         } catch (IOException e) {
             log.error("",e);

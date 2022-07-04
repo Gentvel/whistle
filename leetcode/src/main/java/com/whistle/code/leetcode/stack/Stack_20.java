@@ -25,10 +25,12 @@ public class Stack_20 {
     };
 
     public boolean isValid(String s) {
-        if (s == null)
+        if (s == null) {
             return false;
-        if (s.length() % 2 == 1)
+        }
+        if (s.length() % 2 == 1) {
             return false;
+        }
         char[] chars = s.toCharArray();
         Stack<Character> stack = new Stack<>();
         for (char aChar : chars) {

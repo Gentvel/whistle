@@ -17,12 +17,6 @@ public interface UploadHandler {
     List<ChunkUploaded> preCheckUpload(FileUploadContext context);
 
     /**
-     * 获取分片文件UUID
-     * @param context 上下文
-     */
-    String getUUID(FileUploadContext context);
-
-    /**
      * 上传前置处理
      * @param context 上下文
      */

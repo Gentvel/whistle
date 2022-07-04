@@ -16,7 +16,5 @@ public enum ProcessType {
     /**
      * RandomAccessFile
      */
-    RANDOM;
-
-
+    RANDOM
 }

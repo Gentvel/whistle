@@ -3,7 +3,6 @@ package com.whistle.code.file.upload.boot;
 import com.whistle.code.file.upload.enums.ProcessType;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -56,7 +55,7 @@ public class FileUploadProperties {
      */
     private Integer queueCapacity = 200;
     /**
-     * 活跃时间
+     * 线程空闲时间
      */
     private Integer keepAlive=60;
 

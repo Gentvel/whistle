@@ -29,7 +29,14 @@ public class Uploader {
 
     }
 
+    /**
+     * 文件上传
+     * @param context
+     */
     public UploadResult upload(FileUploadContext context) {
+        //return uploadProcessor.process(context);
+
+
         CompletableFuture<UploadResult> future = CompletableFuture.supplyAsync(() -> uploadProcessor.process(context), fileUploadExecutor);
         try {
             return future.get();
@@ -40,7 +47,10 @@ public class Uploader {
         }
     }
 
-
+    /**
+     * 预查询
+     * @param context
+     */
     public UploadResult preQuery(FileUploadContext context) {
         CompletableFuture<UploadResult> future = CompletableFuture.supplyAsync(() -> uploadProcessor.preQuery(context), fileUploadExecutor);
         try {

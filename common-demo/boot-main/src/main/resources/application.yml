@@ -5,6 +5,7 @@ server:
       max: 1
       min-spare: 1
     max-connections: 30
+    accept-count: 1
 spring:
   servlet:
     multipart:
