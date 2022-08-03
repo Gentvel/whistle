@@ -1,18 +1,18 @@
-package com.whistle.code.leetcode.tree;
+package com.whistle.code;
 
 /**
  * @author Gentvel
  * @version 1.0.0
  */
 public class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
+    public int val;
+    public TreeNode left;
+    public TreeNode right;
 
     TreeNode() {
     }
 
-    TreeNode(int val) {
+    public TreeNode(int val) {
         this.val = val;
     }
 

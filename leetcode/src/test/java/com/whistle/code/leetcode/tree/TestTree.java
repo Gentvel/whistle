@@ -1,6 +1,7 @@
 package com.whistle.code.leetcode.tree;
 
 
+import com.whistle.code.TreeNode;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
