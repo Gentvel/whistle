@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Redis系列一 数据类型 | 林秃秃</title>
+    <meta name="generator" content="VuePress 1.5.2">
+    
+    <meta name="description" content="有术无道，止于术；有道无术，术尚可求。">
+    <link rel="preload" href="/whistle/assets/css/0.styles.27a793f2.css" as="style"><link rel="preload" href="/whistle/assets/js/app.c849928c.js" as="script"><link rel="preload" href="/whistle/assets/js/3.f6935b69.js" as="script"><link rel="preload" href="/whistle/assets/js/1.ca64ea80.js" as="script"><link rel="preload" href="/whistle/assets/js/33.ced660fe.js" as="script"><link rel="prefetch" href="/whistle/assets/js/10.19865d52.js"><link rel="prefetch" href="/whistle/assets/js/100.0fdba92f.js"><link rel="prefetch" href="/whistle/assets/js/101.1412c0d5.js"><link rel="prefetch" href="/whistle/assets/js/102.0f01dd8f.js"><link rel="prefetch" href="/whistle/assets/js/103.bae8272b.js"><link rel="prefetch" href="/whistle/assets/js/104.ba1d7a63.js"><link rel="prefetch" href="/whistle/assets/js/105.88774299.js"><link rel="prefetch" href="/whistle/assets/js/106.90349fe7.js"><link rel="prefetch" href="/whistle/assets/js/107.335b7f02.js"><link rel="prefetch" href="/whistle/assets/js/108.67608ec7.js"><link rel="prefetch" href="/whistle/assets/js/109.fdcd6597.js"><link rel="prefetch" href="/whistle/assets/js/11.9a03e430.js"><link rel="prefetch" href="/whistle/assets/js/110.c61bcef2.js"><link rel="prefetch" href="/whistle/assets/js/111.accb4d01.js"><link rel="prefetch" href="/whistle/assets/js/112.392f20f1.js"><link rel="prefetch" href="/whistle/assets/js/113.3725f52d.js"><link rel="prefetch" href="/whistle/assets/js/114.4d51e46e.js"><link rel="prefetch" href="/whistle/assets/js/115.b06b4a52.js"><link rel="prefetch" href="/whistle/assets/js/116.5739ac85.js"><link rel="prefetch" href="/whistle/assets/js/117.07a928d9.js"><link rel="prefetch" href="/whistle/assets/js/118.35737cd9.js"><link rel="prefetch" href="/whistle/assets/js/119.e4460eb2.js"><link rel="prefetch" href="/whistle/assets/js/12.449405b3.js"><link rel="prefetch" href="/whistle/assets/js/120.046638c5.js"><link rel="prefetch" href="/whistle/assets/js/121.fb1caf41.js"><link rel="prefetch" href="/whistle/assets/js/122.72021ded.js"><link rel="prefetch" href="/whistle/assets/js/123.84032e47.js"><link rel="prefetch" href="/whistle/assets/js/124.9ed28712.js"><link rel="prefetch" href="/whistle/assets/js/125.eb048089.js"><link rel="prefetch" href="/whistle/assets/js/126.2960e7f7.js"><link rel="prefetch" href="/whistle/assets/js/127.e7ad2e9d.js"><link rel="prefetch" href="/whistle/assets/js/128.b3744390.js"><link rel="prefetch" href="/whistle/assets/js/129.b011d3f2.js"><link rel="prefetch" href="/whistle/assets/js/13.16a79965.js"><link rel="prefetch" href="/whistle/assets/js/130.a05d728d.js"><link rel="prefetch" href="/whistle/assets/js/131.eef6c73c.js"><link rel="prefetch" href="/whistle/assets/js/132.0387996b.js"><link rel="prefetch" href="/whistle/assets/js/14.891c2195.js"><link rel="prefetch" href="/whistle/assets/js/15.e953afa5.js"><link rel="prefetch" href="/whistle/assets/js/16.b8699525.js"><link rel="prefetch" href="/whistle/assets/js/17.b91b75f1.js"><link rel="prefetch" href="/whistle/assets/js/18.9f29e718.js"><link rel="prefetch" href="/whistle/assets/js/19.263598cc.js"><link rel="prefetch" href="/whistle/assets/js/20.770fe2d3.js"><link rel="prefetch" href="/whistle/assets/js/21.0a6ce8b6.js"><link rel="prefetch" href="/whistle/assets/js/22.02e00977.js"><link rel="prefetch" href="/whistle/assets/js/23.6207cbb8.js"><link rel="prefetch" href="/whistle/assets/js/24.24e5a71d.js"><link rel="prefetch" href="/whistle/assets/js/25.e1e15b11.js"><link rel="prefetch" href="/whistle/assets/js/26.7d1364f8.js"><link rel="prefetch" href="/whistle/assets/js/27.86cb59bd.js"><link rel="prefetch" href="/whistle/assets/js/28.21fe08a4.js"><link rel="prefetch" href="/whistle/assets/js/29.7fefe934.js"><link rel="prefetch" href="/whistle/assets/js/30.1fca0706.js"><link rel="prefetch" href="/whistle/assets/js/31.0dd0f434.js"><link rel="prefetch" href="/whistle/assets/js/32.809fd211.js"><link rel="prefetch" href="/whistle/assets/js/34.2fe58e53.js"><link rel="prefetch" href="/whistle/assets/js/35.1c33f7cc.js"><link rel="prefetch" href="/whistle/assets/js/36.9236ac80.js"><link rel="prefetch" href="/whistle/assets/js/37.b82cf1aa.js"><link rel="prefetch" href="/whistle/assets/js/38.bad257bf.js"><link rel="prefetch" href="/whistle/assets/js/39.05285128.js"><link rel="prefetch" href="/whistle/assets/js/4.33f70e17.js"><link rel="prefetch" href="/whistle/assets/js/40.17f2c77b.js"><link rel="prefetch" href="/whistle/assets/js/41.a287741a.js"><link rel="prefetch" href="/whistle/assets/js/42.6e794082.js"><link rel="prefetch" href="/whistle/assets/js/43.8ac74e68.js"><link rel="prefetch" href="/whistle/assets/js/44.91e1fec5.js"><link rel="prefetch" href="/whistle/assets/js/45.42c52a75.js"><link rel="prefetch" href="/whistle/assets/js/46.65fcc9b8.js"><link rel="prefetch" href="/whistle/assets/js/47.4b878044.js"><link rel="prefetch" href="/whistle/assets/js/48.5c647dd0.js"><link rel="prefetch" href="/whistle/assets/js/49.46a6f0c3.js"><link rel="prefetch" href="/whistle/assets/js/5.44a242a9.js"><link rel="prefetch" href="/whistle/assets/js/50.3050ef3e.js"><link rel="prefetch" href="/whistle/assets/js/51.78a2fd5b.js"><link rel="prefetch" href="/whistle/assets/js/52.6d146ed8.js"><link rel="prefetch" href="/whistle/assets/js/53.501e8829.js"><link rel="prefetch" href="/whistle/assets/js/54.6299a871.js"><link rel="prefetch" href="/whistle/assets/js/55.31e11b60.js"><link rel="prefetch" href="/whistle/assets/js/56.084e968e.js"><link rel="prefetch" href="/whistle/assets/js/57.91968542.js"><link rel="prefetch" href="/whistle/assets/js/58.f683ed7b.js"><link rel="prefetch" href="/whistle/assets/js/59.ed4ee9cd.js"><link rel="prefetch" href="/whistle/assets/js/6.06c2faef.js"><link rel="prefetch" href="/whistle/assets/js/60.578875cb.js"><link rel="prefetch" href="/whistle/assets/js/61.761cb8df.js"><link rel="prefetch" href="/whistle/assets/js/62.3f38fad5.js"><link rel="prefetch" href="/whistle/assets/js/63.289b89c6.js"><link rel="prefetch" href="/whistle/assets/js/64.3d311a31.js"><link rel="prefetch" href="/whistle/assets/js/65.497be64f.js"><link rel="prefetch" href="/whistle/assets/js/66.91f1d53c.js"><link rel="prefetch" href="/whistle/assets/js/67.df5562a9.js"><link rel="prefetch" href="/whistle/assets/js/68.a0ef3fb8.js"><link rel="prefetch" href="/whistle/assets/js/69.f7377bde.js"><link rel="prefetch" href="/whistle/assets/js/7.65818d2e.js"><link rel="prefetch" href="/whistle/assets/js/70.e2c50de8.js"><link rel="prefetch" href="/whistle/assets/js/71.0d77b6b1.js"><link rel="prefetch" href="/whistle/assets/js/72.44c83251.js"><link rel="prefetch" href="/whistle/assets/js/73.1a7b8007.js"><link rel="prefetch" href="/whistle/assets/js/74.bc331b32.js"><link rel="prefetch" href="/whistle/assets/js/75.7628cab6.js"><link rel="prefetch" href="/whistle/assets/js/76.144a2aab.js"><link rel="prefetch" href="/whistle/assets/js/77.bd3d9092.js"><link rel="prefetch" href="/whistle/assets/js/78.6f06e89e.js"><link rel="prefetch" href="/whistle/assets/js/79.b5cc874d.js"><link rel="prefetch" href="/whistle/assets/js/8.f7c9d158.js"><link rel="prefetch" href="/whistle/assets/js/80.8725a0cf.js"><link rel="prefetch" href="/whistle/assets/js/81.bc083770.js"><link rel="prefetch" href="/whistle/assets/js/82.93c44050.js"><link rel="prefetch" href="/whistle/assets/js/83.de36a387.js"><link rel="prefetch" href="/whistle/assets/js/84.f7e48c4e.js"><link rel="prefetch" href="/whistle/assets/js/85.58ec196f.js"><link rel="prefetch" href="/whistle/assets/js/86.9dee754a.js"><link rel="prefetch" href="/whistle/assets/js/87.c3a19168.js"><link rel="prefetch" href="/whistle/assets/js/88.b0888120.js"><link rel="prefetch" href="/whistle/assets/js/89.2ac99c64.js"><link rel="prefetch" href="/whistle/assets/js/9.2a7508b2.js"><link rel="prefetch" href="/whistle/assets/js/90.49932208.js"><link rel="prefetch" href="/whistle/assets/js/91.8c2de1f6.js"><link rel="prefetch" href="/whistle/assets/js/92.1ce4cbc0.js"><link rel="prefetch" href="/whistle/assets/js/93.15b88173.js"><link rel="prefetch" href="/whistle/assets/js/94.b91ccb62.js"><link rel="prefetch" href="/whistle/assets/js/95.74ebc95e.js"><link rel="prefetch" href="/whistle/assets/js/96.b5e01145.js"><link rel="prefetch" href="/whistle/assets/js/97.c62544f3.js"><link rel="prefetch" href="/whistle/assets/js/98.ffe218d7.js"><link rel="prefetch" href="/whistle/assets/js/99.ceb46fe4.js">
+    <link rel="stylesheet" href="/whistle/assets/css/0.styles.27a793f2.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container" data-v-dad8a512><div data-v-dad8a512><div id="loader-wrapper" class="loading-wrapper" data-v-d48f4d20 data-v-dad8a512 data-v-dad8a512><div class="loader-main" data-v-d48f4d20><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div></div> <!----> <!----></div> <div class="password-shadow password-wrapper-out" style="display:none;" data-v-64685f0e data-v-dad8a512 data-v-dad8a512><h3 class="title" style="display:none;" data-v-64685f0e data-v-64685f0e>林秃秃</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-64685f0e data-v-64685f0e><input type="password" value="" data-v-64685f0e> <span data-v-64685f0e>Konck! Knock!</span> <button data-v-64685f0e>OK</button></label> <div class="footer" style="display:none;" data-v-64685f0e data-v-64685f0e><span data-v-64685f0e><i class="iconfont reco-theme" data-v-64685f0e></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-64685f0e>vuePress-theme-reco</a></span> <span data-v-64685f0e><i class="iconfont reco-copyright" data-v-64685f0e></i> <a data-v-64685f0e><span data-v-64685f0e>林秃秃</span>
+            
+          <!---->
+          2022
+        </a></span></div></div> <div class="hide" data-v-dad8a512><header class="navbar" data-v-dad8a512><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/whistle/" class="home-link router-link-active"><img src="/whistle/logo.svg" alt="林秃秃" class="logo"> <span class="site-name">林秃秃</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/whistle/" class="nav-link"><i class="iconfont reco-eye"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/whistle/categories/algorithm/" class="nav-link"><i class="iconfont undefined"></i>
+  algorithm
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/数据结构/" class="nav-link"><i class="iconfont undefined"></i>
+  数据结构
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/基础/" class="nav-link"><i class="iconfont undefined"></i>
+  基础
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/MySQL/" class="nav-link"><i class="iconfont undefined"></i>
+  MySQL
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/redis/" class="nav-link"><i class="iconfont undefined"></i>
+  redis
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/操作系统/" class="nav-link"><i class="iconfont undefined"></i>
+  操作系统
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/java/" class="nav-link"><i class="iconfont undefined"></i>
+  java
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/多线程/" class="nav-link"><i class="iconfont undefined"></i>
+  多线程
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/中间件/" class="nav-link"><i class="iconfont undefined"></i>
+  中间件
+</a></li></ul></div></div><div class="nav-item"><a href="/whistle/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/whistle/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间线
+</a></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-dad8a512></div> <aside class="sidebar" data-v-dad8a512><div class="personal-info-wrapper" data-v-ca798c94 data-v-dad8a512><img src="/whistle/avatar.png" alt="author-avatar" class="personal-img" data-v-ca798c94> <h3 class="name" data-v-ca798c94>
+    林秃秃
+  </h3> <div class="num" data-v-ca798c94><div data-v-ca798c94><h3 data-v-ca798c94>90</h3> <h6 data-v-ca798c94>文章</h6></div> <div data-v-ca798c94><h3 data-v-ca798c94>12</h3> <h6 data-v-ca798c94>标签</h6></div></div> <hr data-v-ca798c94></div> <nav class="nav-links"><div class="nav-item"><a href="/whistle/" class="nav-link"><i class="iconfont reco-eye"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/whistle/categories/algorithm/" class="nav-link"><i class="iconfont undefined"></i>
+  algorithm
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/数据结构/" class="nav-link"><i class="iconfont undefined"></i>
+  数据结构
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/基础/" class="nav-link"><i class="iconfont undefined"></i>
+  基础
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/MySQL/" class="nav-link"><i class="iconfont undefined"></i>
+  MySQL
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/redis/" class="nav-link"><i class="iconfont undefined"></i>
+  redis
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/操作系统/" class="nav-link"><i class="iconfont undefined"></i>
+  操作系统
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/java/" class="nav-link"><i class="iconfont undefined"></i>
+  java
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/多线程/" class="nav-link"><i class="iconfont undefined"></i>
+  多线程
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/中间件/" class="nav-link"><i class="iconfont undefined"></i>
+  中间件
+</a></li></ul></div></div><div class="nav-item"><a href="/whistle/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/whistle/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间线
+</a></div> <!----></nav> <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><a href="/whistle/foundation/" class="sidebar-heading clickable router-link-active open"><span>基础</span> <span class="arrow down"></span></a> <ul class="sidebar-links sidebar-group-items"><li><section class="sidebar-group collapsable is-sub-group depth-1"><a href="/whistle/foundation/system/" class="sidebar-heading clickable"><span>操作系统</span> <span class="arrow right"></span></a> <!----></section></li><li><section class="sidebar-group collapsable is-sub-group depth-1"><a href="/whistle/foundation/mysql/" class="sidebar-heading clickable"><span>MySQL</span> <span class="arrow right"></span></a> <!----></section></li><li><section class="sidebar-group collapsable is-sub-group depth-1"><a href="/whistle/foundation/redis/" class="sidebar-heading clickable router-link-active open"><span>Redis</span> <span class="arrow down"></span></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/whistle/foundation/redis/datatype.html" aria-current="page" class="active sidebar-link">数据类型</a></li><li><a href="/whistle/foundation/redis/command.html" class="sidebar-link">通用指令</a></li><li><a href="/whistle/foundation/redis/lettuce.html" class="sidebar-link">Lettuce</a></li><li><a href="/whistle/foundation/redis/rdbaof.html" class="sidebar-link">持久化</a></li><li><a href="/whistle/foundation/redis/transaction.html" class="sidebar-link">事务</a></li><li><a href="/whistle/foundation/redis/expire.html" class="sidebar-link">过期策略</a></li><li><a href="/whistle/foundation/redis/seniordata.html" class="sidebar-link">高级数据类型</a></li><li><a href="/whistle/foundation/redis/replication.html" class="sidebar-link">主从复制</a></li><li><a href="/whistle/foundation/redis/sentinel.html" class="sidebar-link">哨兵</a></li><li><a href="/whistle/foundation/redis/cluster.html" class="sidebar-link">集群</a></li><li><a href="/whistle/foundation/redis/solution.html" class="sidebar-link">解决方案</a></li></ul></section></li><li><a href="/whistle/foundation/designpattern/" class="sidebar-link">设计模式</a></li><li><a href="/whistle/foundation/bitewise.html" class="sidebar-link">位运算</a></li><li><a href="/whistle/foundation/git.html" class="sidebar-link">Git</a></li><li><a href="/whistle/foundation/markdown.html" class="sidebar-link">Markdown</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><a href="/whistle/java/" class="sidebar-heading clickable"><span>JAVA</span> <span class="arrow right"></span></a> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><a href="/whistle/middle/" class="sidebar-heading clickable"><span>中间件</span> <span class="arrow right"></span></a> <!----></section></li></ul> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-64685f0e data-v-dad8a512><h3 class="title" style="display:none;" data-v-64685f0e data-v-64685f0e>Redis系列一 数据类型</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-64685f0e data-v-64685f0e><input type="password" value="" data-v-64685f0e> <span data-v-64685f0e>Konck! Knock!</span> <button data-v-64685f0e>OK</button></label> <div class="footer" style="display:none;" data-v-64685f0e data-v-64685f0e><span data-v-64685f0e><i class="iconfont reco-theme" data-v-64685f0e></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-64685f0e>vuePress-theme-reco</a></span> <span data-v-64685f0e><i class="iconfont reco-copyright" data-v-64685f0e></i> <a data-v-64685f0e><span data-v-64685f0e>林秃秃</span>
+            
+          <!---->
+          2022
+        </a></span></div></div> <div data-v-dad8a512><main class="page"><div class="page-title" style="display:none;"><h1>Redis系列一 数据类型</h1> <div data-v-3b7f5bdf><i class="iconfont reco-account" data-v-3b7f5bdf><span data-v-3b7f5bdf>林秃秃</span></i> <i class="iconfont reco-date" data-v-3b7f5bdf><span data-v-3b7f5bdf>2020-11-08</span></i> <!----> <i class="iconfont reco-tag tags" data-v-3b7f5bdf><span class="tag-item" data-v-3b7f5bdf>redis</span></i></div></div> <div class="theme-reco-content content__default" style="display:none;"><h2 id="前言"><a href="#前言" class="header-anchor">#</a> 前言</h2> <p>Redis支持五种数据类型：string（字符串），hash（哈希），list（列表），set（集合）及zset(sorted set：有序集合)。</p> <p>官方文档<a href="https://redis.io/commands" target="_blank" rel="noopener noreferrer">redis<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <h2 id="一、string"><a href="#一、string" class="header-anchor">#</a> 一、String</h2> <p>string 是 redis 最基本的类型，你可以理解成与 Memcached 一模一样的类型，一个 key 对应一个 value。
+string 类型是二进制安全的。意思是 redis 的 string 可以包含任何数据。比如jpg图片或者序列化的对象。
+string 类型是 Redis 最基本的数据类型，string 类型的值最大能存储 <strong>512MB</strong>。</p> <h3 id="基本操作"><a href="#基本操作" class="header-anchor">#</a> 基本操作</h3> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token operator">&gt;</span> <span class="token builtin class-name">set</span> a <span class="token number">1000</span> <span class="token comment">#设值</span>
+OK
+<span class="token operator">&gt;</span> get a <span class="token comment">#获取值</span>
+<span class="token number">1000</span>
+<span class="token operator">&gt;</span> mset b <span class="token number">2000</span> c <span class="token number">3000</span> d <span class="token number">4000</span> <span class="token comment">#多指令设置</span>
+OK
+<span class="token operator">&gt;</span> mget a b c d <span class="token comment">#多指令获取</span>
+<span class="token number">1000</span>
+<span class="token number">2000</span>
+<span class="token number">3000</span>
+<span class="token number">4000</span>
+<span class="token operator">&gt;</span> strlen a <span class="token comment">#string长度</span>
+<span class="token number">4</span>
+<span class="token operator">&gt;</span> append a <span class="token number">3000</span> <span class="token comment">#尾部追加</span>
+<span class="token number">8</span>
+<span class="token operator">&gt;</span> get a
+<span class="token number">10003000</span>
+</code></pre></div><p>由上面可以看出，string最常用的基本操作有<code>set、get、mset、mget、strlen、append</code></p> <div class="custom-block tip"><p>mset与set、mget与get，这两种，一种mget(multiple) 表示多指令操作，另外一种表示单指令操作，如果使用方式可能的话尽量使用多指令操作，减少网络IO与降低Redis负载</p></div> <h3 id="拓展操作"><a href="#拓展操作" class="header-anchor">#</a> 拓展操作</h3> <ol><li>在大型企业级应用中，分表操作是基本操作，使用多张表存储同一类型数据，但是对应的主键id必须保证统一性，不能重复。Oracle数据库具有sequence设定，可以解决该问题，但是MySQL数据库并不具有类似机制。
+这时候就可以使用String的设置数值操作</li></ol> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token operator">&gt;</span> incr <span class="token function">id</span> <span class="token comment">#自增1</span>
+<span class="token number">1</span>
+<span class="token operator">&gt;</span> incr <span class="token function">id</span>
+<span class="token number">2</span>
+<span class="token operator">&gt;</span> incr <span class="token function">id</span>
+<span class="token number">3</span>
+<span class="token operator">&gt;</span> incrby <span class="token function">id</span> <span class="token number">5</span> <span class="token comment">#自增5</span>
+<span class="token number">8</span>
+<span class="token operator">&gt;</span> incrby <span class="token function">id</span> <span class="token number">5</span>
+<span class="token number">13</span>
+<span class="token operator">&gt;</span> incrbyfloat <span class="token function">id</span> <span class="token number">5.3</span> <span class="token comment">#自增5.3</span>
+<span class="token number">18.3</span>
+<span class="token operator">&gt;</span> incrbyfloat <span class="token function">id</span> <span class="token number">5.3</span>
+<span class="token number">23.6</span>
+
+</code></pre></div><p><code>incr 、incrby、 incrbyfloat</code>等，当然，也可以减少指定范围的值</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token operator">&gt;</span> decr <span class="token function">id</span> <span class="token comment">#自减1</span>
+<span class="token number">1</span>
+<span class="token operator">&gt;</span> decrby <span class="token function">id</span> <span class="token number">5</span> <span class="token comment">#自增5</span>
+-4
+</code></pre></div><p><code>decr 、decrby</code> 如果key的值不是数字的话，增加和减少操作会报错</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token operator">&gt;</span> <span class="token builtin class-name">set</span> a 13dff
+OK
+<span class="token operator">&gt;</span> incr a
+ERR value is not an integer or out of range
+</code></pre></div><hr> <ol start="2"><li>在很多时候我们的应用需要对接外部的比如微信或者其他系统，这个时候就会用到他们系统给的token，但这个token是有时效的，比如两个小时过期，这时候就可以用到我们的redis的设置key过期时间</li></ol> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token operator">&gt;</span> setex a <span class="token number">3000</span> helloexpire <span class="token comment">#设置键的过期时间，单位为秒</span>
+OK
+<span class="token operator">&gt;</span> get a
+helloexpire
+<span class="token operator">&gt;</span> ttl a <span class="token comment">#获取键的过期时间</span>
+<span class="token number">2956</span>
+<span class="token operator">&gt;</span> ttl a
+<span class="token number">2953</span>
+<span class="token operator">&gt;</span> expire a <span class="token number">60</span> <span class="token comment">#设置键的过期时间 单位秒</span>
+<span class="token number">1</span>
+<span class="token operator">&gt;</span> ttl a
+<span class="token number">57</span>
+</code></pre></div><p>有两种方式设置key的过期时间<code>setex、expire</code>,使用<code>ttl</code>查看键的过期时间。</p> <div class="custom-block tip"><p>表示运行结果是否成功
+0-&gt;false 失败
+1-&gt;true 成功</p> <p>key的设置约定
+通常使用   表名:主键名:主键值:字段名 如：order: id :341341234:name</p></div> <table><thead><tr><th>命令</th> <th>描述</th></tr></thead> <tbody><tr><td>SET key value</td> <td>设置指定 key 的值</td></tr> <tr><td>GET key</td> <td>获取指定 key 的值。</td></tr> <tr><td>GETRANGE key start end</td> <td>返回 key 中字符串值的子字符</td></tr> <tr><td>GETSET key value</td> <td>将给定 key 的值设为 value ，并返回 key 的旧值(old value)。</td></tr> <tr><td>GETBIT key offset</td> <td>对 key 所储存的字符串值，获取指定偏移量上的位(bit)。</td></tr> <tr><td>MGET key1 [key2..]</td> <td>获取所有(一个或多个)给定 key 的值。</td></tr> <tr><td>SETBIT key offset value</td> <td>对 key 所储存的字符串值，设置或清除指定偏移量上的位(bit)。</td></tr> <tr><td>SETEX key seconds value</td> <td>将值 value 关联到 key ，并将 key 的过期时间设为 seconds (以秒为单位)。</td></tr> <tr><td>SETNX key value</td> <td>只有在 key 不存在时设置 key 的值。</td></tr> <tr><td>SETRANGE key offset value</td> <td>用 value 参数覆写给定 key 所储存的字符串值，从偏移量 offset 开始。</td></tr> <tr><td>STRLEN key</td> <td>返回 key 所储存的字符串值的长度。</td></tr> <tr><td>MSET key value [key value ...]</td> <td>同时设置一个或多个 key-value 对。</td></tr> <tr><td>MSETNX key value [key value ...]</td> <td>同时设置一个或多个 key-value 对，当且仅当所有给定 key 都不存在。</td></tr> <tr><td>PSETEX key milliseconds value</td> <td>这个命令和 SETEX 命令相似，但它以毫秒为单位设置 key 的生存时间，而不是像 SETEX 命令那样，以秒为单位。</td></tr> <tr><td>INCR key</td> <td>将 key 中储存的数字值增一。</td></tr> <tr><td>INCRBY key increment</td> <td>将 key 所储存的值加上给定的增量值（increment） 。</td></tr> <tr><td>INCRBYFLOAT key increment</td> <td>将 key 所储存的值加上给定的浮点增量值（increment） 。</td></tr> <tr><td>DECR key</td> <td>将 key 中储存的数字值减一。</td></tr> <tr><td>DECRBY key decrement</td> <td>key 所储存的值减去给定的减量值（decrement） 。</td></tr> <tr><td>APPEND key value</td> <td>如果 key 已经存在并且是一个字符串， APPEND 命令将指定的 value 追加到该 key 原来值（value）的末尾。</td></tr></tbody></table> <h2 id="二、hash"><a href="#二、hash" class="header-anchor">#</a> 二、Hash</h2> <p>Redis hash 是一个 string 类型的 field（字段） 和 value（值） 的映射表，hash 特别适合用于存储对象。
+Redis hash对一系列的数据进行编组，方便管理，一个储存控件保存多个键值对数据</p> <h3 id="基本操作-2"><a href="#基本操作-2" class="header-anchor">#</a> 基本操作</h3> <p>hash的基本操作和string类似</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token operator">&gt;</span> hset user name 张三 age <span class="token number">12</span> nickname pig phone <span class="token number">10086</span> <span class="token comment">#添加、修改数据</span>
+<span class="token number">4</span>
+<span class="token operator">&gt;</span> hget user name <span class="token comment">#获取数据某字段</span>
+张三
+<span class="token operator">&gt;</span> hgetall user <span class="token comment">#获取数据所有字段</span>
+name
+张三
+age
+<span class="token number">12</span>
+nickname
+pig
+phone
+<span class="token number">10086</span>
+<span class="token operator">&gt;</span> hdel user nickname <span class="token comment">#删除数据某个字段</span>
+<span class="token number">1</span>
+<span class="token operator">&gt;</span> hgetall user 
+name
+张三
+age
+<span class="token number">12</span>
+phone
+<span class="token number">10086</span>
+<span class="token operator">&gt;</span> hmset user name 李四 age <span class="token number">16</span> phone <span class="token number">10001</span> nickname dog <span class="token comment">#添加修改多个数据</span>
+OK
+<span class="token operator">&gt;</span> hmget user name age <span class="token comment">#获取多个数据</span>
+李四
+<span class="token number">16</span>
+<span class="token operator">&gt;</span> hlen user <span class="token comment">#获取哈希表中字段的数量</span>
+<span class="token number">4</span>
+<span class="token operator">&gt;</span> hexists user name <span class="token comment">#获取哈希表中是否存在指定的字段</span>
+<span class="token number">1</span>
+<span class="token operator">&gt;</span> hexists user password 
+<span class="token number">0</span>
+<span class="token operator">&gt;</span> hkeys user <span class="token comment">#获取哈希表中所有字段名</span>
+name
+age
+phone
+nickname
+<span class="token operator">&gt;</span> hvals user <span class="token comment">#获取哈希表中所有字段值</span>
+李四
+<span class="token number">16</span>
+<span class="token number">10001</span>
+dog
+<span class="token operator">&gt;</span> hincrby user age <span class="token number">1</span> <span class="token comment">#设置指定字段数字自增或增加指定范围的值</span>
+<span class="token number">17</span>
+<span class="token operator">&gt;</span> hincrbyfloat user age <span class="token number">2.5</span> <span class="token comment">#设置指定字段数字自增或增加指定范围的值</span>
+<span class="token number">19.5</span>
+
+</code></pre></div><div class="custom-block warning"><ul><li>hash类型下的value只能存储字符串，不允许存储其他数据类型，不存在嵌套现象。如果数据未获取到，对应的值未空(nil)</li> <li>每个hash可以存储2^32-1个键值对</li> <li>hash类型十分贴切对象的数据存储形式，并且可以灵活添加删除对象属性。但是hsah设计初衷不是为了存储大量对象而设计的，切记不可滥用，更不可以将hash作为对象列表使用</li> <li>hgetall 操作可以获取全部属性，但是如果内部field过多，便利整体数据效率就会很低，有可能成为数据访问瓶颈</li></ul></div> <h3 id="拓展操作-2"><a href="#拓展操作-2" class="header-anchor">#</a> 拓展操作</h3> <p>电商网站购物车设计与实现，为什么可以使用hash呢？我们分析一下，一个购物车页面可以存在多种物品，但是每个用户的购物车里面的东西是不一样的，所以可以将用户id作为key，将购物车每个物品的id作为field，那么field值就商品数量，这样就能很巧妙的使用hash。
+比如，当用户增加或减少购买某物品数量，那么就可以使用 <code>hincrby</code>指令,获取某个物品数量使用<code>hget</code>操作，删除物品可以使用<code>hdel</code>，全选可以使用<code>hgetall</code>操作，物品类别总量可以使用<code>hlen</code>操作</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token operator">&gt;</span> hset 0002 g1 <span class="token number">1</span> g2 <span class="token number">3</span> g5 <span class="token number">1</span> g6 <span class="token number">2</span>
+<span class="token number">4</span>
+<span class="token operator">&gt;</span> hincrby 0002 g1 <span class="token number">1</span>
+<span class="token number">2</span>
+<span class="token operator">&gt;</span> hdel 0002 g2
+<span class="token number">1</span>
+<span class="token operator">&gt;</span> hgetall 0002
+g1
+<span class="token number">2</span>
+g5
+<span class="token number">1</span>
+g6
+<span class="token number">2</span>
+</code></pre></div><p>但是存在问题是字段只有id的话还是要到数据库去查询这些数据，那用不用redis并没有太大区别</p> <p>这时候我们可以将购物车中每个物品的记录保存成两条数据</p> <ul><li>物品id:nums 保存购买数量</li> <li>物品id：info 保存购物车中显示的信息（文字描述、图片、价格等）格式为json格式</li></ul> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token operator">&gt;</span> hset 001 g2:nums <span class="token number">3</span> g2:info <span class="token punctuation">{</span>text,address,info<span class="token punctuation">}</span>
+<span class="token number">2</span>
+<span class="token operator">&gt;</span> hgetall 001
+g2:nums
+<span class="token number">3</span>
+g2:info
+<span class="token punctuation">{</span>text,address,info<span class="token punctuation">}</span>
+</code></pre></div><p>但是这样又会出现问题，当别的用户购买一样的物品，那么存储的物品信息就冗余了，造成空间浪费，那么其实我们就可以将物品信息保存一个hash</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token operator">&gt;</span> hset g2 text 高贵优雅耗子尾汁 address http://www.baidu.com info <span class="token number">69</span>岁老同志旗舰店
+<span class="token number">3</span>
+<span class="token operator">&gt;</span> hgetall g2
+text
+高贵优雅耗子尾汁
+address
+http://www.baidu.com
+info
+<span class="token number">69</span>岁老同志旗舰店
+<span class="token operator">&gt;</span> hset 01 g2 <span class="token number">1</span> g3 <span class="token number">1</span> g5 <span class="token number">1</span>
+<span class="token number">3</span>
+<span class="token operator">&gt;</span> hgetall 01
+g2
+<span class="token number">1</span>
+g3
+<span class="token number">1</span>
+g5
+<span class="token number">1</span>
+</code></pre></div><p>特别注意<code>hsetnx key field value</code> 当field不存在时，才能设置该值，如果存在field并且有值时，将会设置失败。</p> <ol start="2"><li>第二种情况时商家推出某些物品抢购，数量有限的情况比如apple旗舰店推出三款手机iphone11售100台每台20元，iphone12售50台每台21元，iphone13售20台每台22元
+这时候就可以存储appleid作为key，物品id作为field，还有多少台作为field值</li></ol> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token operator">&gt;</span> hset apple iphone11 <span class="token number">100</span> iphone12 <span class="token number">50</span> iphone <span class="token number">20</span>
+<span class="token number">3</span>
+<span class="token operator">&gt;</span> hincrby apple iphone11 -1
+<span class="token number">99</span>
+</code></pre></div><p>但是实际过程中可能会出现超卖的问题，这里不做讨论，将在后面继续</p> <table><thead><tr><th>命令</th> <th>描述</th></tr></thead> <tbody><tr><td>HDEL key field1 [field2]</td> <td>删除一个或多个哈希表字段</td></tr> <tr><td>HEXISTS key field</td> <td>查看哈希表 key 中，指定的字段是否存在。</td></tr> <tr><td>HGET key field</td> <td>获取存储在哈希表中指定字段的值。</td></tr> <tr><td>HGETALL key</td> <td>获取在哈希表中指定 key 的所有字段和值</td></tr> <tr><td>HINCRBY key field increment</td> <td>为哈希表 key 中的指定字段的整数值加上增量 increment 。</td></tr> <tr><td>HINCRBYFLOAT key field increment</td> <td>为哈希表 key 中的指定字段的浮点数值加上增量 increment 。</td></tr> <tr><td>HKEYS key</td> <td>获取所有哈希表中的字段</td></tr> <tr><td>HLEN key</td> <td>获取哈希表中字段的数量</td></tr> <tr><td>HMGET key field1 [field2]</td> <td>获取所有给定字段的值</td></tr> <tr><td>HMSET key field1 value1 [field2 value2 ]</td> <td>同时将多个 field-value (域-值)对设置到哈希表 key 中。</td></tr> <tr><td>HSET key field value</td> <td>将哈希表 key 中的字段 field 的值设为 value 。</td></tr> <tr><td>HSETNX key field value</td> <td>只有在字段 field 不存在时，设置哈希表字段的值。</td></tr> <tr><td>HVALS key</td> <td>获取哈希表中所有值。</td></tr> <tr><td>HSCAN key cursor [MATCH pattern] [COUNT count]</td> <td>迭代哈希表中的键值对。</td></tr></tbody></table> <h2 id="三、list"><a href="#三、list" class="header-anchor">#</a> 三、List</h2> <p>Redis列表是简单的字符串列表，按照插入顺序排序。你可以添加一个元素到列表的头部（左边）或者尾部（右边）
+底层使用双向链表存储结构实现</p> <h3 id="基本操作-3"><a href="#基本操作-3" class="header-anchor">#</a> 基本操作</h3> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token operator">&gt;</span> lpush list1 <span class="token number">20</span> <span class="token number">30</span> <span class="token number">40</span>  <span class="token comment">#左进</span>
+<span class="token number">3</span>
+<span class="token operator">&gt;</span> llen list1
+<span class="token number">3</span>
+<span class="token operator">&gt;</span> rpush list1 <span class="token number">50</span> <span class="token number">60</span> <span class="token comment">#右进</span>
+<span class="token number">5</span>
+<span class="token operator">&gt;</span> lrange list1 <span class="token number">0</span> -1 <span class="token comment">#查看所有元素</span>
+<span class="token number">40</span>
+<span class="token number">30</span>
+<span class="token number">20</span>
+<span class="token number">50</span>
+<span class="token number">60</span>
+<span class="token operator">&gt;</span> lindex list1 <span class="token number">2</span> <span class="token comment">#查找list第二个元素的值</span>
+<span class="token number">20</span>
+<span class="token operator">&gt;</span> lpop list1 <span class="token comment">#左出</span>
+<span class="token number">40</span>
+<span class="token operator">&gt;</span> rpop list1 <span class="token comment">#右出</span>
+<span class="token number">60</span>
+</code></pre></div><p>由于list是一个双向链表，所以在左边push时，那么它的链表形式就会如下所示</p> <center><p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAf8AAAA9CAYAAACjpmC1AAAEKHRFWHRteGZpbGUAJTNDbXhmaWxlJTIwbW9kaWZpZWQlM0QlMjIyMDIwLTExLTEzVDA3JTNBMjklM0E0My4yMzZaJTIyJTIwaG9zdCUzRCUyMmh1YXR1Ljk4eW91eGkuY29tJTIyJTIwYWdlbnQlM0QlMjJNb3ppbGxhJTJGNS4wJTIwKFdpbmRvd3MlMjBOVCUyMDEwLjAlM0IlMjBXaW42NCUzQiUyMHg2NCklMjBBcHBsZVdlYktpdCUyRjUzNy4zNiUyMChLSFRNTCUyQyUyMGxpa2UlMjBHZWNrbyklMjBDaHJvbWUlMkY4Ni4wLjQyNDAuMTkzJTIwU2FmYXJpJTJGNTM3LjM2JTIyJTIwZXRhZyUzRCUyMmF1NTVKQlpjd0NCSk1oaWw3ejU1JTIyJTIwdmVyc2lvbiUzRCUyMjExLjEuNCUyMiUyMHR5cGUlM0QlMjJvbmxpbmUlMjIlM0UlM0NkaWFncmFtJTIwaWQlM0QlMjI3QVhqUFl6UF9tTWRxTzFlcGx5dSUyMiUyMG5hbWUlM0QlMjIlRTclQUMlQUMlMjAxJTIwJUU5JUExJUI1JTIyJTNFM1pYQlRvUXdFSWFmaHF1QkZsaTl1cnZxUVU5N1VJOE5IUUZUR05JdEMlMkZqMGxtVllJQ3lKaWJvbUpoeVliNmJ0ek0lMkZmNFBCMVZ0OXJVU1JQS0VFNXpKVzF3emNPWTU3UG1OTSUyQnJtdzZzZ3I5RHNRNmxWUTBnRjM2QVFSZG9tVXFZVDhwTklqS3BNVVVScGpuRUprSkUxcGpOUzE3UXpVOXRSQXh6TUF1RW1wT24xTnBrbzVlczlYQUh5Q05rJTJGNWtMN3pwTXBub2kybVNmU0lrVmlQRXR3NWZhMFRUdldYMUdsUXJYcTlMdCUyQjV1SVh0cVRFTnV2cklnb0RaTTA4OEcwbzVLSVdxVFlJeTVVTnVCM21vc2N3bnRCcTZOaHBwSHhNSkN6OEozTUthaDd5WktneFlsSmxPVXRiM3A1b1hXSDRQWE5yZ0slMkJuQlRqNU9iaHFLdTE3YkJ4V2tKN2JIVUVWV1IxNHpRTVZBVlB5bHRMUXFZZ1QzRmxtaFF3cVNINmU2Q3ZCS2Y2Z1k1N1FzcGVsNWRPdm9n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" alt="Lpush"></p></center> <p>所以在lrange的时候就以顺序读编程40-30-20。特别的，想要查看list所有数据使用<code>lrange key 0 -1</code>类似python的数组获取</p> <h3 id="拓展操作-3"><a href="#拓展操作-3" class="header-anchor">#</a> 拓展操作</h3> <ol><li>实现朋友圈点赞功能，朋友圈在日常生活中接触很多，一个朋友的朋友圈点赞和取消点赞也是常见的操作，如果使用redis实现的话，用list是不错的一种选择，
+首先，将用户的id作为key，点赞的用户id做为list的值，那用什么杨的方式push进去呢？点赞是有顺序的，按照比较舒服的思路，使用rpush比较容易懂。</li></ol> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token operator">&gt;</span> rpush lbwnb <span class="token number">101</span> pdd dsm 002 005 008
+<span class="token number">6</span>
+<span class="token operator">&gt;</span> lrange lbwnb <span class="token number">0</span> -1
+<span class="token number">101</span>
+pdd
+dsm
+002
+005
+008
+<span class="token operator">&gt;</span> rpop lbwnb
+008
+<span class="token operator">&gt;</span> rpush lbwnb 008
+<span class="token number">6</span>
+<span class="token operator">&gt;</span> lrange lbwnb <span class="token number">0</span> -1
+<span class="token number">101</span>
+pdd
+dsm
+002
+005
+008
+<span class="token operator">&gt;</span> lpop lbwnb
+<span class="token number">101</span>
+<span class="token operator">&gt;</span> lrem lbwnb <span class="token number">1</span> 005
+<span class="token number">1</span>
+<span class="token operator">&gt;</span> lrange lbwnb <span class="token number">0</span> -1
+pdd
+dsm
+002
+008
+
+</code></pre></div><p>如果是list第一个元素和最后一个元素可以使用lpop和rpop，但是如果删除list中某个元素，那么就需要使用lrem命令。</p> <ol start="2"><li>实现微博关注列表，关注列表是从最近关注的往下显示的，那么可以使用list的lpush和lrange配合，使用用户id作为key，关注用户的id作为list元素</li></ol> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token operator">&gt;</span> lpush 0002 0001 0003 0004 006
+<span class="token number">4</span>
+<span class="token operator">&gt;</span> lrange 0002 <span class="token number">0</span> -1
+006
+0004
+0003
+0001
+</code></pre></div><p>这种实现还是比较简易的真正实现还有其他问题。</p> <div class="custom-block warning"><p class="custom-block-title">注意事项</p> <ul><li>list中保存的数据都是string类型的，数组总容量是有限的。</li> <li>list具有索引的概念，但是操作数据时通常以队列的形式入队出队，或者以栈的形式入栈出栈操作</li> <li>获取全部数据操作结局索引设置为-1 <code>lrange key 0 -1</code></li> <li>list可以对数据进行分页操作，通常第一页信息来自于list，第2页及更多信息通过数据库形式加载</li></ul></div> <table><thead><tr><th>命令</th> <th>描述</th></tr></thead> <tbody><tr><td>BLPOP key1 [key2 ] timeout</td> <td>移出并获取列表的第一个元素， 如果列表没有元素会阻塞列表直到等待超时或发现可弹出元素为止。</td></tr> <tr><td>BRPOP key1 [key2 ] timeout</td> <td>移出并获取列表的最后一个元素， 如果列表没有元素会阻塞列表直到等待超时或发现可弹出元素为止。</td></tr> <tr><td>BRPOPLPUSH source destination timeout</td> <td>从列表中弹出一个值，将弹出的元素插入到另外一个列表中并返回它； 如果列表没有元素会阻塞列表直到等待超时或发现可弹出元素为止。</td></tr> <tr><td>LINDEX key index</td> <td>通过索引获取列表中的元素</td></tr> <tr><td>LINSERT key BEFORE</td> <td>AFTER pivot value</td></tr> <tr><td>LLEN key</td> <td>获取列表长度</td></tr> <tr><td>LPOP key</td> <td>移出并获取列表的第一个元素</td></tr> <tr><td>LPUSH key value1 [value2]</td> <td>将一个或多个值插入到列表头部</td></tr> <tr><td>LPUSHX key value</td> <td>将一个值插入到已存在的列表头部</td></tr> <tr><td>LRANGE key start stop</td> <td>获取列表指定范围内的元素</td></tr> <tr><td>LREM key count value</td> <td>移除列表元素</td></tr> <tr><td>LSET key index value</td> <td>通过索引设置列表元素的值</td></tr> <tr><td>LTRIM key start stop</td> <td>对一个列表进行修剪(trim)，就是说，让列表只保留指定区间内的元素，不在指定区间之内的元素都将被删除。</td></tr> <tr><td>RPOP key</td> <td>移除列表的最后一个元素，返回值为移除的元素。</td></tr> <tr><td>RPOPLPUSH source destination</td> <td>移除列表的最后一个元素，并将该元素添加到另一个列表并返回</td></tr> <tr><td>RPUSH key value1 [value2]</td> <td>在列表中添加一个或多个值</td></tr> <tr><td>RPUSHX key value</td> <td>为已存在的列表添加值</td></tr></tbody></table> <h2 id="四、set"><a href="#四、set" class="header-anchor">#</a> 四、Set</h2> <p>集合成员是唯一的，这就意味着集合中不能出现重复的数据。</p> <p>Redis 中集合是通过哈希表或者ziplist实现的，所以添加，删除，查找的复杂度都是 O(1)。</p> <h3 id="基本操作-4"><a href="#基本操作-4" class="header-anchor">#</a> 基本操作</h3> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token operator">&gt;</span> sadd set1 001 001 002 002 003 003 <span class="token comment">#添加数据，重复数据不会添加</span>
+<span class="token number">3</span>
+<span class="token operator">&gt;</span> smembers set1 <span class="token comment">#获取所有数据</span>
+003
+002
+001
+<span class="token operator">&gt;</span> srem set1 002 <span class="token comment">#删除数据</span>
+<span class="token number">1</span>
+<span class="token operator">&gt;</span> smembers set1
+003
+001
+</code></pre></div><h3 id="拓展操作-4"><a href="#拓展操作-4" class="header-anchor">#</a> 拓展操作</h3> <ol><li>在用户使用今日头条时会设置3个爱好的内容，但是后期为了增加用户的活跃度，兴趣点，增加用户的留存度。可以使用set获取推荐内容的随机几个数据</li></ol> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token operator">&gt;</span> smembers news
+<span class="token number">1</span>
+<span class="token number">2</span>
+<span class="token number">3</span>
+<span class="token number">4</span>
+<span class="token number">5</span>
+<span class="token number">6</span>
+<span class="token operator">&gt;</span> srandmember news <span class="token number">1</span> <span class="token comment">#取出随机一个数据</span>
+<span class="token number">6</span>
+<span class="token operator">&gt;</span> srandmember news <span class="token number">2</span> <span class="token comment">#取出随机两个数据</span>
+<span class="token number">6</span>
+<span class="token number">2</span>
+<span class="token operator">&gt;</span> spop news <span class="token comment">#取出随机一个数据并从集合中删除</span>
+<span class="token number">3</span>
+
+</code></pre></div><ol start="2"><li>求两个集合的交并差集，常用于qq共同好友，微博共同关注等。</li></ol> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token operator">&gt;</span> sadd news2 <span class="token number">2</span> <span class="token number">5</span> <span class="token number">9</span> 
+<span class="token number">3</span>
+<span class="token operator">&gt;</span> sinter news news2 <span class="token comment">#求交集</span>
+<span class="token number">2</span>
+<span class="token number">5</span>
+<span class="token operator">&gt;</span> sunion news news2 <span class="token comment">#求并集</span>
+<span class="token number">1</span>
+<span class="token number">2</span>
+<span class="token number">4</span>
+<span class="token number">5</span>
+<span class="token number">6</span>
+<span class="token number">9</span>
+<span class="token operator">&gt;</span> <span class="token function">sdiff</span> news news2 <span class="token comment">#求差集</span>
+<span class="token number">1</span>
+<span class="token number">4</span>
+<span class="token number">6</span>
+<span class="token operator">&gt;</span> sinterstore news1 news news2 <span class="token comment">#求交集并将结果存储到news1中</span>
+<span class="token number">2</span>
+<span class="token operator">&gt;</span> smembers news1
+<span class="token number">2</span>
+<span class="token number">5</span>
+<span class="token operator">&gt;</span> sunionstore news1 news news2 <span class="token comment">#求并集并将结果存储到news1中</span>
+<span class="token number">6</span>
+<span class="token operator">&gt;</span> smembers news1
+<span class="token number">1</span>
+<span class="token number">2</span>
+<span class="token number">4</span>
+<span class="token number">5</span>
+<span class="token number">6</span>
+<span class="token number">9</span>
+<span class="token operator">&gt;</span> sdiffstore news1 news news2 <span class="token comment">#求差集并将结果存储到news1中</span>
+<span class="token number">3</span>
+<span class="token operator">&gt;</span> smembers news1
+<span class="token number">1</span>
+<span class="token number">4</span>
+<span class="token number">6</span>
+<span class="token operator">&gt;</span> smove news1 news2 <span class="token number">1</span> <span class="token comment">#将指定数据1从集合news1中移动到news2中</span>
+<span class="token number">1</span>
+<span class="token operator">&gt;</span> smembers news2
+<span class="token number">1</span>
+<span class="token number">2</span>
+<span class="token number">5</span>
+<span class="token number">9</span>
+</code></pre></div><ol start="3"><li>公司对网站做推广，统计网站PV（访问量）、UV（独立访客）、IP（独立IP）</li></ol> <ul><li>PV：网站被访问次数，可通过刷新页面提高访问量</li> <li>UV:网站被不同用户访问次数，可通过cookie统计访问量，相同用户切换IP地址，UV不变</li> <li>IP：网站被不同IP地址访问的总次数，可通过访问IP地址统计量计算</li></ul> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token operator">&gt;</span> sadd ips <span class="token number">1.1</span>.1.1
+<span class="token number">1</span>
+<span class="token operator">&gt;</span> sadd ips <span class="token number">1.1</span>.1.2
+<span class="token number">1</span>
+<span class="token operator">&gt;</span> smembers ips
+<span class="token number">1.1</span>.1.2
+<span class="token number">1.1</span>.1.1
+</code></pre></div><p>:::wanring 注意事项</p> <ul><li>set类型不允许数据重复，如果添加的数据在set中已经存在，那么将只保留一份</li> <li>set虽然与hash的存储结构相同，但是无法启动hash中存储值空间
+:::
+命令|描述
+-|-
+SADD key member1 [member2]|向集合添加一个或多个成员
+SCARD key|获取集合的成员数
+SDIFF key1 [key2]|返回第一个集合与其他集合之间的差异。
+SDIFFSTORE destination key1 [key2]|返回给定所有集合的差集并存储在 destination 中
+SINTER key1 [key2]|返回给定所有集合的交集
+SINTERSTORE destination key1 [key2]|返回给定所有集合的交集并存储在 destination 中
+SISMEMBER key member|判断 member 元素是否是集合 key 的成员
+SMEMBERS key|返回集合中的所有成员
+SMOVE source destination member|将 member 元素从 source 集合移动到 destination 集合
+SPOP key|移除并返回集合中的一个随机元素
+SRANDMEMBER key [count]|返回集合中一个或多个随机数
+SREM key member1 [member2]|移除集合中一个或多个成员
+SUNION key1 [key2]|返回所有给定集合的并集
+SUNIONSTORE destination key1 [key2]|所有给定集合的并集存储在 destination 集合中
+SSCAN key cursor [MATCH pattern] [COUNT count]|迭代集合中的元素</li></ul> <h2 id="五、sortedset"><a href="#五、sortedset" class="header-anchor">#</a> 五、SortedSet</h2> <p>Redis 有序集合和集合一样也是 string 类型元素的集合,且不允许重复的成员。</p> <p>不同的是每个元素都会关联一个 double 类型的分数。redis 正是通过分数来为集合中的成员进行从小到大的排序。</p> <p>有序集合的成员是唯一的,但分数(score)却可以重复。</p> <p>集合是通过哈希表实现的，所以添加，删除，查找的复杂度都是 O(1)。 集合中最大的成员数为 232 - 1 (4294967295, 每个集合可存储40多亿个成员)。</p> <h3 id="基本操作-5"><a href="#基本操作-5" class="header-anchor">#</a> 基本操作</h3> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token operator">&gt;</span> zadd sset <span class="token number">1</span> redis <span class="token comment">#添加数据 数字为序列</span>
+<span class="token number">1</span>
+<span class="token operator">&gt;</span> zadd sset <span class="token number">1</span> mongodb
+<span class="token number">1</span>
+<span class="token operator">&gt;</span> zadd sset <span class="token number">2</span> mysql
+<span class="token number">1</span>
+<span class="token operator">&gt;</span> zadd sset <span class="token number">3</span> oracle
+<span class="token number">1</span>
+<span class="token operator">&gt;</span> zrange sset <span class="token number">0</span> <span class="token number">10</span> withscores <span class="token comment">#获取数据 包括序列</span>
+mongodb
+<span class="token number">1</span>
+redis
+<span class="token number">1</span>
+mysql
+<span class="token number">2</span>
+oracle
+<span class="token number">3</span>
+<span class="token operator">&gt;</span> zrange sset <span class="token number">0</span> <span class="token number">10</span> <span class="token comment">#获取数据 不包括序列</span>
+mongodb
+redis
+mysql
+oracle
+<span class="token operator">&gt;</span> zadd sset <span class="token number">2</span> mysql8
+<span class="token number">1</span>
+<span class="token operator">&gt;</span> zrange sset <span class="token number">0</span> <span class="token number">10</span>
+mongodb
+redis
+mysql
+mysql8
+oracle
+<span class="token operator">&gt;</span> zadd sset <span class="token number">3</span> mysql8 <span class="token comment">#当添加存在的数据时，序列不同会更新序列</span>
+<span class="token number">0</span>
+<span class="token operator">&gt;</span> zrange sset <span class="token number">0</span> <span class="token number">10</span>
+mongodb
+redis
+mysql
+mysql8
+oracle
+<span class="token operator">&gt;</span> zrange sset <span class="token number">0</span> <span class="token number">10</span> withscores
+mongodb
+<span class="token number">1</span>
+redis
+<span class="token number">1</span>
+mysql
+<span class="token number">2</span>
+mysql8
+<span class="token number">3</span>
+oracle
+<span class="token number">3</span>
+<span class="token operator">&gt;</span> zrangebyscore sset <span class="token number">1</span> <span class="token number">3</span> <span class="token comment">#按条件获取元素</span>
+mongodb
+redis
+mysql
+mysql8
+oracle
+<span class="token operator">&gt;</span> zremrangebyrank sset <span class="token number">0</span> <span class="token number">3</span>  <span class="token comment">#按下表区间删除数据</span>
+<span class="token number">4</span>
+<span class="token operator">&gt;</span> zrangebyscore sset <span class="token number">0</span> <span class="token number">10</span> 
+oracle
+<span class="token operator">&gt;</span> zadd sset <span class="token number">1</span> redis
+<span class="token number">1</span>
+<span class="token operator">&gt;</span> zremrangebyscore sset <span class="token number">1</span> <span class="token number">2</span> <span class="token comment">#按score删除数据</span>
+<span class="token number">1</span>
+<span class="token operator">&gt;</span> zrangebyscore sset <span class="token number">0</span> <span class="token number">10</span>
+oracle
+<span class="token operator">&gt;</span> zadd sset <span class="token number">2</span> mysql
+<span class="token number">1</span>
+<span class="token operator">&gt;</span> zadd sset <span class="token number">1</span> redis
+<span class="token number">1</span>
+<span class="token operator">&gt;</span> zcard sset <span class="token comment">#获取集合数据总个数</span>
+<span class="token number">3</span>
+<span class="token operator">&gt;</span> zrange sset <span class="token number">0</span> <span class="token number">10</span> withscores
+redis
+<span class="token number">1</span>
+mysql
+<span class="token number">2</span>
+oracle
+<span class="token number">3</span>
+<span class="token operator">&gt;</span> zcount sset <span class="token number">1</span> <span class="token number">2</span> <span class="token comment">#获取集合指定score范围的个数</span>
+<span class="token number">2</span>
+</code></pre></div><div class="custom-block danger"><p>当按score查找或者删除时用于限定查询条件，当按rank操作set时，作用于索引，表示开始、结束索引</p></div> <h3 id="拓展操作-5"><a href="#拓展操作-5" class="header-anchor">#</a> 拓展操作</h3> <table><thead><tr><th>命令</th> <th>描述</th></tr></thead> <tbody><tr><td>ZADD key score1 member1 [score2 member2]</td> <td>向有序集合添加一个或多个成员，或者更新已存在成员的分数</td></tr> <tr><td>ZCARD key</td> <td>获取有序集合的成员数</td></tr> <tr><td>ZCOUNT key min max</td> <td>计算在有序集合中指定区间分数的成员数</td></tr> <tr><td>ZINCRBY key increment member</td> <td>有序集合中对指定成员的分数加上增量 increment</td></tr> <tr><td>ZINTERSTORE destination numkeys key [key ...]</td> <td>计算给定的一个或多个有序集的交集并将结果集存储在新的有序集合 destination 中</td></tr> <tr><td>ZLEXCOUNT key min max</td> <td>在有序集合中计算指定字典区间内成员数量</td></tr> <tr><td>ZRANGE key start stop [WITHSCORES]</td> <td>通过索引区间返回有序集合指定区间内的成员</td></tr> <tr><td>ZRANGEBYLEX key min max [LIMIT offset count]</td> <td>通过字典区间返回有序集合的成员</td></tr> <tr><td>ZRANGEBYSCORE key min max [WITHSCORES] [LIMIT]</td> <td>通过分数返回有序集合指定区间内的成员</td></tr> <tr><td>ZRANK key member</td> <td>返回有序集合中指定成员的索引</td></tr> <tr><td>ZREM key member [member ...]</td> <td>移除有序集合中的一个或多个成员</td></tr> <tr><td>ZREMRANGEBYLEX key min max</td> <td>移除有序集合中给定的字典区间的所有成员</td></tr> <tr><td>ZREMRANGEBYRANK key start stop</td> <td>移除有序集合中给定的排名区间的所有成员</td></tr> <tr><td>ZREMRANGEBYSCORE key min max</td> <td>移除有序集合中给定的分数区间的所有成员</td></tr> <tr><td>ZREVRANGE key start stop [WITHSCORES]</td> <td>返回有序集中指定区间内的成员，通过索引，分数从高到低</td></tr> <tr><td>ZREVRANGEBYSCORE key max min [WITHSCORES]</td> <td>返回有序集中指定分数区间内的成员，分数从高到低排序</td></tr> <tr><td>ZREVRANK key member</td> <td>返回有序集合中指定成员的排名，有序集成员按分数值递减(从大到小)排序</td></tr> <tr><td>ZSCORE key member</td> <td>返回有序集中，成员的分数值</td></tr> <tr><td>ZUNIONSTORE destination numkeys key [key ...]</td> <td>计算给定的一个或多个有序集的并集，并存储在新的 key 中</td></tr> <tr><td>ZSCAN key cursor [MATCH pattern] [COUNT count]</td> <td>迭代有序集合中的元素（包括元素成员和元素分值）</td></tr></tbody></table></div> <footer class="page-edit" style="display:none;"><!----> <div class="last-updated"><span class="prefix">最近更新: </span> <span class="time">11/8/2022, 7:16:33 AM</span></div></footer> <!----> <!----> <!----></main> <!----></div></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div></div></div>
+    <script src="/whistle/assets/js/app.c849928c.js" defer></script><script src="/whistle/assets/js/3.f6935b69.js" defer></script><script src="/whistle/assets/js/1.ca64ea80.js" defer></script><script src="/whistle/assets/js/33.ced660fe.js" defer></script>
+  </body>
+</html>

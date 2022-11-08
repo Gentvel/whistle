@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>【nginx】Nginx | 林秃秃</title>
+    <meta name="generator" content="VuePress 1.5.2">
+    
+    <meta name="description" content="有术无道，止于术；有道无术，术尚可求。">
+    <link rel="preload" href="/whistle/assets/css/0.styles.27a793f2.css" as="style"><link rel="preload" href="/whistle/assets/js/app.c849928c.js" as="script"><link rel="preload" href="/whistle/assets/js/3.f6935b69.js" as="script"><link rel="preload" href="/whistle/assets/js/1.ca64ea80.js" as="script"><link rel="preload" href="/whistle/assets/js/126.2960e7f7.js" as="script"><link rel="prefetch" href="/whistle/assets/js/10.19865d52.js"><link rel="prefetch" href="/whistle/assets/js/100.0fdba92f.js"><link rel="prefetch" href="/whistle/assets/js/101.1412c0d5.js"><link rel="prefetch" href="/whistle/assets/js/102.0f01dd8f.js"><link rel="prefetch" href="/whistle/assets/js/103.bae8272b.js"><link rel="prefetch" href="/whistle/assets/js/104.ba1d7a63.js"><link rel="prefetch" href="/whistle/assets/js/105.88774299.js"><link rel="prefetch" href="/whistle/assets/js/106.90349fe7.js"><link rel="prefetch" href="/whistle/assets/js/107.335b7f02.js"><link rel="prefetch" href="/whistle/assets/js/108.67608ec7.js"><link rel="prefetch" href="/whistle/assets/js/109.fdcd6597.js"><link rel="prefetch" href="/whistle/assets/js/11.9a03e430.js"><link rel="prefetch" href="/whistle/assets/js/110.c61bcef2.js"><link rel="prefetch" href="/whistle/assets/js/111.accb4d01.js"><link rel="prefetch" href="/whistle/assets/js/112.392f20f1.js"><link rel="prefetch" href="/whistle/assets/js/113.3725f52d.js"><link rel="prefetch" href="/whistle/assets/js/114.4d51e46e.js"><link rel="prefetch" href="/whistle/assets/js/115.b06b4a52.js"><link rel="prefetch" href="/whistle/assets/js/116.5739ac85.js"><link rel="prefetch" href="/whistle/assets/js/117.07a928d9.js"><link rel="prefetch" href="/whistle/assets/js/118.35737cd9.js"><link rel="prefetch" href="/whistle/assets/js/119.e4460eb2.js"><link rel="prefetch" href="/whistle/assets/js/12.449405b3.js"><link rel="prefetch" href="/whistle/assets/js/120.046638c5.js"><link rel="prefetch" href="/whistle/assets/js/121.fb1caf41.js"><link rel="prefetch" href="/whistle/assets/js/122.72021ded.js"><link rel="prefetch" href="/whistle/assets/js/123.84032e47.js"><link rel="prefetch" href="/whistle/assets/js/124.9ed28712.js"><link rel="prefetch" href="/whistle/assets/js/125.eb048089.js"><link rel="prefetch" href="/whistle/assets/js/127.e7ad2e9d.js"><link rel="prefetch" href="/whistle/assets/js/128.b3744390.js"><link rel="prefetch" href="/whistle/assets/js/129.b011d3f2.js"><link rel="prefetch" href="/whistle/assets/js/13.16a79965.js"><link rel="prefetch" href="/whistle/assets/js/130.a05d728d.js"><link rel="prefetch" href="/whistle/assets/js/131.eef6c73c.js"><link rel="prefetch" href="/whistle/assets/js/132.0387996b.js"><link rel="prefetch" href="/whistle/assets/js/14.891c2195.js"><link rel="prefetch" href="/whistle/assets/js/15.e953afa5.js"><link rel="prefetch" href="/whistle/assets/js/16.b8699525.js"><link rel="prefetch" href="/whistle/assets/js/17.b91b75f1.js"><link rel="prefetch" href="/whistle/assets/js/18.9f29e718.js"><link rel="prefetch" href="/whistle/assets/js/19.263598cc.js"><link rel="prefetch" href="/whistle/assets/js/20.770fe2d3.js"><link rel="prefetch" href="/whistle/assets/js/21.0a6ce8b6.js"><link rel="prefetch" href="/whistle/assets/js/22.02e00977.js"><link rel="prefetch" href="/whistle/assets/js/23.6207cbb8.js"><link rel="prefetch" href="/whistle/assets/js/24.24e5a71d.js"><link rel="prefetch" href="/whistle/assets/js/25.e1e15b11.js"><link rel="prefetch" href="/whistle/assets/js/26.7d1364f8.js"><link rel="prefetch" href="/whistle/assets/js/27.86cb59bd.js"><link rel="prefetch" href="/whistle/assets/js/28.21fe08a4.js"><link rel="prefetch" href="/whistle/assets/js/29.7fefe934.js"><link rel="prefetch" href="/whistle/assets/js/30.1fca0706.js"><link rel="prefetch" href="/whistle/assets/js/31.0dd0f434.js"><link rel="prefetch" href="/whistle/assets/js/32.809fd211.js"><link rel="prefetch" href="/whistle/assets/js/33.ced660fe.js"><link rel="prefetch" href="/whistle/assets/js/34.2fe58e53.js"><link rel="prefetch" href="/whistle/assets/js/35.1c33f7cc.js"><link rel="prefetch" href="/whistle/assets/js/36.9236ac80.js"><link rel="prefetch" href="/whistle/assets/js/37.b82cf1aa.js"><link rel="prefetch" href="/whistle/assets/js/38.bad257bf.js"><link rel="prefetch" href="/whistle/assets/js/39.05285128.js"><link rel="prefetch" href="/whistle/assets/js/4.33f70e17.js"><link rel="prefetch" href="/whistle/assets/js/40.17f2c77b.js"><link rel="prefetch" href="/whistle/assets/js/41.a287741a.js"><link rel="prefetch" href="/whistle/assets/js/42.6e794082.js"><link rel="prefetch" href="/whistle/assets/js/43.8ac74e68.js"><link rel="prefetch" href="/whistle/assets/js/44.91e1fec5.js"><link rel="prefetch" href="/whistle/assets/js/45.42c52a75.js"><link rel="prefetch" href="/whistle/assets/js/46.65fcc9b8.js"><link rel="prefetch" href="/whistle/assets/js/47.4b878044.js"><link rel="prefetch" href="/whistle/assets/js/48.5c647dd0.js"><link rel="prefetch" href="/whistle/assets/js/49.46a6f0c3.js"><link rel="prefetch" href="/whistle/assets/js/5.44a242a9.js"><link rel="prefetch" href="/whistle/assets/js/50.3050ef3e.js"><link rel="prefetch" href="/whistle/assets/js/51.78a2fd5b.js"><link rel="prefetch" href="/whistle/assets/js/52.6d146ed8.js"><link rel="prefetch" href="/whistle/assets/js/53.501e8829.js"><link rel="prefetch" href="/whistle/assets/js/54.6299a871.js"><link rel="prefetch" href="/whistle/assets/js/55.31e11b60.js"><link rel="prefetch" href="/whistle/assets/js/56.084e968e.js"><link rel="prefetch" href="/whistle/assets/js/57.91968542.js"><link rel="prefetch" href="/whistle/assets/js/58.f683ed7b.js"><link rel="prefetch" href="/whistle/assets/js/59.ed4ee9cd.js"><link rel="prefetch" href="/whistle/assets/js/6.06c2faef.js"><link rel="prefetch" href="/whistle/assets/js/60.578875cb.js"><link rel="prefetch" href="/whistle/assets/js/61.761cb8df.js"><link rel="prefetch" href="/whistle/assets/js/62.3f38fad5.js"><link rel="prefetch" href="/whistle/assets/js/63.289b89c6.js"><link rel="prefetch" href="/whistle/assets/js/64.3d311a31.js"><link rel="prefetch" href="/whistle/assets/js/65.497be64f.js"><link rel="prefetch" href="/whistle/assets/js/66.91f1d53c.js"><link rel="prefetch" href="/whistle/assets/js/67.df5562a9.js"><link rel="prefetch" href="/whistle/assets/js/68.a0ef3fb8.js"><link rel="prefetch" href="/whistle/assets/js/69.f7377bde.js"><link rel="prefetch" href="/whistle/assets/js/7.65818d2e.js"><link rel="prefetch" href="/whistle/assets/js/70.e2c50de8.js"><link rel="prefetch" href="/whistle/assets/js/71.0d77b6b1.js"><link rel="prefetch" href="/whistle/assets/js/72.44c83251.js"><link rel="prefetch" href="/whistle/assets/js/73.1a7b8007.js"><link rel="prefetch" href="/whistle/assets/js/74.bc331b32.js"><link rel="prefetch" href="/whistle/assets/js/75.7628cab6.js"><link rel="prefetch" href="/whistle/assets/js/76.144a2aab.js"><link rel="prefetch" href="/whistle/assets/js/77.bd3d9092.js"><link rel="prefetch" href="/whistle/assets/js/78.6f06e89e.js"><link rel="prefetch" href="/whistle/assets/js/79.b5cc874d.js"><link rel="prefetch" href="/whistle/assets/js/8.f7c9d158.js"><link rel="prefetch" href="/whistle/assets/js/80.8725a0cf.js"><link rel="prefetch" href="/whistle/assets/js/81.bc083770.js"><link rel="prefetch" href="/whistle/assets/js/82.93c44050.js"><link rel="prefetch" href="/whistle/assets/js/83.de36a387.js"><link rel="prefetch" href="/whistle/assets/js/84.f7e48c4e.js"><link rel="prefetch" href="/whistle/assets/js/85.58ec196f.js"><link rel="prefetch" href="/whistle/assets/js/86.9dee754a.js"><link rel="prefetch" href="/whistle/assets/js/87.c3a19168.js"><link rel="prefetch" href="/whistle/assets/js/88.b0888120.js"><link rel="prefetch" href="/whistle/assets/js/89.2ac99c64.js"><link rel="prefetch" href="/whistle/assets/js/9.2a7508b2.js"><link rel="prefetch" href="/whistle/assets/js/90.49932208.js"><link rel="prefetch" href="/whistle/assets/js/91.8c2de1f6.js"><link rel="prefetch" href="/whistle/assets/js/92.1ce4cbc0.js"><link rel="prefetch" href="/whistle/assets/js/93.15b88173.js"><link rel="prefetch" href="/whistle/assets/js/94.b91ccb62.js"><link rel="prefetch" href="/whistle/assets/js/95.74ebc95e.js"><link rel="prefetch" href="/whistle/assets/js/96.b5e01145.js"><link rel="prefetch" href="/whistle/assets/js/97.c62544f3.js"><link rel="prefetch" href="/whistle/assets/js/98.ffe218d7.js"><link rel="prefetch" href="/whistle/assets/js/99.ceb46fe4.js">
+    <link rel="stylesheet" href="/whistle/assets/css/0.styles.27a793f2.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container" data-v-dad8a512><div data-v-dad8a512><div id="loader-wrapper" class="loading-wrapper" data-v-d48f4d20 data-v-dad8a512 data-v-dad8a512><div class="loader-main" data-v-d48f4d20><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div></div> <!----> <!----></div> <div class="password-shadow password-wrapper-out" style="display:none;" data-v-64685f0e data-v-dad8a512 data-v-dad8a512><h3 class="title" style="display:none;" data-v-64685f0e data-v-64685f0e>林秃秃</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-64685f0e data-v-64685f0e><input type="password" value="" data-v-64685f0e> <span data-v-64685f0e>Konck! Knock!</span> <button data-v-64685f0e>OK</button></label> <div class="footer" style="display:none;" data-v-64685f0e data-v-64685f0e><span data-v-64685f0e><i class="iconfont reco-theme" data-v-64685f0e></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-64685f0e>vuePress-theme-reco</a></span> <span data-v-64685f0e><i class="iconfont reco-copyright" data-v-64685f0e></i> <a data-v-64685f0e><span data-v-64685f0e>林秃秃</span>
+            
+          <!---->
+          2022
+        </a></span></div></div> <div class="hide" data-v-dad8a512><header class="navbar" data-v-dad8a512><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/whistle/" class="home-link router-link-active"><img src="/whistle/logo.svg" alt="林秃秃" class="logo"> <span class="site-name">林秃秃</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/whistle/" class="nav-link"><i class="iconfont reco-eye"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/whistle/categories/algorithm/" class="nav-link"><i class="iconfont undefined"></i>
+  algorithm
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/数据结构/" class="nav-link"><i class="iconfont undefined"></i>
+  数据结构
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/基础/" class="nav-link"><i class="iconfont undefined"></i>
+  基础
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/MySQL/" class="nav-link"><i class="iconfont undefined"></i>
+  MySQL
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/redis/" class="nav-link"><i class="iconfont undefined"></i>
+  redis
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/操作系统/" class="nav-link"><i class="iconfont undefined"></i>
+  操作系统
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/java/" class="nav-link"><i class="iconfont undefined"></i>
+  java
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/多线程/" class="nav-link"><i class="iconfont undefined"></i>
+  多线程
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/中间件/" class="nav-link"><i class="iconfont undefined"></i>
+  中间件
+</a></li></ul></div></div><div class="nav-item"><a href="/whistle/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/whistle/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间线
+</a></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-dad8a512></div> <aside class="sidebar" data-v-dad8a512><div class="personal-info-wrapper" data-v-ca798c94 data-v-dad8a512><img src="/whistle/avatar.png" alt="author-avatar" class="personal-img" data-v-ca798c94> <h3 class="name" data-v-ca798c94>
+    林秃秃
+  </h3> <div class="num" data-v-ca798c94><div data-v-ca798c94><h3 data-v-ca798c94>90</h3> <h6 data-v-ca798c94>文章</h6></div> <div data-v-ca798c94><h3 data-v-ca798c94>12</h3> <h6 data-v-ca798c94>标签</h6></div></div> <hr data-v-ca798c94></div> <nav class="nav-links"><div class="nav-item"><a href="/whistle/" class="nav-link"><i class="iconfont reco-eye"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/whistle/categories/algorithm/" class="nav-link"><i class="iconfont undefined"></i>
+  algorithm
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/数据结构/" class="nav-link"><i class="iconfont undefined"></i>
+  数据结构
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/基础/" class="nav-link"><i class="iconfont undefined"></i>
+  基础
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/MySQL/" class="nav-link"><i class="iconfont undefined"></i>
+  MySQL
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/redis/" class="nav-link"><i class="iconfont undefined"></i>
+  redis
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/操作系统/" class="nav-link"><i class="iconfont undefined"></i>
+  操作系统
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/java/" class="nav-link"><i class="iconfont undefined"></i>
+  java
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/多线程/" class="nav-link"><i class="iconfont undefined"></i>
+  多线程
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/中间件/" class="nav-link"><i class="iconfont undefined"></i>
+  中间件
+</a></li></ul></div></div><div class="nav-item"><a href="/whistle/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/whistle/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间线
+</a></div> <!----></nav> <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><a href="/whistle/foundation/" class="sidebar-heading clickable"><span>基础</span> <span class="arrow right"></span></a> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><a href="/whistle/java/" class="sidebar-heading clickable"><span>JAVA</span> <span class="arrow right"></span></a> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><a href="/whistle/middle/" class="sidebar-heading clickable router-link-active open"><span>中间件</span> <span class="arrow down"></span></a> <ul class="sidebar-links sidebar-group-items"><li><section class="sidebar-group collapsable is-sub-group depth-1"><a href="/whistle/middle/netty/" class="sidebar-heading clickable open"><span>Netty</span> <span class="arrow down"></span></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/whistle/middle/netty/bio.html" class="sidebar-link">BIO</a></li><li><a href="/whistle/middle/netty/nio.html" class="sidebar-link">NIO</a></li><li><a href="/whistle/middle/netty/copy.html" class="sidebar-link">零拷贝</a></li><li><a href="/whistle/middle/netty/architecture.html" class="sidebar-link">Netty架构衍变</a></li><li><a href="/whistle/middle/netty/component.html" class="sidebar-link">Netty组件详解</a></li><li><a href="/whistle/middle/netty/protobuf.html" class="sidebar-link">Google Protobuf</a></li><li><a href="/whistle/middle/netty/handler.html" class="sidebar-link">Netty Handler详解</a></li><li><a href="/whistle/middle/netty/package.html" class="sidebar-link">Netty 粘包和拆包</a></li><li><a href="/whistle/middle/netty/netty.html" class="sidebar-link">Netty 实战</a></li></ul></section></li><li><a href="/whistle/middle/nginx.html" aria-current="page" class="active sidebar-link">Nginx</a></li></ul></section></li></ul> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-64685f0e data-v-dad8a512><h3 class="title" style="display:none;" data-v-64685f0e data-v-64685f0e>【nginx】Nginx</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-64685f0e data-v-64685f0e><input type="password" value="" data-v-64685f0e> <span data-v-64685f0e>Konck! Knock!</span> <button data-v-64685f0e>OK</button></label> <div class="footer" style="display:none;" data-v-64685f0e data-v-64685f0e><span data-v-64685f0e><i class="iconfont reco-theme" data-v-64685f0e></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-64685f0e>vuePress-theme-reco</a></span> <span data-v-64685f0e><i class="iconfont reco-copyright" data-v-64685f0e></i> <a data-v-64685f0e><span data-v-64685f0e>林秃秃</span>
+            
+          <!---->
+          2022
+        </a></span></div></div> <div data-v-dad8a512><main class="page"><div class="page-title" style="display:none;"><h1>【nginx】Nginx</h1> <div data-v-3b7f5bdf><i class="iconfont reco-account" data-v-3b7f5bdf><span data-v-3b7f5bdf>林秃秃</span></i> <i class="iconfont reco-date" data-v-3b7f5bdf><span data-v-3b7f5bdf>2020-07-24</span></i> <!----> <i class="iconfont reco-tag tags" data-v-3b7f5bdf><span class="tag-item" data-v-3b7f5bdf>nginx</span></i></div></div> <div class="theme-reco-content content__default" style="display:none;"><h2 id="一-常用命令"><a href="#一-常用命令" class="header-anchor">#</a> 一. 常用命令</h2> <div class="language-shell extra-class"><pre class="language-shell"><code>nginx -s quit          <span class="token comment">#优雅停止nginx，有连接时会等连接请求完成再杀死worker进程  </span>
+nginx -s stop          <span class="token comment">#快速停止或关闭Nginx</span>
+nginx -s reload        <span class="token comment">#优雅重启，并重新载入配置文件nginx.conf</span>
+nginx -s reopen        <span class="token comment">#重新打开日志文件，一般用于切割日志</span>
+nginx -v               <span class="token comment">#查看版本  </span>
+nginx -t               <span class="token comment">#检查nginx的配置文件</span>
+nginx -h               <span class="token comment">#查看帮助信息</span>
+nginx -V               <span class="token comment">#详细版本信息，包括编译参数 </span>
+nginx  -c filename     <span class="token comment">#指定配置文件</span>
+</code></pre></div><h2 id="二-nginx配置文件"><a href="#二-nginx配置文件" class="header-anchor">#</a> 二. Nginx配置文件</h2> <p>配置文件默认为安装目录下的conf/nginx.conf，如果有使用到其他子配置文件，可以在nginx.conf中使用include 文件路径;的方式加载使用，比如server段，就可以单独写成一个配置文件，在http段下面使用include加载使用。
+如果使用yum类型的方式安装,那么配置文件在<code>/etc/nginx/</code>文件夹下，其中<code>conf.d</code>文件夹下为默认添加的conf。资源文件夹在<code>/usr/share/nginx/html/</code>目录下</p> <div class="language-conf extra-class"><pre class="language-text"><code>...              #全局块
+ 
+events {         #events块
+   ...
+}
+ 
+http      #http块
+{
+    ...   #http全局块
+    server        #server块
+    { 
+        ...       #server全局块
+        location [PATTERN]   #location块
+        {
+            ...
+        }
+        location [PATTERN] 
+        {
+            ...
+        }
+    }
+    server
+    {
+      ...
+    }
+    ...     #http全局块
+}
+</code></pre></div><ul><li>全局块：配置影响nginx全局的指令。一般有运行nginx服务器的用户组，nginx进程pid存放路径，日志存放路径，配置文件引入，允许生成worker process数等。</li> <li>events块：配置影响nginx服务器或与用户的网络连接。有每个进程的最大连接数，选取哪种事件驱动模型处理连接请求，是否允许同时接受多个网路连接，开启多个网络连接序列化等。</li> <li>http块：可以嵌套多个server，配置代理，缓存，日志定义等绝大多数功能和第三方模块的配置。如文件引入，mime-type定义，日志自定义，是否使用sendfile传输文件，连接超时时间，单连接请求数等。</li> <li>server块：配置虚拟主机的相关参数，一个http中可以有多个server。</li> <li>location块：配置请求的路由，以及各种页面的处理情况。
+配置示例:</li></ul> <div class="language-conf extra-class"><pre class="language-text"><code>#user nginx;  #配置用户或者组，默认为nobody nobody。
+#worker_processes 2;  #允许生成的进程数，默认为1 可设置为auto，系统根据请求自动判断
+#pid /nginx/pid/nginx.pid;   #指定nginx进程运行文件存放地址
+error_log log/error.log debug;  #制定日志路径，级别。这个设置可以放入全局块，http块，server块，级别以此为：debug|info|notice|warn|error|crit|alert|emerg
+events {
+    accept_mutex on;   #设置网路连接序列化，防止惊群现象发生，默认为on
+    multi_accept on;  #设置一个进程是否同时接受多个网络连接，默认为off
+    #use epoll;      #事件驱动模型，select|poll|kqueue|epoll|resig|/dev/poll|eventport
+    worker_connections  1024;    #最大连接数，默认为512
+}
+http {
+    include       mime.types;   #文件扩展名与文件类型映射表
+    default_type  application/octet-stream; #默认文件类型，默认为text/plain
+    #access_log off; #取消服务日志   
+    log_format myFormat '$remote_addr–$remote_user [$time_local] $request $status $body_bytes_sent $http_referer $http_user_agent $http_x_forwarded_for'; #自定义日志格式
+    access_log log/access.log myFormat;  #combined为日志格式的默认值
+    sendfile on;   #允许sendfile方式传输文件，默认为off，可以在http块，server块，location块。
+    sendfile_max_chunk 100k;  #每个进程每次调用传输数量不能大于设定的值，默认为0，即不设上限。
+    keepalive_timeout 65;  #连接超时时间，默认为75s，可以在http，server，location块。
+    # 隐藏nginx版本号，不再浏览显示
+    server_tokens off;
+
+    #gzip加速
+    gzip  on;
+    gzip_http_version 1.0;    # 指定http的版本
+    gzip_disable 'MSIE [1-6]';    # 禁止IE的1~6版本使用该功能
+    gzip_types application/javascript text/css image/jpeg image/png; 
+
+    # 禁止ip访问，当有匹配时，就不会在向下匹配
+    # deny all;        # 拒绝所有
+    # allow 192.168.211.1;         # 允许192.168.211.1
+
+    # 用户访问限制
+    # auth_basic 'pls login:';        # 指定提示语&quot;pls login:&quot;
+    # auth_basic_user_file /usr/local/nginx/conf/userlist;        # 指定授权用户所在文件
+    
+    upstream mysvr {  
+      server 127.0.0.1:7878;
+      server 192.168.10.121:3333 backup;  #热备
+    }
+    error_page 404 https://www.baidu.com; #错误页
+    server {
+        keepalive_requests 120; #单连接请求上限次数。
+        listen       4545;   #监听端口
+        server_name  127.0.0.1;   #监听地址      
+        location  ~*^.+$ {       #请求的url过滤，正则匹配，~为区分大小写，~*为不区分大小写。释义为：不区分大小写，以1个以上的 非换行符的字符 开始并结束
+           #root path;  #根目录
+           #index vv.txt;  #设置默认页
+           proxy_pass  http://mysvr;  #请求转向mysvr 定义的服务器列表
+           deny 127.0.0.1;  #拒绝的ip
+           allow 172.18.5.54; #允许的ip  
+           # 资源重定向，如访问http://shop.devops.com/index.html后会被重写为访问http://shop.devops.com/index.php，permanent表示永久重定向
+            rewrite /index.html /index.php permanent; 
+            # expires 设置客户端缓存
+            expires 1h;
+            # 资源重定向，$request_filename为nginx的内置变量，表示资源文件路径
+            if (!-e $request_filename) {
+                rewrite ^(.*)$ /index.php?s=/$1 last;
+                break;
+            }
+            # 防盗链实现，所有不是从shop.devops.com跳转过去访问js|css|jpg|png文件的都被拦截，返回404
+            valid_referers shop.devops.com;
+            if ($invalid_referer) {
+                return 404;
+            }    
+        }
+    }
+}
+</code></pre></div><div class="custom-block warning"><p><strong>注：每个指令必须有分号结束</strong></p></div> <h2 id="三、配置文件详解"><a href="#三、配置文件详解" class="header-anchor">#</a> 三、配置文件详解</h2> <h3 id="_2-1-全局块"><a href="#_2-1-全局块" class="header-anchor">#</a> 2.1 全局块</h3> <ul><li><h4 id="配置运行nginx服务器用户（组）"><a href="#配置运行nginx服务器用户（组）" class="header-anchor">#</a> 配置运行Nginx服务器用户（组）</h4></li></ul> <p>指令格式：<code>user user [group];</code><br>
+ user：指定可以运行Nginx服务器的用户<br>
+ group：可选项，可以运行Nginx服务器的用户组</p> <div class="custom-block tip"><p><strong>注：如果user指令不配置或者配置为 user nobody nobody ，则默认所有用户都可以启动Nginx进程</strong></p></div> <hr> <ul><li><h4 id="worker-process数配置"><a href="#worker-process数配置" class="header-anchor">#</a> worker process数配置</h4></li></ul> <p>Nginx服务器实现并发处理服务的关键，指令格式：<code>worker_processes number | auto;</code><br>
+ number：Nginx进程最多可以产生的worker process数<br>
+ auto：Nginx进程将自动检测
+原作者的话：</p> <div class="language- extra-class"><pre class="language-text"><code>As a general rule you need the only worker with large number of
+worker_connections, say 10,000 or 20,000.
+However, if nginx does CPU-intensive work as SSL or gzipping and
+you have 2 or more CPU, then you may set worker_processes to be equal
+to CPU number.
+Besides, if you serve many static files and the total size of the files
+is bigger than memory, then you may increase worker_processes to
+utilize a full disk bandwidth.
+Igor Sysoev
+</code></pre></div><p>一般一个进程足够了，可以把连接数设得很大。
+如果有SSL、gzip这些比较消耗CPU的工作，而且是多核CPU的话，可以设为和CPU的数量一样。
+或者要处理很多很多的小文件，而且文件总大小比内存大很多的时候，也可以把进程数增加，
+以充分利用IO带宽（主要似乎是IO操作有block）</p> <div class="custom-block tip"><p><strong>注：服务器是“多个CPU＋gzip+网站总文件大小大于内存”的环境，worker_processes设置为CPU个数的两倍比较好</strong></p></div> <hr> <ul><li><h4 id="nginx进程pid存放路径"><a href="#nginx进程pid存放路径" class="header-anchor">#</a> Nginx进程PID存放路径</h4></li></ul> <p>Nginx进程作为系统的守护进程运行，我们需要在某个文件中保存当前运行程序的主进程号，Nginx支持定义pid的存放路径，其指令为：pid，语法格式如下
+<code>pid file;</code><br>
+ file：存放路径和文件名称<br>
+默认存放在nginx安装目录logs下，名字为：nginx.pid</p> <div class="custom-block tip"><p><strong>注：一般情况下，pid文件，都是在编译安装nginx的时候，通过 --pid-path=PATH，该PATH一定要使用绝对路径</strong></p></div> <hr> <ul><li><h4 id="定义mime类型"><a href="#定义mime类型" class="header-anchor">#</a> 定义MIME类型</h4></li></ul> <p>在常用的浏览器中，可以显示的内容有html、xml、gif、flash等种类繁多的文本、媒体等资源，浏览器为区分这些资料，引用了MIME type，换言之，MIME type是网络资源的媒体类型<br>
+默认nginx配置文件</p> <div class="language-conf extra-class"><pre class="language-text"><code>include mime.types;
+default_type application/octet-stream;
+</code></pre></div><div class="language-shell extra-class"><pre class="language-shell"><code><span class="token function">cat</span> /etc/nginx/mime.types
+</code></pre></div><p>default_type配置了用来处理前端请求的MIME类型，其语法如下<br> <code>default_type mime-type;</code><br>
+其中mime-type一定要是types块中定义过，如果不设置这个，默认为text/plain</p> <hr> <ul><li><h4 id="自定义nginx的访问日志"><a href="#自定义nginx的访问日志" class="header-anchor">#</a> 自定义nginx的访问日志</h4></li> <li><h5 id="access-log指令"><a href="#access-log指令" class="header-anchor">#</a> access_log指令</h5></li></ul> <p>语法：</p> <div class="language-conf extra-class"><pre class="language-text"><code>access_log path [format [buffer=size] [gzip[=level]] [flush=time] [if=condition]];
+access_log off;
+</code></pre></div><p>说明：<br>
+path： 配置服务日志的文件存放的路径和名称<br>
+format，可选项，自定义服务日志的格式字符串<br>
+size：配置临时存放日志的内存缓存区大小<br>
+该指令可以配置在http块，server块，location块，默认如下:<br>
+#access_log logs/access.log main;</p> <ul><li><h5 id="log-format指令"><a href="#log-format指令" class="header-anchor">#</a> log_format指令</h5></li></ul> <p>语法如下：
+<code>log_format name [escape=default|json] string ...</code><br>
+说明：<br>
+name：格式字符串的名字，默认为combined<br>
+string： 服务日志的格式字符串，在定义过程中，nginx配置预设一些变量获取相关内容</p> <div class="language- extra-class"><pre class="language-text"><code># log_format main '$remote_addr - $remote_user [$time_local] &quot;$request&quot; '
+# '$status $body_bytes_sent &quot;$http_referer&quot; '
+# '&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;';
+</code></pre></div><p>参数具体说明如下：</p> <table><thead><tr><th>参数</th> <th>说明</th> <th>示例</th></tr></thead> <tbody><tr><td>$remote_addr</td> <td>客户端地址</td> <td>10.2.18.231</td></tr> <tr><td>$remote_user</td> <td>客户端用户名称</td> <td>- -</td></tr> <tr><td>$time_local</td> <td>访问时间和时区</td> <td>07/Dec/2017:16:39:09 +0800</td></tr> <tr><td>$request</td> <td>请求的URI和HTTP协议</td> <td>&quot;GET / HTTP/1.1&quot;</td></tr> <tr><td>$http_host</td> <td>请求的地址</td> <td>www.a.com</td></tr> <tr><td>$status</td> <td>HTTP响应状态码</td> <td>200</td></tr> <tr><td>$body_bytes_sent</td> <td>发送给客户端文件内容大小</td> <td>612</td></tr> <tr><td>$http_referer</td> <td>url跳转来源</td> <td>-</td></tr> <tr><td>$http_user_agent</td> <td>用户终端浏览器等信息</td> <td>&quot;Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36&quot;</td></tr> <tr><td>$upstream_addr</td> <td>后台upstream的地址</td> <td></td></tr> <tr><td>$request_time</td> <td>整个请求的时间</td> <td></td></tr> <tr><td>$upstream_response_time</td> <td>请求过程中，upstream响应时间</td> <td></td></tr></tbody></table> <h3 id="_2-2-event块"><a href="#_2-2-event块" class="header-anchor">#</a> 2.2 Event块</h3> <div class="language-conf extra-class"><pre class="language-text"><code>events {
+  accept_mutex on;             #设置网路连接序列化，防止惊群现象发生，默认为on
+  multi_accept on;             #设置一个进程是否同时接受多个网络连接，默认为off
+  #use epoll;                  #事件驱动模型，select|poll|kqueue|epoll|resig|/dev/poll|eventport
+  worker_connections  1024;    #最大连接数，默认为512
+}
+</code></pre></div><div class="custom-block tip"><p><strong>注：惊群现象</strong><br>
+对于操作系统来说，多个进程/线程在等待同一资源时，其结果就是每当资源可用，所有的进程/线程都来竞争资源，会造成以下后果：</p> <ul><li>系统对用户进程/线程频繁的做无效的调度、上下文切换，系统性能大打折扣。</li> <li>为了确保只有一个线程得到资源，用户必须对资源操作进行加锁保护，进一步加大了系统开销。</li></ul></div> <p>更多详情请参考<a href="https://zhuanlan.zhihu.com/p/51251700" title="滴滴云" target="_blank" rel="noopener noreferrer">Linux惊群效应之Nginx解决方案<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <h3 id="_2-3-http块"><a href="#_2-3-http块" class="header-anchor">#</a> 2.3 http块</h3> <div class="language- extra-class"><pre class="language-text"><code>http{
+  include       mime.types;   #文件扩展名与文件类型映射表
+  default_type  application/octet-stream; #默认文件类型，默认为text/plain
+  #access_log off; #取消服务日志   
+  log_format myFormat '$remote_addr–$remote_user [$time_local] $request $status $body_bytes_sent $http_referer $http_user_agent $http_x_forwarded_for'; #自定义格式
+  access_log log/access.log myFormat;  #combined为日志格式的默认值
+  sendfile on;   #允许sendfile方式传输文件，默认为off，可以在http块，server块，location块。
+  sendfile_max_chunk 100k;  #每个进程每次调用传输数量不能大于设定的值，默认为0，即不设上限。
+  keepalive_timeout 65;  #连接超时时间，默认为75s，可以在http，server，location块。
+  # 隐藏nginx版本号，不再浏览显示
+  server_tokens off;
+  #gzip加速
+  #gzip  on;
+
+  upstream mysvr {  
+    server 127.0.0.1:7878;
+    server 192.168.10.121:3333 backup;  #热备
+  }
+  error_page 404 https://www.baidu.com; #错误页
+}
+</code></pre></div><h3 id="_2-4-server块"><a href="#_2-4-server块" class="header-anchor">#</a> 2.4 server块</h3> <div class="language- extra-class"><pre class="language-text"><code>server {
+  keepalive_requests 120; #单连接请求上限次数。
+  listen       4545;   #监听端口
+  server_name  127.0.0.1;   #监听地址      
+}
+</code></pre></div><ul><li><h4 id="_2-4-1-listen"><a href="#_2-4-1-listen" class="header-anchor">#</a> 2.4.1 listen</h4></li></ul> <p>功能：指定监听端口
+案例：</p> <div class="language-conf extra-class"><pre class="language-text"><code>listen 127.0.0.1:8000;
+listen 127.0.0.1;
+listen 8000;
+listen *:8000;
+listen localhost:8000;
+listen 443 ssl;
+</code></pre></div><ul><li><h4 id="_2-4-2-server-name"><a href="#_2-4-2-server-name" class="header-anchor">#</a> 2.4.2 server_name</h4></li></ul> <p>功能：设置虚拟主机的名字（域名）
+案例：<br> <code>server_name 51pet.comwww.51pet.comm.51pet.com</code></p> <p>匹配法则：</p> <ul><li><p>1）精确匹配</p></li> <li><p>2）左侧通配符匹配 .test.com</p></li> <li><p>3）右侧通配符匹配 mail.</p></li> <li><p>4）正则表达式匹配检测</p></li> <li><h4 id="_2-4-3-root"><a href="#_2-4-3-root" class="header-anchor">#</a> 2.4.3 root</h4></li></ul> <p>功能：为请求设置根目录
+案例</p> <div class="language-conf extra-class"><pre class="language-text"><code>root /usr/share/nginx/html
+location /i/ {
+  root /data/w3;
+}
+</code></pre></div><ul><li><h4 id="_2-4-4-alias"><a href="#_2-4-4-alias" class="header-anchor">#</a> 2.4.4 alias</h4></li></ul> <p>语法：</p> <div class="language- extra-class"><pre class="language-text"><code>alias path;
+location /i/ {
+alias /data/w3/images/;
+}
+</code></pre></div><p>on request of “/i/top.gif”, the file /data/w3/images/top.gif will be sent.</p> <div class="language- extra-class"><pre class="language-text"><code>location ~ ^/users/(.+.(?:gif|jpe?g|png))$ {
+alias /data/w3/images/$1;
+}
+</code></pre></div><div class="custom-block tip"><p><strong>alias和root区别</strong><br>
+nginx是通过alias设置虚拟目录，在nginx的配置中，alias目录和root目录是有区别的：<br>
+1）alias指定的目录是准确的，即location匹配访问的path目录下的文件直接是在alias目录下查找的；<br>
+2）root指定的目录是location匹配访问的path目录的上一级目录,这个path目录一定要是真实存在root指定目录下的；<br>
+3）使用alias标签的目录块中不能使用rewrite的break（具体原因不明）；另外，alias指定的目录后面必须要加上&quot;/&quot;符号！！<br>
+4）alias虚拟目录配置中，location匹配的path目录如果后面不带&quot;/&quot;，那么访问的url地址中这个path目录后面加不加&quot;/&quot;不影响访问，访问时它会自动加上&quot;/&quot;；但是如果location匹配的path目录后面加上&quot;/&quot;，那么访问的url地址中这个path目录必须要加上&quot;/&quot;，访问时它不会自动加上&quot;/&quot;。如果不加上&quot;/&quot;，访问就会失败！<br>
+5）root目录配置中，location匹配的path目录后面带不带&quot;/&quot;，都不会影响访问。</p></div> <ul><li><h4 id="_2-4-5-index"><a href="#_2-4-5-index" class="header-anchor">#</a> 2.4.5 index</h4></li></ul> <p>功能：指定默认主页面</p> <p>案例：</p> <p><code>index index.php index.html index.htm;</code></p> <ul><li><h4 id="_2-4-6-error-page"><a href="#_2-4-6-error-page" class="header-anchor">#</a> 2.4.6 error_page</h4></li></ul> <p>语法：
+<code>error_page code ... [=[response]] uri;</code></p> <p>案例：</p> <div class="language-conf extra-class"><pre class="language-text"><code>error_page 404 /404.html;
+error_page 500 502 503 504 /50x.html;
+error_page 404 =302 /404.html;
+</code></pre></div><h3 id="_2-5-location块"><a href="#_2-5-location块" class="header-anchor">#</a> 2.5 location块</h3> <p><code>location [=|~|~*|^~] /uri/ { … }</code><br>
+语法规则：</p> <ul><li>= 开头表示精确匹配</li> <li>^~ 开头表示uri以某个常规字符串开头，理解为匹配 url路径即可。nginx不对url做编码，因此请求为/static/20%/aa，可以被规则^~ /static/ /aa匹配到（注意是空格）。以xx开头</li> <li>~ 开头表示区分大小写的正则匹配                     以xx结尾</li> <li>~* 开头表示不区分大小写的正则匹配                以xx结尾</li> <li>!~和!~*分别为区分大小写不匹配及不区分大小写不匹配 的正则</li> <li>/ 通用匹配，任何请求都会匹配到。
+多个location配置的情况下匹配顺序为:<br>
+首先精确匹配 =-》其次以xx开头匹配^~-》然后是按文件中顺序的正则匹配-》最后是交给 / 通用匹配。
+当有匹配成功时候，停止匹配，按当前匹配规则处理请求。</li></ul> <div class="custom-block tip"><p><strong>注：文件中顺序的正则匹配从前缀最长的开始找</strong></p></div> <ul><li><h4 id="_2-5-1-rewrite语法"><a href="#_2-5-1-rewrite语法" class="header-anchor">#</a> 2.5.1 ReWrite语法</h4></li> <li>last – 基本上都用这个Flag。</li> <li>break – 中止Rewirte，不在继续匹配</li> <li>redirect – 返回临时重定向的HTTP状态302</li> <li>permanent – 返回永久重定向的HTTP状态301</li> <li><h4 id="_2-5-2-try-files"><a href="#_2-5-2-try-files" class="header-anchor">#</a> 2.5.2 Try_files</h4></li></ul> <div class="language- extra-class"><pre class="language-text"><code>location /images/ {
+    root /opt/html/;
+    try_files $uri   $uri/  /images/default.gif; 
+}
+</code></pre></div><p>比如 请求 127.0.0.1/images/test.gif 会依次查找</p> <ol><li>文件/opt/html/images/test.gif</li> <li>文件夹 /opt/html/images/test.gif/下的index文件</li> <li>请求127.0.0.1/images/default.gif</li></ol> <div class="custom-block tip"><p><strong>如果不写上 $uri/，当直接访问一个目录路径时，并不会去匹配目录下的索引页  即 访问127.0.0.1/images/ 不会去访问  127.0.0.1/images/index.html</strong></p></div> <p><em>其他配置或调优请参考<a href="https://www.kancloud.cn/louis1986/nginx-web" title="看云" target="_blank" rel="noopener noreferrer">nginx手册<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></em></p> <p><em>更多详情请参考<a href="http://nginx.org/en/docs/" title="NGINX" target="_blank" rel="noopener noreferrer">Nginx官方文档<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></em></p></div> <footer class="page-edit" style="display:none;"><!----> <div class="last-updated"><span class="prefix">最近更新: </span> <span class="time">11/8/2022, 7:16:33 AM</span></div></footer> <!----> <!----> <!----></main> <!----></div></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div></div></div>
+    <script src="/whistle/assets/js/app.c849928c.js" defer></script><script src="/whistle/assets/js/3.f6935b69.js" defer></script><script src="/whistle/assets/js/1.ca64ea80.js" defer></script><script src="/whistle/assets/js/126.2960e7f7.js" defer></script>
+  </body>
+</html>

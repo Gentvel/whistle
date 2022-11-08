@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>【Kubernetes】 Kubernetes安装 | 林秃秃</title>
+    <meta name="generator" content="VuePress 1.5.2">
+    
+    <meta name="description" content="有术无道，止于术；有道无术，术尚可求。">
+    <link rel="preload" href="/whistle/assets/css/0.styles.27a793f2.css" as="style"><link rel="preload" href="/whistle/assets/js/app.c849928c.js" as="script"><link rel="preload" href="/whistle/assets/js/3.f6935b69.js" as="script"><link rel="preload" href="/whistle/assets/js/1.ca64ea80.js" as="script"><link rel="preload" href="/whistle/assets/js/131.eef6c73c.js" as="script"><link rel="prefetch" href="/whistle/assets/js/10.19865d52.js"><link rel="prefetch" href="/whistle/assets/js/100.0fdba92f.js"><link rel="prefetch" href="/whistle/assets/js/101.1412c0d5.js"><link rel="prefetch" href="/whistle/assets/js/102.0f01dd8f.js"><link rel="prefetch" href="/whistle/assets/js/103.bae8272b.js"><link rel="prefetch" href="/whistle/assets/js/104.ba1d7a63.js"><link rel="prefetch" href="/whistle/assets/js/105.88774299.js"><link rel="prefetch" href="/whistle/assets/js/106.90349fe7.js"><link rel="prefetch" href="/whistle/assets/js/107.335b7f02.js"><link rel="prefetch" href="/whistle/assets/js/108.67608ec7.js"><link rel="prefetch" href="/whistle/assets/js/109.fdcd6597.js"><link rel="prefetch" href="/whistle/assets/js/11.9a03e430.js"><link rel="prefetch" href="/whistle/assets/js/110.c61bcef2.js"><link rel="prefetch" href="/whistle/assets/js/111.accb4d01.js"><link rel="prefetch" href="/whistle/assets/js/112.392f20f1.js"><link rel="prefetch" href="/whistle/assets/js/113.3725f52d.js"><link rel="prefetch" href="/whistle/assets/js/114.4d51e46e.js"><link rel="prefetch" href="/whistle/assets/js/115.b06b4a52.js"><link rel="prefetch" href="/whistle/assets/js/116.5739ac85.js"><link rel="prefetch" href="/whistle/assets/js/117.07a928d9.js"><link rel="prefetch" href="/whistle/assets/js/118.35737cd9.js"><link rel="prefetch" href="/whistle/assets/js/119.e4460eb2.js"><link rel="prefetch" href="/whistle/assets/js/12.449405b3.js"><link rel="prefetch" href="/whistle/assets/js/120.046638c5.js"><link rel="prefetch" href="/whistle/assets/js/121.fb1caf41.js"><link rel="prefetch" href="/whistle/assets/js/122.72021ded.js"><link rel="prefetch" href="/whistle/assets/js/123.84032e47.js"><link rel="prefetch" href="/whistle/assets/js/124.9ed28712.js"><link rel="prefetch" href="/whistle/assets/js/125.eb048089.js"><link rel="prefetch" href="/whistle/assets/js/126.2960e7f7.js"><link rel="prefetch" href="/whistle/assets/js/127.e7ad2e9d.js"><link rel="prefetch" href="/whistle/assets/js/128.b3744390.js"><link rel="prefetch" href="/whistle/assets/js/129.b011d3f2.js"><link rel="prefetch" href="/whistle/assets/js/13.16a79965.js"><link rel="prefetch" href="/whistle/assets/js/130.a05d728d.js"><link rel="prefetch" href="/whistle/assets/js/132.0387996b.js"><link rel="prefetch" href="/whistle/assets/js/14.891c2195.js"><link rel="prefetch" href="/whistle/assets/js/15.e953afa5.js"><link rel="prefetch" href="/whistle/assets/js/16.b8699525.js"><link rel="prefetch" href="/whistle/assets/js/17.b91b75f1.js"><link rel="prefetch" href="/whistle/assets/js/18.9f29e718.js"><link rel="prefetch" href="/whistle/assets/js/19.263598cc.js"><link rel="prefetch" href="/whistle/assets/js/20.770fe2d3.js"><link rel="prefetch" href="/whistle/assets/js/21.0a6ce8b6.js"><link rel="prefetch" href="/whistle/assets/js/22.02e00977.js"><link rel="prefetch" href="/whistle/assets/js/23.6207cbb8.js"><link rel="prefetch" href="/whistle/assets/js/24.24e5a71d.js"><link rel="prefetch" href="/whistle/assets/js/25.e1e15b11.js"><link rel="prefetch" href="/whistle/assets/js/26.7d1364f8.js"><link rel="prefetch" href="/whistle/assets/js/27.86cb59bd.js"><link rel="prefetch" href="/whistle/assets/js/28.21fe08a4.js"><link rel="prefetch" href="/whistle/assets/js/29.7fefe934.js"><link rel="prefetch" href="/whistle/assets/js/30.1fca0706.js"><link rel="prefetch" href="/whistle/assets/js/31.0dd0f434.js"><link rel="prefetch" href="/whistle/assets/js/32.809fd211.js"><link rel="prefetch" href="/whistle/assets/js/33.ced660fe.js"><link rel="prefetch" href="/whistle/assets/js/34.2fe58e53.js"><link rel="prefetch" href="/whistle/assets/js/35.1c33f7cc.js"><link rel="prefetch" href="/whistle/assets/js/36.9236ac80.js"><link rel="prefetch" href="/whistle/assets/js/37.b82cf1aa.js"><link rel="prefetch" href="/whistle/assets/js/38.bad257bf.js"><link rel="prefetch" href="/whistle/assets/js/39.05285128.js"><link rel="prefetch" href="/whistle/assets/js/4.33f70e17.js"><link rel="prefetch" href="/whistle/assets/js/40.17f2c77b.js"><link rel="prefetch" href="/whistle/assets/js/41.a287741a.js"><link rel="prefetch" href="/whistle/assets/js/42.6e794082.js"><link rel="prefetch" href="/whistle/assets/js/43.8ac74e68.js"><link rel="prefetch" href="/whistle/assets/js/44.91e1fec5.js"><link rel="prefetch" href="/whistle/assets/js/45.42c52a75.js"><link rel="prefetch" href="/whistle/assets/js/46.65fcc9b8.js"><link rel="prefetch" href="/whistle/assets/js/47.4b878044.js"><link rel="prefetch" href="/whistle/assets/js/48.5c647dd0.js"><link rel="prefetch" href="/whistle/assets/js/49.46a6f0c3.js"><link rel="prefetch" href="/whistle/assets/js/5.44a242a9.js"><link rel="prefetch" href="/whistle/assets/js/50.3050ef3e.js"><link rel="prefetch" href="/whistle/assets/js/51.78a2fd5b.js"><link rel="prefetch" href="/whistle/assets/js/52.6d146ed8.js"><link rel="prefetch" href="/whistle/assets/js/53.501e8829.js"><link rel="prefetch" href="/whistle/assets/js/54.6299a871.js"><link rel="prefetch" href="/whistle/assets/js/55.31e11b60.js"><link rel="prefetch" href="/whistle/assets/js/56.084e968e.js"><link rel="prefetch" href="/whistle/assets/js/57.91968542.js"><link rel="prefetch" href="/whistle/assets/js/58.f683ed7b.js"><link rel="prefetch" href="/whistle/assets/js/59.ed4ee9cd.js"><link rel="prefetch" href="/whistle/assets/js/6.06c2faef.js"><link rel="prefetch" href="/whistle/assets/js/60.578875cb.js"><link rel="prefetch" href="/whistle/assets/js/61.761cb8df.js"><link rel="prefetch" href="/whistle/assets/js/62.3f38fad5.js"><link rel="prefetch" href="/whistle/assets/js/63.289b89c6.js"><link rel="prefetch" href="/whistle/assets/js/64.3d311a31.js"><link rel="prefetch" href="/whistle/assets/js/65.497be64f.js"><link rel="prefetch" href="/whistle/assets/js/66.91f1d53c.js"><link rel="prefetch" href="/whistle/assets/js/67.df5562a9.js"><link rel="prefetch" href="/whistle/assets/js/68.a0ef3fb8.js"><link rel="prefetch" href="/whistle/assets/js/69.f7377bde.js"><link rel="prefetch" href="/whistle/assets/js/7.65818d2e.js"><link rel="prefetch" href="/whistle/assets/js/70.e2c50de8.js"><link rel="prefetch" href="/whistle/assets/js/71.0d77b6b1.js"><link rel="prefetch" href="/whistle/assets/js/72.44c83251.js"><link rel="prefetch" href="/whistle/assets/js/73.1a7b8007.js"><link rel="prefetch" href="/whistle/assets/js/74.bc331b32.js"><link rel="prefetch" href="/whistle/assets/js/75.7628cab6.js"><link rel="prefetch" href="/whistle/assets/js/76.144a2aab.js"><link rel="prefetch" href="/whistle/assets/js/77.bd3d9092.js"><link rel="prefetch" href="/whistle/assets/js/78.6f06e89e.js"><link rel="prefetch" href="/whistle/assets/js/79.b5cc874d.js"><link rel="prefetch" href="/whistle/assets/js/8.f7c9d158.js"><link rel="prefetch" href="/whistle/assets/js/80.8725a0cf.js"><link rel="prefetch" href="/whistle/assets/js/81.bc083770.js"><link rel="prefetch" href="/whistle/assets/js/82.93c44050.js"><link rel="prefetch" href="/whistle/assets/js/83.de36a387.js"><link rel="prefetch" href="/whistle/assets/js/84.f7e48c4e.js"><link rel="prefetch" href="/whistle/assets/js/85.58ec196f.js"><link rel="prefetch" href="/whistle/assets/js/86.9dee754a.js"><link rel="prefetch" href="/whistle/assets/js/87.c3a19168.js"><link rel="prefetch" href="/whistle/assets/js/88.b0888120.js"><link rel="prefetch" href="/whistle/assets/js/89.2ac99c64.js"><link rel="prefetch" href="/whistle/assets/js/9.2a7508b2.js"><link rel="prefetch" href="/whistle/assets/js/90.49932208.js"><link rel="prefetch" href="/whistle/assets/js/91.8c2de1f6.js"><link rel="prefetch" href="/whistle/assets/js/92.1ce4cbc0.js"><link rel="prefetch" href="/whistle/assets/js/93.15b88173.js"><link rel="prefetch" href="/whistle/assets/js/94.b91ccb62.js"><link rel="prefetch" href="/whistle/assets/js/95.74ebc95e.js"><link rel="prefetch" href="/whistle/assets/js/96.b5e01145.js"><link rel="prefetch" href="/whistle/assets/js/97.c62544f3.js"><link rel="prefetch" href="/whistle/assets/js/98.ffe218d7.js"><link rel="prefetch" href="/whistle/assets/js/99.ceb46fe4.js">
+    <link rel="stylesheet" href="/whistle/assets/css/0.styles.27a793f2.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container" data-v-dad8a512><div data-v-dad8a512><div id="loader-wrapper" class="loading-wrapper" data-v-d48f4d20 data-v-dad8a512 data-v-dad8a512><div class="loader-main" data-v-d48f4d20><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div></div> <!----> <!----></div> <div class="password-shadow password-wrapper-out" style="display:none;" data-v-64685f0e data-v-dad8a512 data-v-dad8a512><h3 class="title" style="display:none;" data-v-64685f0e data-v-64685f0e>林秃秃</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-64685f0e data-v-64685f0e><input type="password" value="" data-v-64685f0e> <span data-v-64685f0e>Konck! Knock!</span> <button data-v-64685f0e>OK</button></label> <div class="footer" style="display:none;" data-v-64685f0e data-v-64685f0e><span data-v-64685f0e><i class="iconfont reco-theme" data-v-64685f0e></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-64685f0e>vuePress-theme-reco</a></span> <span data-v-64685f0e><i class="iconfont reco-copyright" data-v-64685f0e></i> <a data-v-64685f0e><span data-v-64685f0e>林秃秃</span>
+            
+          <!---->
+          2022
+        </a></span></div></div> <div class="hide" data-v-dad8a512><header class="navbar" data-v-dad8a512><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/whistle/" class="home-link router-link-active"><img src="/whistle/logo.svg" alt="林秃秃" class="logo"> <span class="site-name">林秃秃</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/whistle/" class="nav-link"><i class="iconfont reco-eye"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/whistle/categories/algorithm/" class="nav-link"><i class="iconfont undefined"></i>
+  algorithm
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/数据结构/" class="nav-link"><i class="iconfont undefined"></i>
+  数据结构
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/基础/" class="nav-link"><i class="iconfont undefined"></i>
+  基础
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/MySQL/" class="nav-link"><i class="iconfont undefined"></i>
+  MySQL
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/redis/" class="nav-link"><i class="iconfont undefined"></i>
+  redis
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/操作系统/" class="nav-link"><i class="iconfont undefined"></i>
+  操作系统
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/java/" class="nav-link"><i class="iconfont undefined"></i>
+  java
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/多线程/" class="nav-link"><i class="iconfont undefined"></i>
+  多线程
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/中间件/" class="nav-link"><i class="iconfont undefined"></i>
+  中间件
+</a></li></ul></div></div><div class="nav-item"><a href="/whistle/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/whistle/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间线
+</a></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-dad8a512></div> <aside class="sidebar" data-v-dad8a512><div class="personal-info-wrapper" data-v-ca798c94 data-v-dad8a512><img src="/whistle/avatar.png" alt="author-avatar" class="personal-img" data-v-ca798c94> <h3 class="name" data-v-ca798c94>
+    林秃秃
+  </h3> <div class="num" data-v-ca798c94><div data-v-ca798c94><h3 data-v-ca798c94>90</h3> <h6 data-v-ca798c94>文章</h6></div> <div data-v-ca798c94><h3 data-v-ca798c94>12</h3> <h6 data-v-ca798c94>标签</h6></div></div> <hr data-v-ca798c94></div> <nav class="nav-links"><div class="nav-item"><a href="/whistle/" class="nav-link"><i class="iconfont reco-eye"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/whistle/categories/algorithm/" class="nav-link"><i class="iconfont undefined"></i>
+  algorithm
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/数据结构/" class="nav-link"><i class="iconfont undefined"></i>
+  数据结构
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/基础/" class="nav-link"><i class="iconfont undefined"></i>
+  基础
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/MySQL/" class="nav-link"><i class="iconfont undefined"></i>
+  MySQL
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/redis/" class="nav-link"><i class="iconfont undefined"></i>
+  redis
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/操作系统/" class="nav-link"><i class="iconfont undefined"></i>
+  操作系统
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/java/" class="nav-link"><i class="iconfont undefined"></i>
+  java
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/多线程/" class="nav-link"><i class="iconfont undefined"></i>
+  多线程
+</a></li><li class="dropdown-item"><!----> <a href="/whistle/categories/中间件/" class="nav-link"><i class="iconfont undefined"></i>
+  中间件
+</a></li></ul></div></div><div class="nav-item"><a href="/whistle/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/whistle/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间线
+</a></div> <!----></nav> <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><a href="/whistle/foundation/" class="sidebar-heading clickable open"><span>基础</span> <span class="arrow down"></span></a> <ul class="sidebar-links sidebar-group-items"><li><section class="sidebar-group collapsable is-sub-group depth-1"><a href="/whistle/foundation/system/" class="sidebar-heading clickable open"><span>操作系统</span> <span class="arrow down"></span></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/whistle/foundation/system/runtime.html" class="sidebar-link">运行机制</a></li><li><a href="/whistle/foundation/system/systemcall.html" class="sidebar-link">系统调用</a></li><li><a href="/whistle/foundation/system/process.html" class="sidebar-link">进程</a></li><li><a href="/whistle/foundation/system/linux.html" class="sidebar-link">Linux</a></li></ul></section></li><li><section class="sidebar-group collapsable is-sub-group depth-1"><a href="/whistle/foundation/mysql/" class="sidebar-heading clickable"><span>MySQL</span> <span class="arrow right"></span></a> <!----></section></li><li><section class="sidebar-group collapsable is-sub-group depth-1"><a href="/whistle/foundation/redis/" class="sidebar-heading clickable"><span>Redis</span> <span class="arrow right"></span></a> <!----></section></li><li><a href="/whistle/foundation/designpattern/" class="sidebar-link">设计模式</a></li><li><a href="/whistle/foundation/bitewise.html" class="sidebar-link">位运算</a></li><li><a href="/whistle/foundation/git.html" class="sidebar-link">Git</a></li><li><a href="/whistle/foundation/markdown.html" class="sidebar-link">Markdown</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><a href="/whistle/java/" class="sidebar-heading clickable"><span>JAVA</span> <span class="arrow right"></span></a> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><a href="/whistle/middle/" class="sidebar-heading clickable"><span>中间件</span> <span class="arrow right"></span></a> <!----></section></li></ul> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-64685f0e data-v-dad8a512><h3 class="title" style="display:none;" data-v-64685f0e data-v-64685f0e>【Kubernetes】 Kubernetes安装</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-64685f0e data-v-64685f0e><input type="password" value="" data-v-64685f0e> <span data-v-64685f0e>Konck! Knock!</span> <button data-v-64685f0e>OK</button></label> <div class="footer" style="display:none;" data-v-64685f0e data-v-64685f0e><span data-v-64685f0e><i class="iconfont reco-theme" data-v-64685f0e></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-64685f0e>vuePress-theme-reco</a></span> <span data-v-64685f0e><i class="iconfont reco-copyright" data-v-64685f0e></i> <a data-v-64685f0e><span data-v-64685f0e>林秃秃</span>
+            
+          <!---->
+          2022
+        </a></span></div></div> <div data-v-dad8a512><main class="page"><div class="page-title" style="display:none;"><h1>【Kubernetes】 Kubernetes安装</h1> <div data-v-3b7f5bdf><i class="iconfont reco-account" data-v-3b7f5bdf><span data-v-3b7f5bdf>林秃秃</span></i> <i class="iconfont reco-date" data-v-3b7f5bdf><span data-v-3b7f5bdf>2020-08-23</span></i> <!----> <!----></div></div> <div class="theme-reco-content content__default" style="display:none;"><h2 id="一、centos7-升级内核版本"><a href="#一、centos7-升级内核版本" class="header-anchor">#</a> 一、Centos7 升级内核版本</h2> <h3 id="_1-1-查看当前内核版本"><a href="#_1-1-查看当前内核版本" class="header-anchor">#</a> 1.1 查看当前内核版本</h3> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token function">uname</span> -r
+<span class="token comment">#3.10.0-514.el7.x86_64</span>
+
+<span class="token function">uname</span> -a
+<span class="token comment">#Linux k8s-leader 3.10.0-514.el7.x86_64 #1 SMP Tue Nov 22 16:42:41 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux</span>
+
+<span class="token function">cat</span> /etc/redhat-release 
+<span class="token comment">#CentOS Linux release 7.3.1611 (Core) </span>
+</code></pre></div><h3 id="_1-2-升级内核"><a href="#_1-2-升级内核" class="header-anchor">#</a> 1.2 升级内核</h3> <p>更新yum源仓库</p> <div class="language-shell extra-class"><pre class="language-shell"><code>yum -y update
+</code></pre></div><p>启用 ELRepo 仓库
+ELRepo 仓库是基于社区的用于企业级 Linux 仓库，提供对 RedHat Enterprise (RHEL) 和 其他基于 RHEL的 Linux 发行版（CentOS、Scientific、Fedora 等）的支持。
+ELRepo 聚焦于和硬件相关的软件包，包括文件系统驱动、显卡驱动、网络驱动、声卡驱动和摄像头驱动等。</p> <p>#导入ELRepo仓库的公共密钥</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token function">rpm</span> --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
+<span class="token comment">#安装ELRepo仓库的yum源</span>
+
+<span class="token function">rpm</span> -Uvh http://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm
+</code></pre></div><h3 id="_1-3-查看可用的系统内核包"><a href="#_1-3-查看可用的系统内核包" class="header-anchor">#</a> 1.3 查看可用的系统内核包</h3> <p>可以看到4.4和4.18两个版本</p> <div class="language-shell extra-class"><pre class="language-shell"><code>yum --disablerepo<span class="token operator">=</span><span class="token string">&quot;*&quot;</span> --enablerepo<span class="token operator">=</span><span class="token string">&quot;elrepo-kernel&quot;</span> list available
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * elrepo-kernel: mirrors.tuna.tsinghua.edu.cn
+elrepo-kernel                                                                                                                                                                 <span class="token operator">|</span> <span class="token number">2.9</span> kB  00:00:00     
+elrepo-kernel/primary_db                                                                                                                                                      <span class="token operator">|</span> <span class="token number">1.8</span> MB  00:00:03     
+Available Packages
+elrepo-release.noarch                                   <span class="token number">7.0</span>-5.el7.elrepo                           elrepo-kernel
+kernel-lt.x86_64                                        <span class="token number">4.4</span>.233-1.el7.elrepo                       elrepo-kernel
+kernel-lt-devel.x86_64                                  <span class="token number">4.4</span>.233-1.el7.elrepo                       elrepo-kernel
+kernel-lt-doc.noarch                                    <span class="token number">4.4</span>.233-1.el7.elrepo                       elrepo-kernel
+kernel-lt-headers.x86_64                                <span class="token number">4.4</span>.233-1.el7.elrepo                       elrepo-kernel
+kernel-lt-tools.x86_64                                  <span class="token number">4.4</span>.233-1.el7.elrepo                       elrepo-kernel
+kernel-lt-tools-libs.x86_64                             <span class="token number">4.4</span>.233-1.el7.elrepo                       elrepo-kernel
+kernel-lt-tools-libs-devel.x86_64                       <span class="token number">4.4</span>.233-1.el7.elrepo                       elrepo-kernel
+kernel-ml.x86_64                                        <span class="token number">5.8</span>.3-1.el7.elrepo                         elrepo-kernel
+kernel-ml-devel.x86_64                                  <span class="token number">5.8</span>.3-1.el7.elrepo                         elrepo-kernel
+kernel-ml-doc.noarch                                    <span class="token number">5.8</span>.3-1.el7.elrepo                         elrepo-kernel
+kernel-ml-headers.x86_64                                <span class="token number">5.8</span>.3-1.el7.elrepo                         elrepo-kernel
+kernel-ml-tools.x86_64                                  <span class="token number">5.8</span>.3-1.el7.elrepo                         elrepo-kernel
+kernel-ml-tools-libs.x86_64                             <span class="token number">5.8</span>.3-1.el7.elrepo                         elrepo-kernel
+kernel-ml-tools-libs-devel.x86_64                       <span class="token number">5.8</span>.3-1.el7.elrepo                         elrepo-kernel
+perf.x86_64                                             <span class="token number">5.8</span>.3-1.el7.elrepo                         elrepo-kernel
+python-perf.x86_64                                      <span class="token number">5.8</span>.3-1.el7.elrepo                         elrepo-kernel
+</code></pre></div><h3 id="_1-4-安装最新版本内核"><a href="#_1-4-安装最新版本内核" class="header-anchor">#</a> 1.4 安装最新版本内核</h3> <div class="language-shell extra-class"><pre class="language-shell"><code>yum --enablerepo<span class="token operator">=</span>elrepo-kernel <span class="token function">install</span> kernel-ml
+<span class="token comment"># --enablerepo 选项开启 CentOS 系统上的指定仓库。默认开启的是 elrepo，这里用 elrepo-kernel 替换。</span>
+</code></pre></div><h3 id="_1-5-设置-grub2"><a href="#_1-5-设置-grub2" class="header-anchor">#</a> 1.5 设置 grub2</h3> <p>内核安装好后，需要设置为默认启动选项并重启后才会生效</p> <p>查看系统上的所有可用内核：</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token function">sudo</span> <span class="token function">awk</span> -F<span class="token punctuation">\</span>' <span class="token string">'$1==&quot;menuentry &quot; {print i++ &quot; : &quot; $2}'</span> /etc/grub2.cfg
+<span class="token comment">#0 : CentOS Linux (4.18.7-1.el7.elrepo.x86_64) 7 (Core)</span>
+<span class="token comment">#1 : CentOS Linux (3.10.0-862.11.6.el7.x86_64) 7 (Core)</span>
+<span class="token comment">#2 : CentOS Linux (3.10.0-514.el7.x86_64) 7 (Core)</span>
+<span class="token comment">#3 : CentOS Linux (0-rescue-063ec330caa04d4baae54c6902c62e54) 7 (Core)</span>
+</code></pre></div><p>设置新的内核为grub2的默认版本
+服务器上存在4 个内核，我们要使用 4.18 这个版本，可以通过 grub2-set-default 0 命令或编辑 /etc/default/grub 文件来设置</p> <h4 id="方法1、通过-grub2-set-default-0-命令设置"><a href="#方法1、通过-grub2-set-default-0-命令设置" class="header-anchor">#</a> 方法1、通过 grub2-set-default 0 命令设置</h4> <p>其中 0 是上面查询出来的可用内核</p> <div class="language-shell extra-class"><pre class="language-shell"><code>grub2-set-default <span class="token number">0</span>
+</code></pre></div><h4 id="方法2、编辑-etc-default-grub-文件"><a href="#方法2、编辑-etc-default-grub-文件" class="header-anchor">#</a> 方法2、编辑 /etc/default/grub 文件</h4> <p>设置 GRUB_DEFAULT=0，通过上面查询显示的编号为 0 的内核作为默认内核：</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token function">vim</span> /etc/default/grub
+
+<span class="token assign-left variable">GRUB_TIMEOUT</span><span class="token operator">=</span><span class="token number">5</span>
+<span class="token assign-left variable">GRUB_DISTRIBUTOR</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable"><span class="token variable">$(</span><span class="token function">sed</span> <span class="token string">'s, release .*$,,g'</span> /etc/system-release<span class="token variable">)</span></span>&quot;</span>
+<span class="token assign-left variable">GRUB_DEFAULT</span><span class="token operator">=</span><span class="token number">0</span>
+<span class="token assign-left variable">GRUB_DISABLE_SUBMENU</span><span class="token operator">=</span>true
+<span class="token assign-left variable">GRUB_TERMINAL_OUTPUT</span><span class="token operator">=</span><span class="token string">&quot;console&quot;</span>
+<span class="token assign-left variable">GRUB_CMDLINE_LINUX</span><span class="token operator">=</span><span class="token string">&quot;crashkernel=auto rd.lvm.lv=cl/root rhgb quiet&quot;</span>
+<span class="token assign-left variable">GRUB_DISABLE_RECOVERY</span><span class="token operator">=</span><span class="token string">&quot;true&quot;</span>
+</code></pre></div><p>生成 grub 配置文件并重启</p> <div class="language-shell extra-class"><pre class="language-shell"><code>grub2-mkconfig -o /boot/grub2/grub.cfg
+Generating grub configuration <span class="token function">file</span> <span class="token punctuation">..</span>.
+Found linux image: /boot/vmlinuz-4.18.7-1.el7.elrepo.x86_64
+Found initrd image: /boot/initramfs-4.18.7-1.el7.elrepo.x86_64.img
+Found linux image: /boot/vmlinuz-3.10.0-862.11.6.el7.x86_64
+Found initrd image: /boot/initramfs-3.10.0-862.11.6.el7.x86_64.img
+Found linux image: /boot/vmlinuz-3.10.0-514.el7.x86_64
+Found initrd image: /boot/initramfs-3.10.0-514.el7.x86_64.img
+Found linux image: /boot/vmlinuz-0-rescue-063ec330caa04d4baae54c6902c62e54
+Found initrd image: /boot/initramfs-0-rescue-063ec330caa04d4baae54c6902c62e54.img
+<span class="token keyword">done</span>
+
+<span class="token function">reboot</span>
+</code></pre></div><h3 id="_1-6-验证"><a href="#_1-6-验证" class="header-anchor">#</a> 1.6 验证</h3> <p>reboot后验证</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token function">uname</span> -r
+<span class="token comment">#4.18.7-1.el7.elrepo.x86_64</span>
+</code></pre></div><h3 id="_1-7-删除旧内核（可选）"><a href="#_1-7-删除旧内核（可选）" class="header-anchor">#</a> 1.7 删除旧内核（可选）</h3> <p>查看系统中全部的内核：</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token function">rpm</span> -qa <span class="token operator">|</span> <span class="token function">grep</span> kernel
+<span class="token comment">#kernel-3.10.0-514.el7.x86_64</span>
+<span class="token comment">#kernel-ml-4.18.7-1.el7.elrepo.x86_64</span>
+<span class="token comment">#kernel-tools-libs-3.10.0-862.11.6.el7.x86_64</span>
+<span class="token comment">#kernel-tools-3.10.0-862.11.6.el7.x86_64</span>
+<span class="token comment">#kernel-3.10.0-862.11.6.el7.x86_64</span>
+</code></pre></div><h4 id="方法1、yum-remove-删除旧内核的-rpm-包"><a href="#方法1、yum-remove-删除旧内核的-rpm-包" class="header-anchor">#</a> 方法1、yum remove 删除旧内核的 RPM 包</h4> <div class="language-shell extra-class"><pre class="language-shell"><code>yum remove kernel-3.10.0-514.el7.x86_64 <span class="token punctuation">\</span>
+kernel-tools-libs-3.10.0-862.11.6.el7.x86_64 <span class="token punctuation">\</span>
+kernel-tools-3.10.0-862.11.6.el7.x86_64 <span class="token punctuation">\</span>
+kernel-3.10.0-862.11.6.el7.x86_64
+</code></pre></div><h4 id="方法2、yum-utils-工具"><a href="#方法2、yum-utils-工具" class="header-anchor">#</a> 方法2、yum-utils 工具</h4> <p>如果安装的内核不多于 3 个，yum-utils 工具不会删除任何一个。只有在安装的内核大于 3 个时，才会自动删除旧内核。</p> <p>安装yum-utils</p> <div class="language-shell extra-class"><pre class="language-shell"><code>yum <span class="token function">install</span> yum-utils
+<span class="token comment">#删除旧版本　　</span>
+package-cleanup --oldkernels
+</code></pre></div><h2 id="二、安装-kubernetes-集群"><a href="#二、安装-kubernetes-集群" class="header-anchor">#</a> 二、安装 Kubernetes 集群</h2> <h3 id="_2-1-检查-centos-hostname"><a href="#_2-1-检查-centos-hostname" class="header-anchor">#</a> 2.1 检查 centos / hostname</h3> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token comment"># 在 master 节点和 worker 节点都要执行</span>
+<span class="token function">cat</span> /etc/redhat-release
+
+<span class="token comment"># 此处 hostname 的输出将会是该机器在 Kubernetes 集群中的节点名字</span>
+<span class="token comment"># 不能使用 localhost 作为节点的名字</span>
+<span class="token function">hostname</span>
+
+<span class="token comment"># 请使用 lscpu 命令，核对 CPU 信息</span>
+<span class="token comment"># Architecture: x86_64    本安装文档不支持 arm 架构</span>
+<span class="token comment"># CPU(s):       2         CPU 内核数量不能低于 2</span>
+lscpu
+</code></pre></div><h4 id="_2-1-1-操作系统兼容性"><a href="#_2-1-1-操作系统兼容性" class="header-anchor">#</a> 2.1.1 操作系统兼容性</h4> <table><thead><tr><th>CentOS 版本</th> <th>本文档是否兼容</th> <th>备注</th></tr></thead> <tbody><tr><td>7.8</td> <td>😄</td> <td>已验证</td></tr> <tr><td>7.7</td> <td>😄</td> <td>已验证</td></tr> <tr><td>7.6</td> <td>😄</td> <td>已验证</td></tr> <tr><td>7.5</td> <td>😞</td> <td>已证实会出现 kubelet 无法启动的问题</td></tr> <tr><td>7.4</td> <td>😞</td> <td>已证实会出现 kubelet 无法启动的问题</td></tr> <tr><td>7.3</td> <td>😞</td> <td>已证实会出现 kubelet 无法启动的问题</td></tr> <tr><td>7.2</td> <td>😞</td> <td>已证实会出现 kubelet 无法启动的问题</td></tr></tbody></table> <h4 id="_2-1-2-修改-hostname"><a href="#_2-1-2-修改-hostname" class="header-anchor">#</a> 2.1.2 修改 hostname</h4> <p>如果您需要修改 hostname，可执行如下指令：</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token comment"># 修改 hostname</span>
+hostnamectl set-hostname your-new-host-name
+<span class="token comment"># 查看修改结果</span>
+hostnamectl status
+<span class="token comment"># 设置 hostname 解析</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;127.0.0.1   <span class="token variable"><span class="token variable">$(</span><span class="token function">hostname</span><span class="token variable">)</span></span>&quot;</span> <span class="token operator">&gt;&gt;</span> /etc/hosts
+</code></pre></div><h4 id="_2-1-3-检查网络"><a href="#_2-1-3-检查网络" class="header-anchor">#</a> 2.1.3 检查网络</h4> <p>在所有节点执行命令</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token punctuation">[</span>root@k8s-leader ~<span class="token punctuation">]</span>$ <span class="token function">ip</span> route show
+<span class="token comment">#default via 192.168.83.1 dev ens33 proto static metric 100 </span>
+<span class="token comment">#172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1 linkdown </span>
+<span class="token comment">#192.168.83.0/24 dev ens33 proto kernel scope link src 192.168.83.11 metric 100 </span>
+
+<span class="token punctuation">[</span>root@k8s-leader ~<span class="token punctuation">]</span>$ <span class="token function">ip</span> address
+<span class="token comment">#1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000</span>
+<span class="token comment">#    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span>
+<span class="token comment">#    inet 127.0.0.1/8 scope host lo</span>
+<span class="token comment">#       valid_lft forever preferred_lft forever</span>
+<span class="token comment">#    inet6 ::1/128 scope host </span>
+<span class="token comment">#       valid_lft forever preferred_lft forever</span>
+<span class="token comment">#2: ens33: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000</span>
+<span class="token comment">#    link/ether 00:0c:29:da:6c:65 brd ff:ff:ff:ff:ff:ff</span>
+<span class="token comment">#    inet 192.168.83.11/24 brd 192.168.83.255 scope global noprefixroute ens33</span>
+<span class="token comment">#       valid_lft forever preferred_lft forever</span>
+<span class="token comment">#    inet6 fe80::2402:dfd2:eab2:573/64 scope link noprefixroute </span>
+<span class="token comment">#       valid_lft forever preferred_lft forever</span>
+
+</code></pre></div><div class="custom-block tip"><p class="custom-block-title">kubelet使用的IP地址</p> <p><code>ip route show</code>命令中，可以知道机器的默认网卡，通常是 eth0，如 default via 172.21.0.23 dev eth0 如果vmware环境下一般为ens33<br> <code>ip address</code> 命令中，可显示默认网卡的 IP 地址，Kubernetes 将使用此 IP 地址与集群内的其他节点通信，如 172.17.216.80<br>
+所有节点上 Kubernetes 所使用的 IP 地址必须可以互通（无需 NAT 映射、无安全组或防火墙隔离）</p></div> <h3 id="_2-2-安装docker及kubelet"><a href="#_2-2-安装docker及kubelet" class="header-anchor">#</a> 2.2 安装docker及kubelet</h3> <p>请认真核对如下选项，7个都符合再安装。</p> <p>😄 我的任意节点 centos 版本为 7.6 / 7.7 或 7.8<br>
+😄 我的任意节点 CPU 内核数量大于等于 2，且内存大于等于 4G<br>
+😄 我的任意节点 hostname 不是 localhost，且不包含下划线、小数点、大写字母<br>
+😄 我的任意节点都有固定的内网 IP 地址<br>
+😄 我的任意节点都只有一个网卡，如果有特殊目的，可以在完成 K8S 安装后再增加新的网卡<br>
+😄 我的任意节点上 Kubelet使用的 IP 地址 可互通（无需 NAT 映射即可相互访问），且没有防火墙、安全组隔离<br>
+😄 我的任意节点不会直接使用 docker run 或 docker-compose 运行容器</p> <h4 id="_2-2-1-快速安装（推荐）"><a href="#_2-2-1-快速安装（推荐）" class="header-anchor">#</a> 2.2.1 快速安装（推荐）</h4> <p>docker hub 镜像请根据自己网络的情况任选一个</p> <ul><li>第四行为腾讯云 docker hub 镜像</li> <li>第六行为DaoCloud docker hub 镜像</li> <li>第八行为华为云 docker hub 镜像</li> <li>第十行为阿里云 docker hub 镜像</li></ul> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token comment"># 在 leader 节点和 worker 节点都要执行</span>
+<span class="token comment"># 最后一个参数 1.18.6 用于指定 kubenetes 版本，支持所有 1.18.x 版本的安装</span>
+<span class="token comment"># 腾讯云 docker hub 镜像</span>
+<span class="token comment"># export REGISTRY_MIRROR=&quot;https://mirror.ccs.tencentyun.com&quot;</span>
+<span class="token comment"># DaoCloud 镜像</span>
+<span class="token comment"># export REGISTRY_MIRROR=&quot;http://f1361db2.m.daocloud.io&quot;</span>
+<span class="token comment"># 华为云镜像</span>
+<span class="token comment"># export REGISTRY_MIRROR=&quot;https://05f073ad3c0010ea0f4bc00b7105ec20.mirror.swr.myhuaweicloud.com&quot;</span>
+<span class="token comment"># 阿里云 docker hub 镜像</span>
+<span class="token comment"># export REGISTRY_MIRROR=https://registry.cn-hangzhou.aliyuncs.com</span>
+<span class="token function">curl</span> -sSL https://kuboard.cn/install-script/v1.18.x/install_kubelet.sh <span class="token operator">|</span> <span class="token function">sh</span> -s <span class="token number">1.18</span>.8
+</code></pre></div><h4 id="_2-2-2-手动安装"><a href="#_2-2-2-手动安装" class="header-anchor">#</a> 2.2.2 手动安装</h4> <p>docker hub 镜像请根据自己网络的情况任选一个</p> <ul><li>第四行为腾讯云 docker hub 镜像</li> <li>第六行为DaoCloud docker hub 镜像</li> <li>第八行为阿里云 docker hub 镜像</li></ul> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token comment"># 在 leader 节点和 worker 节点都要执行</span>
+<span class="token comment"># 最后一个参数 1.18.6 用于指定 kubenetes 版本，支持所有 1.18.x 版本的安装</span>
+<span class="token comment"># 腾讯云 docker hub 镜像</span>
+<span class="token comment"># export REGISTRY_MIRROR=&quot;https://mirror.ccs.tencentyun.com&quot;</span>
+<span class="token comment"># DaoCloud 镜像</span>
+<span class="token comment"># export REGISTRY_MIRROR=&quot;http://f1361db2.m.daocloud.io&quot;</span>
+<span class="token comment"># 阿里云 docker hub 镜像</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">REGISTRY_MIRROR</span><span class="token operator">=</span>https://registry.cn-hangzhou.aliyuncs.com
+</code></pre></div><div class="language-shell extra-class"><pre class="language-shell"><code><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token comment"># 在 leader 节点和 worker 节点都要执行</span>
+
+<span class="token comment"># 安装 docker</span>
+<span class="token comment"># 参考文档如下</span>
+<span class="token comment"># https://docs.docker.com/install/linux/docker-ce/centos/ </span>
+<span class="token comment"># https://docs.docker.com/install/linux/linux-postinstall/</span>
+
+<span class="token comment"># 卸载旧版本</span>
+yum remove -y <span class="token function">docker</span> <span class="token punctuation">\</span>
+docker-client <span class="token punctuation">\</span>
+docker-client-latest <span class="token punctuation">\</span>
+docker-ce-cli <span class="token punctuation">\</span>
+docker-common <span class="token punctuation">\</span>
+docker-latest <span class="token punctuation">\</span>
+docker-latest-logrotate <span class="token punctuation">\</span>
+docker-logrotate <span class="token punctuation">\</span>
+docker-selinux <span class="token punctuation">\</span>
+docker-engine-selinux <span class="token punctuation">\</span>
+docker-engine
+
+<span class="token comment"># 设置 yum repository</span>
+yum <span class="token function">install</span> -y yum-utils <span class="token punctuation">\</span>
+device-mapper-persistent-data <span class="token punctuation">\</span>
+lvm2
+yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+
+<span class="token comment"># 安装并启动 docker</span>
+yum <span class="token function">install</span> -y docker-ce-19.03.8 docker-ce-cli-19.03.8 containerd.io
+systemctl <span class="token builtin class-name">enable</span> <span class="token function">docker</span>
+systemctl start <span class="token function">docker</span>
+
+<span class="token comment"># 安装 nfs-utils</span>
+<span class="token comment"># 必须先安装 nfs-utils 才能挂载 nfs 网络存储</span>
+yum <span class="token function">install</span> -y nfs-utils
+yum <span class="token function">install</span> -y <span class="token function">wget</span>
+
+<span class="token comment"># 关闭 防火墙</span>
+systemctl stop firewalld
+systemctl disable firewalld
+
+<span class="token comment"># 关闭 SeLinux</span>
+setenforce <span class="token number">0</span>
+<span class="token function">sed</span> -i <span class="token string">&quot;s/SELINUX=enforcing/SELINUX=disabled/g&quot;</span> /etc/selinux/config
+
+<span class="token comment"># 关闭 swap</span>
+swapoff -a
+<span class="token function">yes</span> <span class="token operator">|</span> <span class="token function">cp</span> /etc/fstab /etc/fstab_bak
+<span class="token function">cat</span> /etc/fstab_bak <span class="token operator">|</span><span class="token function">grep</span> -v swap <span class="token operator">&gt;</span> /etc/fstab
+
+<span class="token comment"># 修改 /etc/sysctl.conf</span>
+<span class="token comment"># 如果有配置，则修改</span>
+<span class="token function">sed</span> -i <span class="token string">&quot;s#^net.ipv4.ip_forward.*#net.ipv4.ip_forward=1#g&quot;</span>  /etc/sysctl.conf
+<span class="token function">sed</span> -i <span class="token string">&quot;s#^net.bridge.bridge-nf-call-ip6tables.*#net.bridge.bridge-nf-call-ip6tables=1#g&quot;</span>  /etc/sysctl.conf
+<span class="token function">sed</span> -i <span class="token string">&quot;s#^net.bridge.bridge-nf-call-iptables.*#net.bridge.bridge-nf-call-iptables=1#g&quot;</span>  /etc/sysctl.conf
+<span class="token function">sed</span> -i <span class="token string">&quot;s#^net.ipv6.conf.all.disable_ipv6.*#net.ipv6.conf.all.disable_ipv6=1#g&quot;</span>  /etc/sysctl.conf
+<span class="token function">sed</span> -i <span class="token string">&quot;s#^net.ipv6.conf.default.disable_ipv6.*#net.ipv6.conf.default.disable_ipv6=1#g&quot;</span>  /etc/sysctl.conf
+<span class="token function">sed</span> -i <span class="token string">&quot;s#^net.ipv6.conf.lo.disable_ipv6.*#net.ipv6.conf.lo.disable_ipv6=1#g&quot;</span>  /etc/sysctl.conf
+<span class="token function">sed</span> -i <span class="token string">&quot;s#^net.ipv6.conf.all.forwarding.*#net.ipv6.conf.all.forwarding=1#g&quot;</span>  /etc/sysctl.conf
+<span class="token comment"># 可能没有，追加</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;net.ipv4.ip_forward = 1&quot;</span> <span class="token operator">&gt;&gt;</span> /etc/sysctl.conf
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;net.bridge.bridge-nf-call-ip6tables = 1&quot;</span> <span class="token operator">&gt;&gt;</span> /etc/sysctl.conf
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;net.bridge.bridge-nf-call-iptables = 1&quot;</span> <span class="token operator">&gt;&gt;</span> /etc/sysctl.conf
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;net.ipv6.conf.all.disable_ipv6 = 1&quot;</span> <span class="token operator">&gt;&gt;</span> /etc/sysctl.conf
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;net.ipv6.conf.default.disable_ipv6 = 1&quot;</span> <span class="token operator">&gt;&gt;</span> /etc/sysctl.conf
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;net.ipv6.conf.lo.disable_ipv6 = 1&quot;</span> <span class="token operator">&gt;&gt;</span> /etc/sysctl.conf
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;net.ipv6.conf.all.forwarding = 1&quot;</span>  <span class="token operator">&gt;&gt;</span> /etc/sysctl.conf
+<span class="token comment"># 执行命令以应用</span>
+sysctl -p
+
+<span class="token comment"># 配置K8S的yum源</span>
+<span class="token function">cat</span> <span class="token operator">&lt;&lt;</span><span class="token string">EOF<span class="token bash punctuation"> <span class="token operator">&gt;</span> /etc/yum.repos.d/kubernetes.repo</span>
+[kubernetes]
+name=Kubernetes
+baseurl=http://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=0
+repo_gpgcheck=0
+gpgkey=http://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg
+       http://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+EOF</span>
+
+<span class="token comment"># 卸载旧版本</span>
+yum remove -y kubelet kubeadm kubectl
+
+<span class="token comment"># 安装kubelet、kubeadm、kubectl</span>
+<span class="token comment"># 将 ${1} 替换为 kubernetes 版本号，例如 1.17.2</span>
+yum <span class="token function">install</span> -y kubelet-<span class="token variable">${1}</span> kubeadm-<span class="token variable">${1}</span> kubectl-<span class="token variable">${1}</span>
+
+<span class="token comment"># 修改docker Cgroup Driver为systemd</span>
+<span class="token comment"># # 将/usr/lib/systemd/system/docker.service文件中的这一行 ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock</span>
+<span class="token comment"># # 修改为 ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --exec-opt native.cgroupdriver=systemd</span>
+<span class="token comment"># 如果不修改，在添加 worker 节点时可能会碰到如下错误</span>
+<span class="token comment"># [WARNING IsDockerSystemdCheck]: detected &quot;cgroupfs&quot; as the Docker cgroup driver. The recommended driver is &quot;systemd&quot;. </span>
+<span class="token comment"># Please follow the guide at https://kubernetes.io/docs/setup/cri/</span>
+<span class="token function">sed</span> -i <span class="token string">&quot;s#^ExecStart=/usr/bin/dockerd.*#ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --exec-opt native.cgroupdriver=systemd#g&quot;</span> /usr/lib/systemd/system/docker.service
+
+<span class="token comment"># 设置 docker 镜像，提高 docker 镜像下载速度和稳定性</span>
+<span class="token comment"># 如果您访问 https://hub.docker.io 速度非常稳定，亦可以跳过这个步骤</span>
+<span class="token function">curl</span> -sSL https://kuboard.cn/install-script/set_mirror.sh <span class="token operator">|</span> <span class="token function">sh</span> -s <span class="token variable">${REGISTRY_MIRROR}</span>
+
+<span class="token comment"># 重启 docker，并启动 kubelet</span>
+systemctl daemon-reload
+systemctl restart <span class="token function">docker</span>
+systemctl <span class="token builtin class-name">enable</span> kubelet <span class="token operator">&amp;&amp;</span> systemctl start kubelet
+
+<span class="token function">docker</span> version
+</code></pre></div><div class="custom-block warning"><p class="custom-block-title">注意</p> <p>如果此时执行 service status kubelet 命令，将得到 kubelet 启动失败的错误提示，请忽略此错误，因为必须完成后续步骤中 kubeadm init 的操作，kubelet 才能正常启动</p></div> <p>验证</p> <div class="language-shell extra-class"><pre class="language-shell"><code>--------请检查下面输出结果中的 Registry Mirrors 是否已经修改过来-------- 
+<span class="token function">docker</span> info
+Client:
+ Debug Mode: <span class="token boolean">false</span>
+
+Server:
+ Containers: <span class="token number">0</span>
+  Running: <span class="token number">0</span>
+  Paused: <span class="token number">0</span>
+  Stopped: <span class="token number">0</span>
+ Images: <span class="token number">0</span>
+ Server Version: <span class="token number">19.03</span>.8
+ Storage Driver: overlay2
+  Backing Filesystem: <span class="token operator">&lt;</span>unknown<span class="token operator">&gt;</span>
+  Supports d_type: <span class="token boolean">true</span>
+  Native Overlay Diff: <span class="token boolean">true</span>
+ Logging Driver: json-file
+ Cgroup Driver: systemd
+ Plugins:
+  Volume: <span class="token builtin class-name">local</span>
+  Network: bridge <span class="token function">host</span> ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file <span class="token builtin class-name">local</span> logentries splunk syslog
+ Swarm: inactive
+ Runtimes: runc
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: 7ad184331fa3e55e52b890ea95e65ba581ae3429
+ runc version: dc9208a3303feef5b3839f4323d9beb36df0a9dd
+ init version: fec3683
+ Security Options:
+  seccomp
+   Profile: default
+ Kernel Version: <span class="token number">5.8</span>.3-1.el7.elrepo.x86_64
+ Operating System: CentOS Linux <span class="token number">7</span> <span class="token punctuation">(</span>Core<span class="token punctuation">)</span>
+ OSType: linux
+ Architecture: x86_64
+ CPUs: <span class="token number">2</span>
+ Total Memory: <span class="token number">1</span>.915GiB
+ Name: k8s-leader
+ ID: 2PXC:YUNB:G5YK:ZZWD:SLGB:FAXI:AZES:OP2W:IMYD:UCBW:EEO3:75Z2
+ Docker Root Dir: /var/lib/docker
+ Debug Mode: <span class="token boolean">false</span>
+ Registry: https://index.docker.io/v1/
+ Labels:
+ Experimental: <span class="token boolean">false</span>
+ Insecure Registries:
+  <span class="token number">127.0</span>.0.0/8
+ Registry Mirrors:
+  https://registry.cn-hangzhou.aliyuncs.com/
+ Live Restore Enabled: <span class="token boolean">false</span>
+
+Created symlink from /etc/systemd/system/multi-user.target.wants/kubelet.service to /usr/lib/systemd/system/kubelet.service.
+Client: Docker Engine - Community
+ Version:           <span class="token number">19.03</span>.8
+ API version:       <span class="token number">1.40</span>
+ Go version:        go1.12.17
+ Git commit:        afacb8b
+ Built:             Wed Mar <span class="token number">11</span> 01:27:04 <span class="token number">2020</span>
+ OS/Arch:           linux/amd64
+ Experimental:      <span class="token boolean">false</span>
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          <span class="token number">19.03</span>.8
+  API version:      <span class="token number">1.40</span> <span class="token punctuation">(</span>minimum version <span class="token number">1.12</span><span class="token punctuation">)</span>
+  Go version:       go1.12.17
+  Git commit:       afacb8b
+  Built:            Wed Mar <span class="token number">11</span> 01:25:42 <span class="token number">2020</span>
+  OS/Arch:          linux/amd64
+  Experimental:     <span class="token boolean">false</span>
+ containerd:
+  Version:          <span class="token number">1.2</span>.13
+  GitCommit:        7ad184331fa3e55e52b890ea95e65ba581ae3429
+ runc:
+  Version:          <span class="token number">1.0</span>.0-rc10
+  GitCommit:        dc9208a3303feef5b3839f4323d9beb36df0a9dd
+ docker-init:
+  Version:          <span class="token number">0.18</span>.0
+  GitCommit:        fec3683
+</code></pre></div><h3 id="_2-3-初始化-leader-节点"><a href="#_2-3-初始化-leader-节点" class="header-anchor">#</a> 2.3 初始化 leader 节点</h3> <div class="custom-block danger"><p class="custom-block-title">关于初始化时用到的环境变量</p> <ul><li>APISERVER_NAME 不能是 leader 的 hostname</li> <li>APISERVER_NAME 必须全为小写字母、数字、小数点，不能包含减号</li> <li>POD_SUBNET 所使用的网段不能与 master节点/worker节点 所在的网段重叠。该字段的取值为一个 CIDR 值，如果您对 CIDR 这个概念还不熟悉，请仍然执行 export POD_SUBNET=10.100.0.1/16 命令，不做修改</li></ul></div> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token comment"># 只在 leader 节点执行</span>
+<span class="token comment"># 替换 x.x.x.x 为 leader 节点实际 IP（请使用内网 IP）</span>
+<span class="token comment"># export 命令只在当前 shell 会话中有效，开启新的 shell 窗口后，如果要继续安装过程，请重新执行此处的 export 命令</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">MASTER_IP</span><span class="token operator">=</span>x.x.x.x   <span class="token comment"># 192.168.83.11</span>
+<span class="token comment"># 替换 apiserver.demo 为 您想要的 dnsName</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">APISERVER_NAME</span><span class="token operator">=</span>k8s.vm
+<span class="token comment"># Kubernetes 容器组所在的网段，该网段安装完成后，由 kubernetes 创建，事先并不存在于您的物理网络中</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">POD_SUBNET</span><span class="token operator">=</span><span class="token number">10.100</span>.0.1/16
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${MASTER_IP}</span>    <span class="token variable">${APISERVER_NAME}</span>&quot;</span> <span class="token operator">&gt;&gt;</span> /etc/hosts
+<span class="token function">curl</span> -sSL https://kuboard.cn/install-script/v1.18.x/init_master.sh <span class="token operator">|</span> <span class="token function">sh</span> -s <span class="token number">1.18</span>.8
+</code></pre></div><h3 id="_2-4-初始化worker"><a href="#_2-4-初始化worker" class="header-anchor">#</a> 2.4 初始化worker</h3> <h4 id="_2-4-1-获得-join命令参数"><a href="#_2-4-1-获得-join命令参数" class="header-anchor">#</a> 2.4.1 获得 join命令参数</h4> <p>在 master 节点上执行</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token comment"># 只在 master 节点执行</span>
+kubeadm token create --print-join-command
+</code></pre></div><p>可获取kubeadm join 命令及参数，如下所示</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token comment"># kubeadm token create 命令的输出</span>
+kubeadm <span class="token function">join</span> apiserver.demo:6443 --token mpfjma.4vjjg8flqihor4vt     --discovery-token-ca-cert-hash sha256:6f7a8e40a810323672de5eee6f4d19aa2dbdb38411845a1bf5dd63485c43d303
+</code></pre></div><div class="custom-block tip"><p class="custom-block-title">有效时间</p> <p>该 token 的有效时间为 2 个小时，2小时内，您可以使用此 token 初始化任意数量的 worker 节点。</p></div> <h4 id="_2-4-2-针对所有的-worker-节点执行"><a href="#_2-4-2-针对所有的-worker-节点执行" class="header-anchor">#</a> 2.4.2 针对所有的 worker 节点执行</h4> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token comment"># 只在 worker 节点执行</span>
+<span class="token comment"># 替换 x.x.x.x 为 master 节点的内网 IP</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">MASTER_IP</span><span class="token operator">=</span><span class="token number">192.168</span>.83.11
+<span class="token comment"># 替换 apiserver.demo 为初始化 master 节点时所使用的 APISERVER_NAME</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">APISERVER_NAME</span><span class="token operator">=</span>k8s.vm
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${MASTER_IP}</span>    <span class="token variable">${APISERVER_NAME}</span>&quot;</span> <span class="token operator">&gt;&gt;</span> /etc/hosts
+
+<span class="token comment"># 替换为 master 节点上 kubeadm token create 命令的输出</span>
+kubeadm <span class="token function">join</span> apiserver.demo:6443 --token mpfjma.4vjjg8flqihor4vt     --discovery-token-ca-cert-hash sha256:6f7a8e40a810323672de5eee6f4d19aa2dbdb38411845a1bf5dd63485c43d303
+
+</code></pre></div><h3 id="_2-5-检查初始化结果"><a href="#_2-5-检查初始化结果" class="header-anchor">#</a> 2.5 检查初始化结果</h3> <p>在 master 节点上执行</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token comment"># 只在 master 节点执行</span>
+kubectl get nodes -o wide
+<span class="token comment"># 输出结果如下所示：</span>
+<span class="token punctuation">[</span>root@k8s-leader ~<span class="token punctuation">]</span><span class="token comment"># kubectl get nodes -o wide</span>
+NAME          STATUS   ROLES    AGE   VERSION   INTERNAL-IP     EXTERNAL-IP   OS-IMAGE                KERNEL-VERSION              CONTAINER-RUNTIME
+k8s-leader    Ready    master   98m   v1.18.8   <span class="token number">192.168</span>.83.11   <span class="token operator">&lt;</span>none<span class="token operator">&gt;</span>        CentOS Linux <span class="token number">7</span> <span class="token punctuation">(</span>Core<span class="token punctuation">)</span>   <span class="token number">5.8</span>.3-1.el7.elrepo.x86_64   docker://19.3.8
+k8s-worker1   Ready    <span class="token operator">&lt;</span>none<span class="token operator">&gt;</span>   23m   v1.18.8   <span class="token number">192.168</span>.83.12   <span class="token operator">&lt;</span>none<span class="token operator">&gt;</span>        CentOS Linux <span class="token number">7</span> <span class="token punctuation">(</span>Core<span class="token punctuation">)</span>   <span class="token number">5.8</span>.3-1.el7.elrepo.x86_64   docker://19.3.8
+k8s-worker2   Ready    <span class="token operator">&lt;</span>none<span class="token operator">&gt;</span>   73m   v1.18.8   <span class="token number">192.168</span>.83.13   <span class="token operator">&lt;</span>none<span class="token operator">&gt;</span>        CentOS Linux <span class="token number">7</span> <span class="token punctuation">(</span>Core<span class="token punctuation">)</span>   <span class="token number">5.8</span>.3-1.el7.elrepo.x86_64   docker://19.3.8
+</code></pre></div><h3 id="_2-6-设置节点role"><a href="#_2-6-设置节点role" class="header-anchor">#</a> 2.6 设置节点role</h3> <div class="language-shell extra-class"><pre class="language-shell"><code>kubectl label <span class="token function">node</span> k8s-worker2 node-role.kubernetes.io/worker<span class="token operator">=</span>worker
+</code></pre></div></div> <footer class="page-edit" style="display:none;"><!----> <div class="last-updated"><span class="prefix">最近更新: </span> <span class="time">11/8/2022, 7:16:33 AM</span></div></footer> <!----> <!----> <!----></main> <!----></div></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div></div></div>
+    <script src="/whistle/assets/js/app.c849928c.js" defer></script><script src="/whistle/assets/js/3.f6935b69.js" defer></script><script src="/whistle/assets/js/1.ca64ea80.js" defer></script><script src="/whistle/assets/js/131.eef6c73c.js" defer></script>
+  </body>
+</html>
