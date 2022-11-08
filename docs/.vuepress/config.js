@@ -192,6 +192,10 @@ module.exports = {
                         title: '单元测试',
                         path: '/java/junit/'
                     },
+                    {
+                        title: 'SEATA',
+                        path: '/java/seata/'
+                    },
                 ]
             },
             {
