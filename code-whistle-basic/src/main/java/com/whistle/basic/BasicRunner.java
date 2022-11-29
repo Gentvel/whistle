@@ -1,46 +1,35 @@
 package com.whistle.basic;
 
-import cn.hutool.extra.spring.SpringUtil;
-import com.whistle.basic.redis.RedisTemplateDemo;
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.date.TimeInterval;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
-import org.springframework.util.ReflectionUtils;
 
-import java.lang.reflect.Method;
-import java.util.Objects;
+import java.util.Map;
+
 /**
  * @author Zz
  */
+@Slf4j
 @Component
 public class BasicRunner implements CommandLineRunner, ApplicationContextAware {
     private ApplicationContext applicationContext;
+
     @Override
     public void run(String... args) {
-        runTest(RedisTemplateDemo.class,"demo");
-    }
+        Map<String, DemoRunner> beansOfType = applicationContext.getBeansOfType(DemoRunner.class);
 
-    private void runTest(Class<?> clazz,String methodName){
-        Object bean = applicationContext.getBean(clazz);
-        Method method = ReflectionUtils.findMethod(clazz, methodName);
-        if(Objects.isNull(method)){
-            throw new RuntimeException(String.format("could not  find method name [%s]",methodName));
-        }
-        ReflectionUtils.makeAccessible(method);
-        ReflectionUtils.invokeMethod(method,bean);
-    }
-
-
-    private void runTest(Class<?> clazz,String methodName,Object ...objects){
-        Object bean = applicationContext.getBean(clazz);
-        Method method = ReflectionUtils.findMethod(clazz, methodName);
-        if(Objects.isNull(method)){
-            throw new RuntimeException(String.format("could not  find method name [%s]",methodName));
-        }
-        ReflectionUtils.makeAccessible(method);
-        ReflectionUtils.invokeMethod(method,bean,objects);
+        beansOfType.forEach((name,bean)->{
+            TimeInterval timer = DateUtil.timer();
+            timer.start();
+            bean.runner();
+            long interval = timer.interval();
+            log.info("exec bean runner [{}] ,exec time {} ms.",name,interval);
+        });
     }
 
     @Override
