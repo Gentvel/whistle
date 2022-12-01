@@ -36,6 +36,8 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <sonar.organization>gentvel</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <netty.version>4.1.55.Final</netty.version>
         <hutool.version>5.7.22</hutool.version>
         <nashorn.version>15.3</nashorn.version>
@@ -74,5 +76,4 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
 </project>
