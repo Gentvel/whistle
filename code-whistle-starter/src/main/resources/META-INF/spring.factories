@@ -1,0 +1,4 @@
+#-------starter????---------
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.whistle.starter.boot.WhistleSpringBootStarter
+org.springframework.context.ApplicationContextInitializer=com.whistle.starter.boot.WhistleApplicationContextInitializer
+org.springframework.boot.env.EnvironmentPostProcessor=com.whistle.starter.boot.WhistleApplicationContextInitializer

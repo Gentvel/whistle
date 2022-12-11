@@ -2,3 +2,6 @@ spring:
   data:
     redis:
       host: 192.168.86.13
+whistle:
+  web:
+    enable-knife4j: false

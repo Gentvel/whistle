@@ -1,11 +1,11 @@
 package com.whistle.basic.redis;
 
 import com.whistle.basic.DemoRunner;
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.Set;
 
 /**
@@ -13,7 +13,8 @@ import java.util.Set;
  */
 @Slf4j
 @Component
-public class RedisTemplateDemo implements DemoRunner {
+public class RedisTemplateDemo {
+
     @Resource
     private RedisTemplate<String,Object> redisTemplate;
 
@@ -30,9 +31,9 @@ public class RedisTemplateDemo implements DemoRunner {
         }
     }
 
-    @Override
-    public void runner() {
-        setTestSet();
-        getTestSet();
-    }
+//    @Override
+//    public void runner() {
+//        setTestSet();
+//        getTestSet();
+//    }
 }
