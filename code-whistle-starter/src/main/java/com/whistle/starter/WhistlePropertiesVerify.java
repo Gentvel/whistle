@@ -19,6 +19,7 @@ public final class WhistlePropertiesVerify {
         StringJoiner excludeList = new StringJoiner(",");
         extVars.putAll(Objects.requireNonNull(verifyKnife4J(environment,excludeList)));
         extVars.put("spring.autoconfigure.exclude",excludeList.toString());
+        //清空临时缓存变量
         WhistleConstants.getWeakCache().clear();
         return extVars;
     }

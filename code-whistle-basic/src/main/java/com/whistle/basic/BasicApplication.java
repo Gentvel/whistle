@@ -1,12 +1,12 @@
 package com.whistle.basic;
 
+import com.whistle.starter.annotation.WhistleApplication;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author Gentvel
  */
-@SpringBootApplication
+@WhistleApplication
 public class BasicApplication{
     public static void main(String[] args) {
         SpringApplication.run(BasicApplication.class, args);

@@ -1,6 +1,7 @@
 package com.whistle.basic;
 
 import com.whistle.starter.WhistleConstants;
+import com.whistle.starter.response.Result;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -12,14 +13,14 @@ public class TestController {
 
 
 
-    @PostMapping
-    public String test(@RequestBody String aaa){
-        return aaa+"344ggg4";
+    @GetMapping("ok")
+    public Result<?> ok(){
+        return Result.ok();
     }
 
-    @GetMapping
-    public String get(){
-        return WhistleConstants.getWeakCache().toString();
+    @GetMapping("fail")
+    public Result<?> fail(){
+        return Result.fail();
     }
 
 
