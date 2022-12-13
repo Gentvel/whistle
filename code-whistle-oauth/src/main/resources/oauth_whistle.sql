@@ -1,4 +1,13 @@
-create table operate_log_info
+create user whistle@'%' identified by 'P@ssw0rd';
+
+create database if not exists whistle;
+
+grant all privileges on whistle.* to whistle@'%';
+
+use whistle;
+
+
+create table if not exists operate_log_info
 (
     id                      int auto_increment comment '主键'
         primary key,
@@ -16,7 +25,7 @@ create table operate_log_info
 )
     comment '操作日志表';
 
-create table pri_rbac_privileges
+create table if not exists pri_rbac_privileges
 (
     pri_id       int auto_increment comment '权限id'
         primary key,
@@ -32,7 +41,7 @@ create table pri_rbac_privileges
 )
     comment '权限表';
 
-create table pri_rbac_role
+create table if not exists pri_rbac_role
 (
     rid          int auto_increment comment '角色id'
         primary key,
@@ -50,7 +59,7 @@ create table pri_rbac_role
 )
     comment '角色表';
 
-create table pri_rbac_role_privileges
+create table if not exists pri_rbac_role_privileges
 (
     id           int auto_increment comment '主键'
         primary key,
@@ -76,7 +85,7 @@ create index pri_rbac_pri_privileges_relation
 create index pri_rbac_pri_role_relation
     on pri_rbac_role_privileges (rid);
 
-create table pri_rbac_user
+create table if not exists pri_rbac_user
 (
     uid          varchar(32)                           not null comment '用户唯一ID'
         primary key,
@@ -99,7 +108,7 @@ create table pri_rbac_user
 )
     comment '权限用户登记表';
 
-create table pri_rbac_user_role
+create table if not exists pri_rbac_user_role
 (
     id           int auto_increment comment '主键'
         primary key,
@@ -125,7 +134,7 @@ create index pri_rbac_role_relation
 create index pri_rbac_user_relation
     on pri_rbac_user_role (uid);
 
-create table some_sqls
+create table if not exists some_sqls
 (
     id       int auto_increment comment '主键'
         primary key,

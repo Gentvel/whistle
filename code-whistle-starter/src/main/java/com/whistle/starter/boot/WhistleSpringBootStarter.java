@@ -1,13 +1,24 @@
 package com.whistle.starter.boot;
 
 import com.github.xiaoymin.knife4j.spring.configuration.Knife4jAutoConfiguration;
+import com.whistle.starter.annotation.WhistleApplication;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.beans.factory.support.BeanDefinitionRegistry;
+import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
+import org.springframework.boot.ConfigurableBootstrapContext;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.SpringApplicationRunListener;
+import org.springframework.boot.autoconfigure.AutoConfigurationPackages;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.*;
+import org.springframework.core.type.AnnotationMetadata;
+import org.springframework.core.type.filter.AnnotationTypeFilter;
+import org.springframework.util.ClassUtils;
+import org.springframework.web.bind.annotation.RestController;
 import springfox.boot.starter.autoconfigure.OpenApiAutoConfiguration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -25,7 +36,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 @AutoConfigureBefore({Knife4jAutoConfiguration.class, OpenApiAutoConfiguration.class})
 @Import({WhistleStarterSelector.class})
 @EnableConfigurationProperties({WhistleProperties.class, WhistleWebProperties.class})
-public class WhistleSpringBootStarter {
+public class WhistleSpringBootStarter implements SpringApplicationRunListener {
     @Bean
     @ConditionalOnProperty(prefix = WhistleWebProperties.PREFIX, value = "enable-knife4j", havingValue = "true")
     public Docket createRestApi() {
@@ -33,7 +44,7 @@ public class WhistleSpringBootStarter {
                 .useDefaultResponseMessages(false)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.whistle"))
+                .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
                 .paths(PathSelectors.any())
                 .build();
     }

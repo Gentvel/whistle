@@ -36,6 +36,7 @@
         <knife4j.version>3.0.3</knife4j.version>
         <mybatis-plus.version>3.3.2</mybatis-plus.version>
         <fastjson2-version>2.0.2</fastjson2-version>
+        <satoken-version>1.33.0</satoken-version>
     </properties>
 
 
@@ -97,6 +98,12 @@
                 <groupId>com.alibaba.fastjson2</groupId>
                 <artifactId>fastjson2-extension</artifactId>
                 <version>${fastjson2-version}</version>
+            </dependency>
+            <!-- Sa-Token 权限认证，在线文档：https://sa-token.cc -->
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-spring-boot-starter</artifactId>
+                <version>${satoken-version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
