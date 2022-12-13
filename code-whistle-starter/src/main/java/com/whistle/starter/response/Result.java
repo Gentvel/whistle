@@ -123,7 +123,7 @@ public class Result <T> implements Serializable {
      * @return {@link Result}
      */
     public static <T>  Result<T> fail(String code,String msg){
-        return success(code, msg, null);
+        return failure(code, msg, null);
     }
 
 
@@ -133,7 +133,7 @@ public class Result <T> implements Serializable {
      * @return {@link Result}
      */
     public static <T>  Result<T> fail(String msg){
-        return success(ResponseInterface.FAILURE, msg, null);
+        return failure(ResponseInterface.FAILURE, msg, null);
     }
 
     /**
@@ -141,7 +141,7 @@ public class Result <T> implements Serializable {
      * @return {@link Result}
      */
     public static <T>  Result<T> fail(){
-        return success(ResponseInterface.FAILURE, ResponseInterface.FAILURE_MESSAGE, null);
+        return failure(ResponseInterface.FAILURE, ResponseInterface.FAILURE_MESSAGE, null);
     }
 
 

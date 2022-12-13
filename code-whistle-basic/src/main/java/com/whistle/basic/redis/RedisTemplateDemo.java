@@ -15,7 +15,7 @@ import java.util.Set;
 @Component
 public class RedisTemplateDemo {
 
-    @Resource
+    //@Resource
     private RedisTemplate<String,Object> redisTemplate;
 
     private void getTestSet(){

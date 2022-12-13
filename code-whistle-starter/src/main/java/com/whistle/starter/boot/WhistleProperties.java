@@ -12,7 +12,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = WhistleProperties.PREFIX)
 public class WhistleProperties {
     public static final String PREFIX = "whistle";
-
-
-
+    /**
+     * 是否开启Redisson
+     */
+    private boolean enableRedisson;
 }

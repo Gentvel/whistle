@@ -17,7 +17,8 @@ public final class WhistlePropertiesVerify {
     public static Map<String,Object> verify(ConfigurableEnvironment environment){
         Map<String,Object> extVars = new HashMap<>(16);
         StringJoiner excludeList = new StringJoiner(",");
-        extVars.putAll(Objects.requireNonNull(verifyKnife4J(environment,excludeList)));
+        extVars.putAll(verifyKnife4J(environment,excludeList));
+        extVars.putAll(verifyRedisson(environment,excludeList));
         extVars.put("spring.autoconfigure.exclude",excludeList.toString());
         //清空临时缓存变量
         WhistleConstants.getWeakCache().clear();
@@ -43,6 +44,16 @@ public final class WhistlePropertiesVerify {
             excludeList.add("com.github.xiaoymin.knife4j.spring.configuration.Knife4jAutoConfiguration");
         }
         return knife4j;
+    }
+
+    private static Map<String, Object> verifyRedisson(ConfigurableEnvironment environment,StringJoiner excludeList) {
+        Boolean enableRedisson = environment.getProperty(getVariableName("enable-redisson"), Boolean.class, false);
+        Map<String, Object> redisson = WhistleConstants.empty();
+        if(!enableRedisson){
+            excludeList.add("org.redisson.spring.starter.RedissonAutoConfiguration");
+            excludeList.add("org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration");
+        }
+        return redisson;
     }
 
 

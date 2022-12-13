@@ -43,6 +43,7 @@ public class WhistleConstants {
         WEAK_CACHE.put("knife4jDisable",knife4jDisable);
         WEAK_CACHE.put("knife4jEnable",knife4jEnable);
         //knife4j end
+        WEAK_CACHE.put("empty", new HashMap<>(0));
     }
 
     public static Map<String,Object> knife4jDisable(){
@@ -57,6 +58,8 @@ public class WhistleConstants {
         return WEAK_CACHE;
     }
 
-
+    public static Map<String,Object> empty(){
+        return WEAK_CACHE.get("empty");
+    }
 
 }
