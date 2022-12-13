@@ -2,7 +2,13 @@
 whistle:
   web:
     enable-knife4j: true
-
+  database: true
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: whistle
+    password: P@ssw0rd
+    url: jdbc:mysql://192.168.86.16:32306/whistle?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
 server:
   # 端口
   port: 8082
@@ -21,6 +27,9 @@ sa-token:
   is-share: true
   # token风格
   token-style: uuid
+  #是否在初始化配置时打印版本字符画
+  is-print: false
   # 是否输出操作日志
   is-log: false
+
 

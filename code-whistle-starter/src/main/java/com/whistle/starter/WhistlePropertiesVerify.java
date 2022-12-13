@@ -16,16 +16,20 @@ public final class WhistlePropertiesVerify {
 
     public static Map<String,Object> verify(ConfigurableEnvironment environment){
         Map<String,Object> extVars = new HashMap<>(16);
-        StringJoiner excludeList = new StringJoiner(",");
+        List<String> excludeList = new ArrayList<>();
         extVars.putAll(verifyKnife4J(environment,excludeList));
         extVars.putAll(verifyRedisson(environment,excludeList));
-        extVars.put("spring.autoconfigure.exclude",excludeList.toString());
+        extVars.putAll(verifyDatabase(environment,excludeList));
+        extVars.putAll(verifyDynamic(environment,excludeList));
+        StringJoiner excludeString = new StringJoiner(",");
+        excludeList.forEach(excludeString::add);
+        extVars.put("spring.autoconfigure.exclude",excludeString.toString());
         //清空临时缓存变量
         WhistleConstants.getWeakCache().clear();
         return extVars;
     }
 
-    private static Map<String, Object> verifyKnife4J(ConfigurableEnvironment environment,StringJoiner excludeList) {
+    private static Map<String, Object> verifyKnife4J(ConfigurableEnvironment environment,List<String> excludeList) {
         Boolean enableKnife4j = environment.getProperty(getWebVariableName("enable-knife4j"), Boolean.class, false);
         String env = environment.getProperty("env", String.class, EnvEnum.DEV.name());
         Map<String, Object> knife4j;
@@ -46,14 +50,41 @@ public final class WhistlePropertiesVerify {
         return knife4j;
     }
 
-    private static Map<String, Object> verifyRedisson(ConfigurableEnvironment environment,StringJoiner excludeList) {
-        Boolean enableRedisson = environment.getProperty(getVariableName("enable-redisson"), Boolean.class, false);
+    private static Map<String, Object> verifyRedisson(ConfigurableEnvironment environment,List<String> excludeList) {
+        Boolean enableRedisson = environment.getProperty(getVariableName("redisson"), Boolean.class, false);
         Map<String, Object> redisson = WhistleConstants.empty();
         if(!enableRedisson){
             excludeList.add("org.redisson.spring.starter.RedissonAutoConfiguration");
             excludeList.add("org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration");
         }
         return redisson;
+    }
+
+    private static Map<String, Object> verifyDatabase(ConfigurableEnvironment environment,List<String> excludeList) {
+        Boolean enableDatabase = environment.getProperty(getVariableName("database"), Boolean.class, false);
+        Map<String, Object> database = WhistleConstants.empty();
+        if(!enableDatabase){
+            excludeList.add("com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration");
+            excludeList.add("com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DynamicDataSourceAutoConfiguration");
+            excludeList.add("org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration");
+        }
+        return database;
+    }
+
+    private static Map<String, Object> verifyDynamic(ConfigurableEnvironment environment,List<String> excludeList) {
+        Boolean enableDynamic = environment.getProperty(getVariableName("dynamic"), Boolean.class, false);
+        Boolean enableDatabase = environment.getProperty(getVariableName("database"), Boolean.class, false);
+        Map<String, Object> database = WhistleConstants.empty();
+        if(enableDynamic){
+            if(!enableDatabase){
+                excludeList.remove("com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration");
+                excludeList.remove("com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DynamicDataSourceAutoConfiguration");
+                excludeList.remove("org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration");
+            }
+        }else{
+            excludeList.add("com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DynamicDataSourceAutoConfiguration");
+        }
+        return database;
     }
 
 

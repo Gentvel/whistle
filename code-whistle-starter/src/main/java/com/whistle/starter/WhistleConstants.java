@@ -23,12 +23,12 @@ public class WhistleConstants {
                 put(WhistleWebProperties.PREFIX+".enable-knife4j",false);
             }
         };
-        Map<String,Object> knife4jEnable = new HashMap<>(1){
+        Map<String,Object> knife4jEnable = new HashMap<>(7){
             {
                 put("knife4j.enable",true);
                 //是否开启生产环境保护策略
                 //put("knife4j.production",true);
-                put("knife4j.setting.enableFooter",false);
+                put("knife4j.setting.enableFooter",true);
                 //是否开启自定义Footer
                 put("knife4j.setting.enableFooterCustom",true);
                 //是否显示界面中SwaggerModel功能
@@ -43,6 +43,13 @@ public class WhistleConstants {
         WEAK_CACHE.put("knife4jDisable",knife4jDisable);
         WEAK_CACHE.put("knife4jEnable",knife4jEnable);
         //knife4j end
+
+//        Map<String,Object> mybatisPlusEnable = new HashMap<>(1){
+//            {
+//                put("",true);
+//            }
+//        };
+
         WEAK_CACHE.put("empty", new HashMap<>(0));
     }
 

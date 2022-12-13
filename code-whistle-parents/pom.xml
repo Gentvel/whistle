@@ -34,7 +34,8 @@
         <hutool.version>5.7.22</hutool.version>
         <nashorn.version>15.3</nashorn.version>
         <knife4j.version>3.0.3</knife4j.version>
-        <mybatis-plus.version>3.3.2</mybatis-plus.version>
+        <mybatis-plus.version>3.5.2</mybatis-plus.version>
+        <dynamic-mybatis-plus.version>3.6.0</dynamic-mybatis-plus.version>
         <fastjson2-version>2.0.2</fastjson2-version>
         <satoken-version>1.33.0</satoken-version>
     </properties>
@@ -82,6 +83,11 @@
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+                <version>${dynamic-mybatis-plus.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>

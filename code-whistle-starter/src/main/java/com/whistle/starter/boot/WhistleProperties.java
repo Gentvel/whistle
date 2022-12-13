@@ -15,5 +15,16 @@ public class WhistleProperties {
     /**
      * 是否开启Redisson
      */
-    private boolean enableRedisson;
+    private boolean redisson;
+
+    /**
+     * 是否开启DataBase
+     */
+    private boolean database;
+
+
+    /**
+     * 是否开启Dynamic-DataBase
+     */
+    private boolean dynamic;
 }
