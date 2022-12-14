@@ -1,6 +1,7 @@
 package com.whistle.starter.response;
 
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.http.ContentType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -13,8 +14,6 @@ import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.servlet.mvc.condition.RequestConditionHolder;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 import org.springframework.web.util.ContentCachingRequestWrapper;
 import org.springframework.web.util.WebUtils;
@@ -29,7 +28,7 @@ import java.util.Collections;
  */
 @Slf4j
 @RestControllerAdvice
-public class WhistleRequestAdvice implements ResponseBodyAdvice<Object> {
+public class WhistleResponseAdvice implements ResponseBodyAdvice<Object> {
 
     private static final int DEFAULT_MAX_PAYLOAD_LENGTH = 10000;
     public static final String REQUEST_MESSAGE_PREFIX = "Request [";
@@ -99,11 +98,15 @@ public class WhistleRequestAdvice implements ResponseBodyAdvice<Object> {
     protected String getMessagePayload(HttpServletRequest request) {
         ContentCachingRequestWrapper wrapper =
                 WebUtils.getNativeRequest(request, ContentCachingRequestWrapper.class);
+        String payload="";
+        if(ContentType.MULTIPART.getValue().equals(request.getContentType())){
+            return payload;
+        }
         if (wrapper != null) {
             byte[] buf = wrapper.getContentAsByteArray();
             if (buf.length > 0) {
                 int length = Math.min(buf.length, DEFAULT_MAX_PAYLOAD_LENGTH);
-                String payload;
+
                 try {
                     payload=new String(buf, 0, length, wrapper.getCharacterEncoding());
                 } catch (UnsupportedEncodingException ex) {
