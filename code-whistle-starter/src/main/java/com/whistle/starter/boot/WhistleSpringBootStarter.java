@@ -2,6 +2,7 @@ package com.whistle.starter.boot;
 
 import com.github.xiaoymin.knife4j.spring.configuration.Knife4jAutoConfiguration;
 import com.whistle.starter.annotation.WhistleApplication;
+import com.whistle.starter.response.LogParamFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -22,6 +23,7 @@ import org.springframework.boot.autoconfigure.AutoConfigurationPackages;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.core.type.AnnotationMetadata;
@@ -70,6 +72,31 @@ public class WhistleSpringBootStarter implements SpringApplicationRunListener {
                 .title("knife4j在线API接口文档")
                 .build();
     }
+
+//    /**
+//     * 分页插件，自动识别数据库类型
+//     * 多租户，请参考官网【插件扩展】
+//     */
+//    @Bean
+//    public PaginationInterceptor paginationInterceptor() {
+//        PaginationInterceptor paginationInterceptor = new PaginationInterceptor();
+//        // 开启 PageHelper 的支持
+//        paginationInterceptor.setDialectType("mysql");
+//        paginationInterceptor.setLocalPage(true);
+//        return paginationInterceptor;
+//    }
+
+    @Bean
+    public FilterRegistrationBean<LogParamFilter> registFilter() {
+        FilterRegistrationBean<LogParamFilter> registration = new FilterRegistrationBean<>();
+        registration.setFilter(new LogParamFilter());
+        registration.addUrlPatterns("/*");
+        registration.setName("LogParamFilter");
+        registration.setOrder(1);
+        return registration;
+    }
+
+
 
     /**
      * //Fix Issue https://github.com/spring-projects/spring-boot/issues/28794

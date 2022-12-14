@@ -8,7 +8,12 @@ import lombok.Getter;
 @Getter
 public enum EnvEnum {
     //
-    DEV("dev"),PROD("prod");
+    DEV("dev"),
+    PROD("prod"),
+
+
+
+    ;
     /**
      * 环境名称
      */

@@ -1,9 +1,11 @@
 package com.whistle.starter.response;
 
 import com.whistle.starter.consts.DateConst;
+import com.whistle.starter.exception.BizException;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -12,7 +14,11 @@ import java.time.LocalDateTime;
  */
 @Getter
 @Setter
-public class Result <T> implements Serializable {
+public final class Result <T> implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     /**
      * 通用返回状态码
      */
@@ -82,7 +88,7 @@ public class Result <T> implements Serializable {
      * @param msg 返回消息
      * @return {@link Result}
      */
-    public static Result<?> okMsg(String msg){
+    public static Result<Object> okMsg(String msg){
         return success(ResponseInterface.SUCCESS, msg, null);
     }
     /**
@@ -99,7 +105,7 @@ public class Result <T> implements Serializable {
      * 成功
      * @return {@link Result}
      */
-    public static <T>  Result<T> ok(){
+    public static  Result<Object> ok(){
         return success(ResponseInterface.SUCCESS, ResponseInterface.SUCCESS_MESSAGE, null);
     }
 
@@ -122,17 +128,24 @@ public class Result <T> implements Serializable {
      * @param msg 返回消息
      * @return {@link Result}
      */
-    public static <T>  Result<T> fail(String code,String msg){
+    public static Result<Object> fail(String code,String msg){
         return failure(code, msg, null);
     }
 
+    /**
+     * 失败
+     * @return {@link Result}
+     */
+    public static Result<Object> fail(BizException e){
+        return failure(e.getCode(), e.getMessage(),  null);
+    }
 
     /**
      * 失败
      * @param msg 返回消息
      * @return {@link Result}
      */
-    public static <T>  Result<T> fail(String msg){
+    public static Result<Object> fail(String msg){
         return failure(ResponseInterface.FAILURE, msg, null);
     }
 
@@ -140,7 +153,7 @@ public class Result <T> implements Serializable {
      * 失败
      * @return {@link Result}
      */
-    public static <T>  Result<T> fail(){
+    public static  Result<Object> fail(){
         return failure(ResponseInterface.FAILURE, ResponseInterface.FAILURE_MESSAGE, null);
     }
 

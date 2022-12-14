@@ -35,9 +35,11 @@
         <nashorn.version>15.3</nashorn.version>
         <knife4j.version>3.0.3</knife4j.version>
         <mybatis-plus.version>3.5.2</mybatis-plus.version>
+        <p6spy.version>3.9.0</p6spy.version>
         <dynamic-mybatis-plus.version>3.6.0</dynamic-mybatis-plus.version>
         <fastjson2-version>2.0.2</fastjson2-version>
         <satoken-version>1.33.0</satoken-version>
+        <UserAgentUtils-version>1.21</UserAgentUtils-version>
     </properties>
 
 
@@ -90,6 +92,11 @@
                 <version>${dynamic-mybatis-plus.version}</version>
             </dependency>
             <dependency>
+                <groupId>p6spy</groupId>
+                <artifactId>p6spy</artifactId>
+                <version>${p6spy.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>knife4j-spring-boot-starter</artifactId>
                 <!--在引用时请在maven中央仓库搜索3.X最新版本号-->
@@ -110,6 +117,11 @@
                 <groupId>cn.dev33</groupId>
                 <artifactId>sa-token-spring-boot-starter</artifactId>
                 <version>${satoken-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>eu.bitwalker</groupId>
+                <artifactId>UserAgentUtils</artifactId>
+                <version>${UserAgentUtils-version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

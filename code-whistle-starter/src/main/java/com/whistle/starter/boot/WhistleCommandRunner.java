@@ -29,8 +29,6 @@ public class WhistleCommandRunner implements CommandLineRunner {
         String path = SpringUtil.getProperty("server.servlet.context-path");
         if(StrUtil.isBlank(path)){
             path="";
-        }else{
-            path="/"+path;
         }
         if (whistleWebProperties.isEnableKnife4J()) {
             log.info("Application is running! Access address:\n\tLocal:\t\thttp://localhost:{}{}\n\tExternal:\thttp://{}:{}{}\n\tDocument:\thttp://localhost:{}{}/doc.html", port, path ,ip, port, path, port, path);

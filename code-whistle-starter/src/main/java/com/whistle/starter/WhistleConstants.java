@@ -44,11 +44,11 @@ public class WhistleConstants {
         WEAK_CACHE.put("knife4jEnable",knife4jEnable);
         //knife4j end
 
-//        Map<String,Object> mybatisPlusEnable = new HashMap<>(1){
-//            {
-//                put("",true);
-//            }
-//        };
+        Map<String,Object> mybatisPlusEnable = new HashMap<>(1){
+            {
+                put("mybatis-plus.configuration.log-impl","org.apache.ibatis.logging.stdout.StdOutImpl");
+            }
+        };
 
         WEAK_CACHE.put("empty", new HashMap<>(0));
     }
