@@ -5,6 +5,7 @@ import cn.hutool.http.ContentType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -31,31 +32,31 @@ import java.util.Collections;
 public class WhistleResponseAdvice implements ResponseBodyAdvice<Object> {
 
     private static final int DEFAULT_MAX_PAYLOAD_LENGTH = 10000;
-    public static final String REQUEST_MESSAGE_PREFIX = "Request [";
-    public static final String REQUEST_MESSAGE_SUFFIX = "]";
+    private static final String REQUEST_MESSAGE_PREFIX = "Request [";
+    private static final String REQUEST_MESSAGE_SUFFIX = "]";
     private final ObjectMapper objectMapper = new ObjectMapper();
 
 
     @Override
-    public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
+    public boolean supports(@NotNull MethodParameter returnType, @NotNull Class<? extends HttpMessageConverter<?>> converterType) {
         return true;
     }
 
     @SneakyThrows
     @Override
-    public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
+    public Object beforeBodyWrite(Object body, @NotNull MethodParameter returnType, @NotNull MediaType selectedContentType, @NotNull Class<? extends HttpMessageConverter<?>> selectedConverterType, @NotNull ServerHttpRequest request, @NotNull ServerHttpResponse response) {
         ServletServerHttpRequest servletServerHttpRequest = (ServletServerHttpRequest) request;
         Object object;
         if (body == null) {
             object = (Collections.emptyMap());
         } else if (Result.class.isAssignableFrom(body.getClass())) {
-            object = (Result)body;
+            object = body;
         } else if (checkPrimitive(body)) {
             return Result.ok(Collections.singletonMap("result", body));
         } else {
             object = body;
         }
-        log.info("{} Response [{}]",createRequestMessage(servletServerHttpRequest.getServletRequest(), REQUEST_MESSAGE_PREFIX, REQUEST_MESSAGE_SUFFIX),objectMapper.writeValueAsString(object));
+        log.info("{} Response [{}]",createRequestMessage(servletServerHttpRequest.getServletRequest()),objectMapper.writeValueAsString(object));
         return object;
     }
 
@@ -72,9 +73,9 @@ public class WhistleResponseAdvice implements ResponseBodyAdvice<Object> {
     }
 
 
-    protected String createRequestMessage(HttpServletRequest request, String prefix, String suffix) {
+    protected String createRequestMessage(HttpServletRequest request) {
         StringBuilder msg = new StringBuilder();
-        msg.append(prefix);
+        msg.append(WhistleResponseAdvice.REQUEST_MESSAGE_PREFIX);
         msg.append(request.getMethod()).append(" ");
         msg.append(request.getRequestURI());
         String queryString = request.getQueryString();
@@ -91,7 +92,7 @@ public class WhistleResponseAdvice implements ResponseBodyAdvice<Object> {
         if (StrUtil.isNotBlank(payload)) {
             msg.append(", payload=").append(payload);
         }
-        msg.append(suffix);
+        msg.append(WhistleResponseAdvice.REQUEST_MESSAGE_SUFFIX);
         return msg.toString();
     }
 
