@@ -31,6 +31,8 @@ import org.springframework.core.type.filter.AnnotationTypeFilter;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springfox.boot.starter.autoconfigure.OpenApiAutoConfiguration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -52,7 +54,7 @@ import java.util.List;
 @AutoConfigureBefore({Knife4jAutoConfiguration.class, OpenApiAutoConfiguration.class})
 @Import({WhistleStarterSelector.class})
 @EnableConfigurationProperties({WhistleProperties.class, WhistleWebProperties.class})
-public class WhistleSpringBootStarter implements SpringApplicationRunListener {
+public class WhistleSpringBootStarter implements WebMvcConfigurer {
     @Bean
     @ConditionalOnProperty(prefix = WhistleWebProperties.PREFIX, value = "enable-knife4j", havingValue = "true")
     public Docket createRestApi() {
@@ -96,6 +98,12 @@ public class WhistleSpringBootStarter implements SpringApplicationRunListener {
         return registration;
     }
 
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("doc.html").addResourceLocations("classpath:/META-INF/resources/");
+        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/META-INF/resources/static/");
+    }
 
 
     /**

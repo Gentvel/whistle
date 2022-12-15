@@ -4,6 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.ContentCachingRequestWrapper;
 import org.springframework.web.util.ContentCachingResponseWrapper;
@@ -28,12 +29,23 @@ public class LogParamFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         ContentCachingRequestWrapper wrapperRequest = new ContentCachingRequestWrapper(request);
         ContentCachingResponseWrapper wrapperResponse = new ContentCachingResponseWrapper(response);
-//        String urlParams = getRequestParams(request);
+        // 允许指定域访问跨域资源
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        // 允许所有请求方式
+        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+        // 有效时间
+        response.setHeader("Access-Control-Max-Age", "3600");
+        // 允许的header参数
+        response.setHeader("Access-Control-Allow-Headers", "x-requested-with,satoken");
+
+        // 如果是预检请求，直接返回
+        if (HttpMethod.OPTIONS.name().equalsIgnoreCase(request.getMethod())) {
+            response.getWriter().print("");
+            return;
+        }
+
         filterChain.doFilter(wrapperRequest, wrapperResponse);
-//        String requestBodyStr = getRequestBody(wrapperRequest);
-//        log.info("Request[{}] | request body:{}", urlParams, requestBodyStr);
-//        String responseBodyStr = getResponseBody(wrapperResponse);
-//        log.info("response body:{}", responseBodyStr);
+
         wrapperResponse.copyBodyToResponse();
 
     }

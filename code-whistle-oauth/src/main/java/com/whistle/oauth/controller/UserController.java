@@ -33,8 +33,6 @@ public class UserController {
         return Result.ok();
     }
 
-
-    @ApiParam(name = "username",value = "用户名",required = true)
     @ApiOperation(value = "用户注册",notes = "用户新增")
     @PostMapping("signup")
     public Result<?> signup(@RequestBody @Validated UserDTO userDTO){

@@ -1,5 +1,6 @@
 package com.whistle.starter.response;
 
+import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
 import com.whistle.starter.exception.BizException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindException;
@@ -14,6 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ControllerAdvice
 @ResponseBody
 public class WhistleGlobalExceptionHandler {
+
+
+
     @ExceptionHandler(BindException.class)
     public Result<Object> bindException(BindException e){
         log.error(e.getMessage(), e);
@@ -24,7 +28,14 @@ public class WhistleGlobalExceptionHandler {
 
     @ExceptionHandler(BizException.class)
     public Result<Object> bizException(BizException e) {
-        log.info("业务异常:{}",e.toString());
+        log.info(e.toString());
         return Result.fail(e);
     }
+
+    @ExceptionHandler(MybatisPlusException.class)
+    public Result<Object> mybatisPlusException(MybatisPlusException e) {
+        log.info("",e);
+        return Result.fail(ResponseInterface.DATA_ERROR,e.getMessage());
+    }
+
 }

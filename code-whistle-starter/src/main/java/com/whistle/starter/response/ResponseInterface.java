@@ -10,6 +10,7 @@ public interface ResponseInterface {
     String FAILURE_MESSAGE="请求失败!";
 
     String SYS_ERROR="0002";
+    String DATA_ERROR="0003";
     String SYS_ERROR_MESSAGE="系统开小差了，请检查网络或稍后重试！";
 
     /**

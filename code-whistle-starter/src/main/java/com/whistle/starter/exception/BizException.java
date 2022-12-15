@@ -34,6 +34,6 @@ public class BizException extends RuntimeException{
 
     @Override
     public String toString() {
-        return String.format("Current BusinessException: [code]:%s,[msg]:%s",code,super.getMessage());
+        return String.format("BusinessException: code [%s],msg [%s]",code,super.getMessage());
     }
 }

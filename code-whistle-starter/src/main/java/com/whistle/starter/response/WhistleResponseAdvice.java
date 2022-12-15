@@ -46,6 +46,13 @@ public class WhistleResponseAdvice implements ResponseBodyAdvice<Object> {
     @Override
     public Object beforeBodyWrite(Object body, @NotNull MethodParameter returnType, @NotNull MediaType selectedContentType, @NotNull Class<? extends HttpMessageConverter<?>> selectedConverterType, @NotNull ServerHttpRequest request, @NotNull ServerHttpResponse response) {
         ServletServerHttpRequest servletServerHttpRequest = (ServletServerHttpRequest) request;
+
+        String requestURI = servletServerHttpRequest.getServletRequest().getRequestURI();
+        if(requestURI.contains("swagger-resources")
+                ||requestURI.contains("api-docs")
+                 ||requestURI.contains("static")){
+            return body;
+        }
         Object object;
         if (body == null) {
             object = (Collections.emptyMap());

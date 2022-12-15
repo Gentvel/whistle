@@ -3,20 +3,28 @@ whistle:
   web:
     enable-knife4j: true
   database: true
+  redisson: true
 spring:
+  redis:
+    host: 192.168.86.16
+    port: 32379
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
     username: whistle
     password: P@ssw0rd
-    url: jdbc:mysql://192.168.86.16:32306/whistle?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+    url: jdbc:p6spy:mysql://192.168.86.16:32306/whistle?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+  thymeleaf:
+    cache: false
 server:
   # 端口
   port: 8082
-
+  servlet:
+    context-path: /oauth
 ############## Sa-Token 配置 (文档: https://sa-token.cc) ##############
 sa-token:
+  jwt-secret-key: whistle.token.oauth
   # token名称 (同时也是cookie名称)
-  token-name: satoken
+  token-name: token
   # token有效期，单位s 默认30天, -1代表永不过期
   timeout: 2592000
   # token临时有效期 (指定时间内无操作就视为token过期) 单位: 秒
@@ -26,7 +34,7 @@ sa-token:
   # 在多人登录同一账号时，是否共用一个token (为true时所有登录共用一个token, 为false时每次登录新建一个token)
   is-share: true
   # token风格
-  token-style: uuid
+  token-style: jwt
   #是否在初始化配置时打印版本字符画
   is-print: false
   # 是否输出操作日志
